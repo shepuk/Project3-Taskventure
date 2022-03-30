@@ -17,3 +17,7 @@ body {
     z-index: 1;
     text-align: center;
 }
+
+.signin-notification  {
+    margin-top: 100px;
+}
