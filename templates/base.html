@@ -15,7 +15,7 @@
 
     <nav class="navbar is-dark is-spaced has-shadow" role="navigation" aria-label="main navigation">
         <div class="navbar-brand">
-          <a class="navbar-item nav-header is-size-4" href="#">
+          <a href="{{ url_for('load_homepage') }}" class="navbar-item nav-header is-size-4" href="#">
             <h1>TASKVENTURE!</h1>
           </a>
       <!-- hamburger menu -->
@@ -28,9 +28,13 @@
       
         <div class="navbar-menu">
           <div class="navbar-start">
-            <a class="navbar-item">
+            <a href="{{ url_for('load_homepage') }}" class="navbar-item">
               Home
             </a>
+
+            <a href="{{ url_for('load_profile') }}" class="navbar-item">
+                Profile
+              </a>
       
             <a class="navbar-item">
               Leaderboards
@@ -55,7 +59,7 @@
           <div class="navbar-end">
             <div class="navbar-item">
               <div class="buttons">
-                <a class="button is-info">
+                <a href="{{ url_for('register') }}" class="button is-info">
                   <strong>Sign up</strong>
                 </a>
                 <a class="button is-light">

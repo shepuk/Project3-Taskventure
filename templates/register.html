@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container">
+    <div class="columns is-centered">
+        <div class="column is-half">
+            <h1 class="title">Start your quest.</h1>
+            <h2 class="subtitle">Register and start leveling up!</h2>
+            <form method="POST" action="{{ url_for('register') }}">
+                <div class="field">
+                    <p class="control has-icons-left">
+                        <input class="input" id="username" type="text" placeholder="Username" name="username">
+                        <span class="icon is-small is-left">
+                            <i class="fas fa-user"></i>
+                        </span>
+                    </p>
+                </div>
+                <div class="field">
+                    <p class="control has-icons-left">
+                        <input class="input" id="password" type="password" placeholder="Password" name="password">
+                        <span class="icon is-small is-left">
+                            <i class="fas fa-lock"></i>
+                        </span>
+                    </p>
+                </div>
+                <div class="field">
+                    <p class="control">
+                        <button class="button is-info" type="submt">
+                            Register
+                        </button>
+                    </p>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
