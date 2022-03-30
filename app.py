@@ -30,6 +30,31 @@ def load_profile():
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
+    if request.method == "POST":
+        existing_username = mongo.db.users.find_one(
+            {"username": request.form.get("username").lower()})
+
+        if existing_username:
+            flash("Username already exists")
+            return redirect(url_for("register"))
+
+        register = {
+            "username": request.form.get("username").lower(),
+            "password": generate_password_hash(request.form.get("password")),
+            "level": "1",
+            "strength": "1",
+            "stamina": "1",
+            "intellect": "1",
+            "skill": "1",
+            "social": "1"
+        }
+        # Add new user (dict) to MongoDB
+        mongo.db.users.insert_one(register)
+
+        # Add new user to session cookie
+        session["user"] = request.form.get("username").lower()
+        flash("Beginning quest...")
+
     return render_template("register.html")
 
 

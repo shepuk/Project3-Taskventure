@@ -11,3 +11,9 @@ body {
 .card-header-icon {
     cursor: default;
 }
+
+.notification {
+    margin:0 auto;
+    z-index: 1;
+    text-align: center;
+}
