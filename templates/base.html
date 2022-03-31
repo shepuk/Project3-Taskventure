@@ -1,100 +1,107 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Taskventure!</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
-        integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" type="text/css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css" type="text/css">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" type="text/css">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Taskventure!</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+    integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" type="text/css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css" type="text/css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" type="text/css">
 </head>
+
 <body>
 
-    <nav class="navbar is-dark is-spaced has-shadow" role="navigation" aria-label="main navigation">
-        <div class="navbar-brand">
-          <a href="{{ url_for('load_homepage') }}" class="navbar-item nav-header is-size-4" href="#">
-            <h1>TASKVENTURE!</h1>
-          </a>
+  <nav class="navbar is-dark is-spaced has-shadow" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+      <a href="{{ url_for('load_homepage') }}" class="navbar-item nav-header is-size-4" href="#">
+        <h1>TASKVENTURE!</h1>
+      </a>
       <!-- hamburger menu -->
-          <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
+      <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+
+    <div class="navbar-menu">
+      <div class="navbar-start">
+        <a href="{{ url_for('load_homepage') }}" class="navbar-item">
+          Home
+        </a>
+        {% if session.user %}
+        <a href="{{ url_for('profile', username=session['user']) }}" class="navbar-item">
+          Profile
+        </a>
+        {% endif %}
+        <a class="navbar-item">
+          Leaderboards
+        </a>
+
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link">
+            More
           </a>
-        </div>
-      
-        <div class="navbar-menu">
-          <div class="navbar-start">
-            <a href="{{ url_for('load_homepage') }}" class="navbar-item">
-              Home
-            </a>
 
-            <a href="{{ url_for('profile', username=session['user']) }}" class="navbar-item">
-                Profile
-              </a>
-      
+          <div class="navbar-dropdown">
             <a class="navbar-item">
-              Leaderboards
+              About
             </a>
-      
-            <div class="navbar-item has-dropdown is-hoverable">
-              <a class="navbar-link">
-                More
-              </a>
-      
-              <div class="navbar-dropdown">
-                <a class="navbar-item">
-                  About
-                </a>
-                <a class="navbar-item">
-                  Contact
-                </a>
-              </div>
-            </div>
-          </div>
-      
-          <div class="navbar-end">
-            <div class="navbar-item">
-              <div class="buttons">
-                <a href="{{ url_for('register') }}" class="button is-info">
-                  <strong>Sign up</strong>
-                </a>
-                <a href="{{ url_for('login') }}" class="button is-light">
-                  Log in
-                </a>
-              </div>
-            </div>
+            <a class="navbar-item">
+              Contact
+            </a>
           </div>
         </div>
-      </nav>
+      </div>
 
-      <section>
-          <!-- flash messages -->
-          {% with messages = get_flashed_messages() %}
-            {% if messages %}
-                {% for message in messages %}
-                    
-                        <div class="notification is-info">
-                            <button class="delete"></button>
-                            <p class="title is-3">{{ message }}</p>
-                          </div>    
-                    
-                {% endfor %}
+      <div class="navbar-end">
+        <div class="navbar-item">
+          <div class="buttons">
+            {% if session.user %}
+            <a href="{{ url_for('logout') }}" class="button is-light">
+              Log Out
+            </a>
+            {% else %}
+            <a href="{{ url_for('register') }}" class="button is-info">
+              <strong>Sign up</strong>
+            </a>
+            <a href="{{ url_for('login') }}" class="button is-light">
+              Log in
+            </a>
             {% endif %}
-          {% endwith %}
-      </section>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
 
-    {% block content %}
-    {% endblock %}
+  <section>
+    <!-- flash messages -->
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    {% for message in messages %}
+
+    <div class="notification is-info">
+      <button class="delete"></button>
+      <p class="title is-3">{{ message }}</p>
+    </div>
+
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+  </section>
+
+  {% block content %}
+  {% endblock %}
 
 
-    <script
-  src="https://code.jquery.com/jquery-3.6.0.min.js"
-  integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
-  crossorigin="anonymous"></script>
-  <script src="{{ url_for('static', filename='/js/script.js') }}" ></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script src="{{ url_for('static', filename='/js/script.js') }}"></script>
 </body>
+
 </html>

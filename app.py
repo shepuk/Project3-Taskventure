@@ -30,9 +30,30 @@ def profile(username):
         {"username": session["user"]})["username"]
     character = mongo.db.users.find_one(
         {"username": session["user"]})["character"]
-    tasks = mongo.db.tasks.find()
-    return render_template(
-        "profile.html", tasks=tasks, username=username, character=character)
+    tasks = mongo.db.tasks.find(
+        {"created_by": session["user"]})
+    level = mongo.db.users.find_one(
+        {"username": session["user"]})["level"]
+    strength = mongo.db.users.find_one(
+        {"username": session["user"]})["strength"]
+    stamina = mongo.db.users.find_one(
+        {"username": session["user"]})["stamina"]
+    intellect = mongo.db.users.find_one(
+        {"username": session["user"]})["intellect"]
+    skill = mongo.db.users.find_one(
+        {"username": session["user"]})["skill"]
+    social = mongo.db.users.find_one(
+        {"username": session["user"]})["social"]
+
+    if session["user"]:
+        return render_template(
+            "profile.html", tasks=tasks,
+            username=username, character=character,
+            level=level, strength=strength,
+            stamina=stamina, intellect=intellect,
+            skill=skill, social=social)
+
+    return redirect(url_for("login"))
 
 
 @app.route("/register", methods=["GET", "POST"])
@@ -88,6 +109,13 @@ def login():
             return redirect(url_for("login"))
 
     return render_template("login.html")
+
+
+@app.route("/logout")
+def logout():
+    flash("Logged Out")
+    session.pop("user")
+    return redirect(url_for("load_homepage"))
 
 
 if __name__ == "__main__":
