@@ -28,8 +28,11 @@ def profile(username):
     # Get the session user's username form the database
     username = mongo.db.users.find_one(
         {"username": session["user"]})["username"]
+    character = mongo.db.users.find_one(
+        {"username": session["user"]})["character"]
     tasks = mongo.db.tasks.find()
-    return render_template("profile.html", tasks=tasks, username=username)
+    return render_template(
+        "profile.html", tasks=tasks, username=username, character=character)
 
 
 @app.route("/register", methods=["GET", "POST"])
@@ -45,6 +48,7 @@ def register():
         register = {
             "username": request.form.get("username").lower(),
             "password": generate_password_hash(request.form.get("password")),
+            "character": request.form.get("character"),
             "level": "1",
             "strength": "1",
             "stamina": "1",
