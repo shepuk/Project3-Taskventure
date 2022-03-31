@@ -4,6 +4,13 @@ body {
     background-color: hsl(0, 0%, 96%);
 }
 
+/* https://css-tricks.com/almanac/properties/i/image-rendering/ */
+img {
+    image-rendering: pixelated;
+    height: 100px;
+    width: 100px;
+  }
+
 .card {
     border-radius: 10px;
 }
@@ -19,5 +26,14 @@ body {
 }
 
 .signin-notification  {
+    margin-top: 100px;
+}
+
+.is-active a {
+    background-color: hsl(0, 0%, 96%)!important;
+    border-color: hsl(0, 0%, 96%)!important;
+}
+
+.active-tasks-list {
     margin-top: 100px;
 }

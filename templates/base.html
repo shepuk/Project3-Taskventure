@@ -32,7 +32,7 @@
               Home
             </a>
 
-            <a href="{{ url_for('load_profile') }}" class="navbar-item">
+            <a href="{{ url_for('profile', username=session['user']) }}" class="navbar-item">
                 Profile
               </a>
       
