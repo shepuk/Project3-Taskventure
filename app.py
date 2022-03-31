@@ -23,8 +23,8 @@ def load_homepage():
     return render_template("home.html")
 
 
-@app.route("/profile/<username>", methods=["GET", "POST"])
-def profile(username):
+@app.route("/profile_tasks/<username>", methods=["GET", "POST"])
+def profile_tasks(username):
     # Get the session user's username form the database
     username = mongo.db.users.find_one(
         {"username": session["user"]})["username"]
@@ -47,7 +47,7 @@ def profile(username):
 
     if session["user"]:
         return render_template(
-            "profile.html", tasks=tasks,
+            "profile_tasks.html", tasks=tasks,
             username=username, character=character,
             level=level, strength=strength,
             stamina=stamina, intellect=intellect,
@@ -58,6 +58,8 @@ def profile(username):
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
+    username = mongo.db.users.find_one(
+        {"username": session["user"]})["username"]
     if request.method == "POST":
         existing_username = mongo.db.users.find_one(
             {"username": request.form.get("username").lower()})
@@ -98,7 +100,7 @@ def login():
             if check_password_hash(
                     existing_user["password"], request.form.get("password")):
                 session["user"] = request.form.get("username").lower()
-                return redirect(url_for("profile", username=session["user"]))
+                return redirect(url_for("profile_tasks", username=session["user"]))
 
             else:
                 flash("Incorrect Username and/or Password")
@@ -109,6 +111,33 @@ def login():
             return redirect(url_for("login"))
 
     return render_template("login.html")
+
+
+@app.route("/create_task", methods=["GET", "POST"])
+def create_task():
+    username = mongo.db.users.find_one(
+        {"username": session["user"]})["username"]
+    character = mongo.db.users.find_one(
+        {"username": session["user"]})["character"]
+    if request.method == "POST":
+        is_urgent = "on" if request.form.get("is_urgent") else "off"
+        task = {
+            "task_name": request.form.get("task_name"),
+            "task_description": request.form.get("task_description"),
+            "is_urgent": is_urgent,
+            "due_date": request.form.get("due_date"),
+            "stat_increase": request.form.get("stat_increase"),
+            "created_by": session["user"],
+            "task_level": request.form.get("task_level"),
+            "is_completed": "no"
+        }
+        mongo.db.tasks.insert_one(task)
+        flash("New Quest Added")
+        return redirect(url_for("profile"))
+
+    return render_template("create_task.html",
+                            username=username,
+                            character=character)
 
 
 @app.route("/logout")

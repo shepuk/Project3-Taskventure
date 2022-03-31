@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+{% include 'profile.html' %}
+<div class="hero-foot">
+    <nav class="tabs is-boxed is-fullwidth">
+      <div class="container">
+        <ul>
+          <li>
+            <a href="{{ url_for('profile_tasks', username=session['user']) }}">Quests</a>
+          </li>
+          <li class="is-active">
+            <a href="{{ url_for('create_task') }}">New Quest</a>
+          </li>
+          <li>
+            <a>Battle</a>
+          </li>
+          <li>
+            <a>Treasures</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+</section>
+
+<div class="container">
+
+    <form>
+        <div class="field">
+            <label class="label">Quest Name</label>
+            <div class="control">
+                <input class="input" type="text" placeholder="Text input">
+            </div>
+        </div>
+
+        <div class="field">
+            <label class="label">Quest Description</label>
+            <div class="control">
+                <textarea class="textarea" placeholder="Textarea"></textarea>
+            </div>
+        </div>
+
+        <input type="date">
+    </form>
+
+
+
+</div>
+{% endblock %}

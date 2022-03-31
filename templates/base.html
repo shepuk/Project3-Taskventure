@@ -34,7 +34,7 @@
           Home
         </a>
         {% if session.user %}
-        <a href="{{ url_for('profile', username=session['user']) }}" class="navbar-item">
+        <a href="{{ url_for('profile_tasks', username=session['user']) }}" class="navbar-item">
           Profile
         </a>
         {% endif %}
@@ -77,7 +77,7 @@
         </div>
       </div>
     </div>
-  </nav>
+  </nav> 
 
   <section>
     <!-- flash messages -->

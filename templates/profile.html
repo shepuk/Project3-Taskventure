@@ -1,6 +1,5 @@
 {% extends "base.html" %}
 {% block content %}
-
 <section class="hero is-info is-small">
   <nav class="level is-mobile">
     <div class="level-item has-text-centered">
@@ -89,64 +88,5 @@
 </div>
 
 
-  <div class="hero-foot">
-    <nav class="tabs is-boxed is-fullwidth">
-      <div class="container">
-        <ul>
-          <li class="is-active">
-            <a>Quests</a>
-          </li>
-          <li>
-            <a>New Quest</a>
-          </li>
-          <li>
-            <a>Battle</a>
-          </li>
-          <li>
-            <a>Treasures</a>
-          </li>
-        </ul>
-      </div>
-    </nav>
-  </div>
-</section>
-
-<div class="container">
-
-    <div class="columns is-multiline active-tasks-list">
-        {% for task in tasks %}
-        <div class="column is-6">
-        <div class="card">
-            <header class="card-header">
-              <p class="card-header-title">
-                {{ task.task_name }}
-              </p>
-              <span class="card-header-icon">
-                <span class="icon">
-                    {% if task.is_urgent == "on" %}
-                    <i class="fa-solid fa-circle-exclamation tooltipped" data-position="right" data-tooltip="Urgent"></i>
-                    {% endif %}
-                </span>
-            </span>
-            </header>
-            <div class="card-content">
-              <div class="content">
-                {{ task.task_description }}
-                <br>
-                {{task.due_date }}
-              </div>
-            </div>
-            <footer class="card-footer">
-              <a href="#" class="card-footer-item">Done</a>
-              <a href="#" class="card-footer-item">Edit</a>
-              <a href="#" class="card-footer-item">Delete</a>
-            </footer>
-          </div>
-        </div>
-    {% endfor %}
-    </div>
-</div>
-
-</div>
 
 {% endblock %}
