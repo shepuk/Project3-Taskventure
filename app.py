@@ -58,8 +58,6 @@ def profile_tasks(username):
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
-    username = mongo.db.users.find_one(
-        {"username": session["user"]})["username"]
     if request.method == "POST":
         existing_username = mongo.db.users.find_one(
             {"username": request.form.get("username").lower()})
