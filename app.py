@@ -83,7 +83,7 @@ def register():
         # Add new user to session cookie
         session["user"] = request.form.get("username").lower()
         flash("Beginning quest...")
-        return redirect(url_for("profile", username=session["user"]))
+        return redirect(url_for("profile_tasks", username=session["user"]))
 
     return render_template("register.html")
 
