@@ -1,8 +1,91 @@
 {% extends "base.html" %}
-
-
 {% block content %}
-{% include 'profile.html' %}
+<section class="hero is-info is-small">
+  <nav class="level is-mobile">
+    <div class="level-item has-text-centered">
+      <div>
+        <p class="heading">Active Tasks</p>
+        <p class="title">11</p>
+      </div>
+    </div>
+    <div class="level-item has-text-centered">
+      <div>
+        <p class="heading">Level</p>
+        <p class="title">{{ level }}</p>
+      </div>
+    </div>
+    <div class="level-item has-text-centered">
+      <div>
+        <p class="heading">Tasks Complete</p>
+        <p class="title">52</p>
+      </div>
+    </div>
+    <div class="level-item has-text-centered">
+      <div>
+        <p class="heading">Likes</p>
+        <p class="title">789</p>
+      </div>
+    </div>
+  </nav>
+  <div class="hero-head">
+
+  </div>
+
+  <div class="hero-body">
+    <div class="container has-text-centered">
+      <p class="title profile-header">
+        Greetings, {{ username.title() }}
+        <img src="{{ url_for('static', filename='/images/characters/' + character + '.png') }}" alt="profile character sprite">
+      </p>
+      <p class="subtitle">
+        Your current stats:
+      </p>
+    </div>
+  </div>
+
+  <div class="container is-max-desktop">
+
+  <table class="table">
+    <tbody>
+      <tr>
+      <td> <img src="{{ url_for('static', filename='/images/attributes/level.png') }}" alt="profile character sprite"></td>
+      <td>Level</td>
+      <td>{{ level }}</td>
+    </tr>
+
+    <tr>
+      <td> <img src="{{ url_for('static', filename='/images/attributes/strength.png') }}" alt="profile character sprite"></td>
+      <td>Strength</td>
+      <td>{{ strength }}</td>
+    </tr>
+
+    <tr>
+      <td> <img src="{{ url_for('static', filename='/images/attributes/stamina.png') }}" alt="profile character sprite"></td>
+      <td>Stamina</td>
+      <td>{{ stamina }}</td>
+    </tr>
+
+    <tr>
+      <td> <img src="{{ url_for('static', filename='/images/attributes/intellect.png') }}" alt="profile character sprite"></td>
+      <td>Intellect</td>
+      <td>{{ intellect }}</td>
+    </tr>
+
+    <tr>
+      <td> <img src="{{ url_for('static', filename='/images/attributes/skill.png') }}" alt="profile character sprite"></td>
+      <td>Skill</td>
+      <td>{{ skill }}</td>
+    </tr>
+
+    <tr>
+      <td> <img src="{{ url_for('static', filename='/images/attributes/social.png') }}" alt="profile character sprite"></td>
+      <td>Social</td>
+      <td>{{ social }}</td>
+    </tr>
+    </tbody>
+  </table>
+
+</div>
 <div class="hero-foot">
     <nav class="tabs is-boxed is-fullwidth">
       <div class="container">

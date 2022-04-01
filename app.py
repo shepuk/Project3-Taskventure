@@ -98,7 +98,8 @@ def login():
             if check_password_hash(
                     existing_user["password"], request.form.get("password")):
                 session["user"] = request.form.get("username").lower()
-                return redirect(url_for("profile_tasks", username=session["user"]))
+                return redirect(url_for(
+                    "profile_tasks", username=session["user"]))
 
             else:
                 flash("Incorrect Username and/or Password")
@@ -117,6 +118,18 @@ def create_task():
         {"username": session["user"]})["username"]
     character = mongo.db.users.find_one(
         {"username": session["user"]})["character"]
+    level = mongo.db.users.find_one(
+        {"username": session["user"]})["level"]
+    strength = mongo.db.users.find_one(
+        {"username": session["user"]})["strength"]
+    stamina = mongo.db.users.find_one(
+        {"username": session["user"]})["stamina"]
+    intellect = mongo.db.users.find_one(
+        {"username": session["user"]})["intellect"]
+    skill = mongo.db.users.find_one(
+        {"username": session["user"]})["skill"]
+    social = mongo.db.users.find_one(
+        {"username": session["user"]})["social"]
     if request.method == "POST":
         is_urgent = "on" if request.form.get("is_urgent") else "off"
         task = {
@@ -135,7 +148,13 @@ def create_task():
 
     return render_template("create_task.html",
                             username=username,
-                            character=character)
+                            character=character,
+                            level=level,
+                            strength=strength,
+                            stamina=stamina,
+                            intellect=intellect,
+                            skill=skill,
+                            social=social)
 
 
 @app.route("/logout")
