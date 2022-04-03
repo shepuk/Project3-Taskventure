@@ -36,45 +36,6 @@
       <p class="title profile-header">
         Greetings, {{ username.title() }}
         <img src="{{ url_for('static', filename='/images/characters/' + character + '.png') }}" alt="profile character sprite">
-        <table class="table">
-          <tbody>
-            <tr>
-            <td> <img src="{{ url_for('static', filename='/images/attributes/level.png') }}" alt="profile character sprite"></td>
-            <td>Level</td>
-            <td>{{ level }}</td>
-          </tr>
-      
-          <tr>
-            <td> <img src="{{ url_for('static', filename='/images/attributes/strength.png') }}" alt="profile character sprite"></td>
-            <td>Strength</td>
-            <td>{{ strength }}</td>
-          </tr>
-      
-          <tr>
-            <td> <img src="{{ url_for('static', filename='/images/attributes/stamina.png') }}" alt="profile character sprite"></td>
-            <td>Stamina</td>
-            <td>{{ stamina }}</td>
-          </tr>
-      
-          <tr>
-            <td> <img src="{{ url_for('static', filename='/images/attributes/intellect.png') }}" alt="profile character sprite"></td>
-            <td>Intellect</td>
-            <td>{{ intellect }}</td>
-          </tr>
-      
-          <tr>
-            <td> <img src="{{ url_for('static', filename='/images/attributes/skill.png') }}" alt="profile character sprite"></td>
-            <td>Skill</td>
-            <td>{{ skill }}</td>
-          </tr>
-      
-          <tr>
-            <td> <img src="{{ url_for('static', filename='/images/attributes/social.png') }}" alt="profile character sprite"></td>
-            <td>Social</td>
-            <td>{{ social }}</td>
-          </tr>
-          </tbody>
-        </table>
       </p>
       <p class="subtitle">
         Your current stats:

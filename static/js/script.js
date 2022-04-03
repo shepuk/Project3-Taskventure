@@ -1,21 +1,23 @@
 $(document).ready(function () {
 
-    // Check for click events on the navbar burger icon
-    $(".navbar-burger").click(function () {
+  // Check for click events on the navbar burger icon
+  $(".navbar-burger").click(function () {
 
-        // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
-        $(".navbar-burger").toggleClass("is-active");
-        $(".navbar-menu").toggleClass("is-active");
+    // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+    $(".navbar-burger").toggleClass("is-active");
+    $(".navbar-menu").toggleClass("is-active");
 
+  });
+
+  $(function () {
+    $("#datepicker").datepicker({
+      dateFormat: 'dd M, yy',
+      minDate: -60,
+      maxDate: "+24M"
     });
-});
-
-document.addEventListener('DOMContentLoaded', () => {
-    (document.querySelectorAll('.notification .delete') || []).forEach(($delete) => {
-      const $notification = $delete.parentNode;
-  
-      $delete.addEventListener('click', () => {
-        $notification.parentNode.removeChild($notification);
-      });
+    $("#format").on("change", function () {
+      $("#datepicker").datepicker("option", "dateFormat", 'dd mm, yy');
     });
   });
+
+});

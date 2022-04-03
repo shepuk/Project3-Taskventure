@@ -10,22 +10,22 @@ img {
     image-rendering: pixelated;
     height: 80px;
     width: 80px;
-  }
+}
 
 .nav-header {
     font-family: 'Averia Serif Libre', cursive;
-  }
+}
 
 .profile-header {
     font-family: 'Averia Serif Libre', cursive;
     font-weight: 300;
     display: flex;
     align-items: center;
-    display:inline-table;
+    display: inline-table;
 }
 
 table {
-    display:inline-table;
+    display: inline-table;
 }
 
 .table {
@@ -46,7 +46,7 @@ table {
     border-radius: 10px;
 }
 
-.card > * {
+.card>* {
     box-shadow: none;
 }
 
@@ -65,18 +65,18 @@ table {
 }
 
 .notification {
-    margin:0 auto;
+    margin: 0 auto;
     z-index: 1;
     text-align: center;
 }
 
-.signin-notification  {
+.signin-notification {
     margin-top: 100px;
 }
 
 .is-active a {
-    background-color: hsl(0, 0%, 96%)!important;
-    border-color: hsl(0, 0%, 96%)!important;
+    background-color: hsl(0, 0%, 96%) !important;
+    border-color: hsl(0, 0%, 96%) !important;
 }
 
 .active-tasks-list {
@@ -99,21 +99,268 @@ table {
     padding-top: 25px;
 }
 
+.new-task-form {
+    padding-top: 50px;
+}
+
+.new-task-form h2 {
+    font-family: 'Averia Serif Libre', cursive;
+    margin-bottom: 30px;
+}
+
+.new-quest-title {
+    display: flex;
+}
+
+.attribute-selector {
+    display: grid;
+    margin: auto;
+}
+
+/* Alignes attribute icons on new task page */
+.is-one-fifth {
+    text-align: center;
+    vertical-align: middle;
+    display: table-cell;
+}
+
+.start-quest-button {
+    display: grid;
+    font-family: 'Averia Serif Libre', cursive;
+    font-size: 50px!important;
+    color: #ededed;
+    font-weight: 400;
+    background-color: hsl(204, 86%, 53%);
+    margin: 50px;
+    border-radius: 10px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
 /* https://stackoverflow.com/questions/17541614/use-images-instead-of-radio-buttons
 /* HIDE RADIO */
-[type=radio] { 
+[type=radio] {
     position: absolute;
     opacity: 0;
     width: 0;
     height: 0;
-  }
-  
-  /* IMAGE STYLES */
-  [type=radio] + img {
+}
+
+/* IMAGE STYLES */
+[type=radio]+img {
     cursor: pointer;
-  }
-  
-  /* CHECKED STYLES */
-  [type=radio]:checked + img {
+}
+
+/* CHECKED STYLES */
+[type=radio]:checked+img {
     outline: 2px solid rgb(0, 0, 0);
-  }
+}
+
+
+/* jQuery calendar */
+.ui-datepicker {
+    width: 25em;
+    padding: .2em .2em 0;
+    display: none;
+    background-color: rgb(255, 255, 255);
+}
+
+.ui-datepicker a {
+    font-size: 15px;
+    color: black;
+    text-align: left;
+}
+
+.ui-datepicker-next {
+    background-image: url("/static/images/ui/right.png");
+}
+
+.ui-datepicker-prev {
+    background-image: url("/static/images/ui/left.png");
+}
+
+.ui-datepicker .ui-datepicker-header {
+    position: relative;
+    padding: .2em 0;
+    background-color: hsl(204, 86%, 53%);
+    color: white;
+}
+
+.ui-datepicker .ui-datepicker-prev,
+.ui-datepicker .ui-datepicker-next {
+    position: absolute;
+    top: 2px;
+    width: 1.8em;
+    height: 1.8em;
+}
+
+.ui-datepicker .ui-datepicker-prev-hover,
+.ui-datepicker .ui-datepicker-next-hover {
+    top: 1px;
+}
+
+.ui-datepicker .ui-datepicker-prev {
+    left: 2px;
+}
+
+.ui-datepicker .ui-datepicker-next {
+    right: 2px;
+}
+
+.ui-datepicker .ui-datepicker-prev-hover {
+    left: 1px;
+}
+
+.ui-datepicker .ui-datepicker-next-hover {
+    right: 1px;
+}
+
+.ui-datepicker .ui-datepicker-prev span,
+.ui-datepicker .ui-datepicker-next span {
+    display: block;
+    position: absolute;
+    left: 50%;
+    margin-left: -8px;
+    top: 50%;
+    margin-top: -8px;
+}
+
+.ui-datepicker .ui-datepicker-title {
+    margin: 0 2.3em;
+    line-height: 1.8em;
+    text-align: center;
+    font-weight: 600;
+}
+
+.ui-datepicker .ui-datepicker-title select {
+    font-size: 1em;
+    margin: 1px 0;
+}
+
+.ui-datepicker select.ui-datepicker-month,
+.ui-datepicker select.ui-datepicker-year {
+    width: 45%;
+}
+
+.ui-datepicker table {
+    width: 100%;
+    font-size: .9em;
+    border-collapse: collapse;
+    margin: 0 0 .4em;
+}
+
+.ui-datepicker th {
+    padding: .7em .3em;
+    text-align: center;
+    font-weight: bold;
+    border: 0;
+}
+
+.ui-datepicker td {
+    border: 1px solid #eeeeee;
+    padding: 1px;
+}
+
+.ui-datepicker td span,
+.ui-datepicker td a {
+    display: block;
+    padding: .2em;
+    text-decoration: none;
+}
+
+.ui-datepicker .ui-datepicker-buttonpane {
+    background-image: none;
+    margin: .7em 0 0 0;
+    padding: 0 .2em;
+    border-left: 0;
+    border-right: 0;
+    border-bottom: 0;
+}
+
+.ui-datepicker .ui-datepicker-buttonpane button {
+    float: right;
+    margin: .5em .2em .4em;
+    cursor: pointer;
+    padding: .2em .6em .3em .6em;
+    width: auto;
+    overflow: visible;
+}
+
+.ui-datepicker .ui-datepicker-buttonpane button.ui-datepicker-current {
+    float: left;
+}
+
+/* RTL support */
+.ui-datepicker-rtl {
+    direction: rtl;
+}
+
+.ui-datepicker-rtl .ui-datepicker-prev {
+    right: 2px;
+    left: auto;
+}
+
+.ui-datepicker-rtl .ui-datepicker-next {
+    left: 2px;
+    right: auto;
+}
+
+.ui-datepicker-rtl .ui-datepicker-prev:hover {
+    right: 1px;
+    left: auto;
+}
+
+.ui-datepicker-rtl .ui-datepicker-next:hover {
+    left: 1px;
+    right: auto;
+}
+
+.ui-datepicker-rtl .ui-datepicker-buttonpane {
+    clear: right;
+}
+
+.ui-datepicker-rtl .ui-datepicker-buttonpane button {
+    float: left;
+}
+
+.ui-datepicker-rtl .ui-datepicker-buttonpane button.ui-datepicker-current,
+.ui-datepicker-rtl .ui-datepicker-group {
+    float: right;
+}
+
+.ui-datepicker-rtl .ui-datepicker-group-last .ui-datepicker-header,
+.ui-datepicker-rtl .ui-datepicker-group-middle .ui-datepicker-header {
+    border-right-width: 0;
+    border-left-width: 1px;
+}
+
+/* Icons */
+.ui-datepicker .ui-icon {
+    display: block;
+    text-indent: -99999px;
+    overflow: hidden;
+    background-repeat: no-repeat;
+    left: .5em;
+    top: .3em;
+}
+
+
+@media only screen and (max-width: 768px) {
+
+    .attribute-selector {
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+
+    .attribute-selector img {
+        width: 30px;
+        height: auto;
+    }
+
+    .attribute-selector label {
+        font-size: small;
+    }
+}
