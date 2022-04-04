@@ -139,12 +139,13 @@ def create_task():
             "due_date": request.form.get("due_date"),
             "stat_increase": request.form.get("stat_increase"),
             "created_by": session["user"],
-            "task_level": request.form.get("task_level"),
+            #"task_level": request.form.get("task_level"),
             "is_completed": "no"
         }
         mongo.db.tasks.insert_one(task)
         flash("New Quest Added")
-        return redirect(url_for("profile"))
+        return redirect(url_for(
+                    "profile_tasks", username=session["user"]))
 
     return render_template("create_task.html",
                             username=username,

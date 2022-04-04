@@ -115,19 +115,18 @@
   </div>
 </section>
 
-<form>
+<form method="POST" action="{{ url_for('create_task') }}">
 
   <div class="container new-task-form">
     <span class="new-quest-title">
       <h2 class="title is-2">Start a new Quest. </h2>
-      <img src="{{ url_for('static', filename='/images/ui/scroll.png') }}" alt="" srcset="">
     </span>
     <div class="columns">
       <div class="column">
         <div class="field">
           <label class="label">Quest Name</label>
           <div class="control field has-icons-left">
-            <input class="input" type="text" placeholder="Text input">
+            <input class="input" name="task_name" type="text" placeholder="Quest Name" required>
             <span class="icon is-left">
               <i class="fa-solid fa-pen"></i>
             </span>
@@ -137,7 +136,7 @@
         <div class="field">
           <label class="label">Quest Description</label>
           <div class="control">
-            <textarea class="textarea" placeholder="Textarea"></textarea>
+            <textarea class="textarea" name="task_description" placeholder="Quest Description" required></textarea>
           </div>
         </div>
       </div>
@@ -145,12 +144,12 @@
 
         <div class="field has-icons-left">
           <label class="label">Quest End</label>
-          <input class="input" type="text" id="datepicker" size="40">
+          <input class="input" type="text" name="due_date" id="datepicker" size="40" type="date" onkeydown="return false" required>
         </div>
 
         <label class="checkbox">
           <label class="label">Urgent</label>
-          <input type="checkbox">
+          <input type="checkbox" name="is_urgent">
         </label>
 
       </div>
@@ -158,41 +157,41 @@
   </div>
 
 
-    <div class="container is-fluid is-centered">
-      <h5 class="subtitle is-5">This quest is a feat of:</h5>
+    <div class="container is-centered">
+      <h5 class="subtitle">This quest is a feat of:</h5>
         <div class="columns attribute-selector is-centered is-mobile">
         <div class="column is-one-fifth">
         <label>
           <label class="label">Strength</label>
-          <input type="radio" name="character" value="strength" checked>
+          <input type="radio" name="stat_increase" value="strength" checked>
           <img src="{{ url_for('static', filename='/images/attributes/strength.png') }}" alt="" srcset="">
         </label>
         </div>
         <div class="column is-one-fifth">
         <label>
           <label class="label">Stamina</label>
-          <input type="radio" name="character" value="stamina">
+          <input type="radio" name="stat_increase" value="stamina">
           <img src="{{ url_for('static', filename='/images/attributes/stamina.png') }}" alt="" srcset="">
         </label>
       </div>
         <div class="column is-one-fifth">
         <label>
           <label class="label">Intellect</label>
-          <input type="radio" name="character" value="intellect">
+          <input type="radio" name="stat_increase" value="intellect">
           <img src="{{ url_for('static', filename='/images/attributes/intellect.png') }}" alt="" srcset="">
         </label>
       </div>
         <div class="column is-one-fifth">
         <label>
           <label class="label">Skill</label>
-          <input type="radio" name="character" value="skill">
+          <input type="radio" name="stat_increase" value="skill">
           <img src="{{ url_for('static', filename='/images/attributes/skill.png') }}" alt="" srcset="">
         </label>
       </div>
         <div class="column is-one-fifth">
         <label>
           <label class="label">Social</label>
-          <input type="radio" name="character" value="social">
+          <input type="radio" name="stat_increase" value="social">
           <img src="{{ url_for('static', filename='/images/attributes/social.png') }}" alt="" srcset="">
         </label>
       </div>

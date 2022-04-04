@@ -127,9 +127,10 @@
             </header>
             <div class="card-content">
               <div class="content">
-                {{ task.task_description }}
+                <span class="task_stat_display"><img src="{{ url_for('static', filename='/images/attributes/' + task.stat_increase + '.png') }}" alt="Image showing which character attribute will be increased by this task"></span>
+                <em class="date_display">Quest Ends {{task.due_date }}</em>
                 <br>
-                {{task.due_date }}
+                {{ task.task_description }}
               </div>
             </div>
             <footer class="card-footer">

@@ -11,12 +11,12 @@ $(document).ready(function () {
 
   $(function () {
     $("#datepicker").datepicker({
-      dateFormat: 'dd M, yy',
+      dateFormat: 'dd MM, yy',
       minDate: -60,
       maxDate: "+24M"
     });
     $("#format").on("change", function () {
-      $("#datepicker").datepicker("option", "dateFormat", 'dd mm, yy');
+      $("#datepicker").datepicker("option", "dateFormat", 'dd MM, yy');
     });
   });
 

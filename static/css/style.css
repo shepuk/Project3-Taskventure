@@ -21,7 +21,8 @@ img {
     font-weight: 300;
     display: flex;
     align-items: center;
-    display: inline-table;
+    display: flex;
+    flex-direction: column-reverse;
 }
 
 table {
@@ -51,7 +52,13 @@ table {
 }
 
 .card-header {
-    border-bottom: 1px solid #ededed;
+    background-color: #3e8ed0;
+    color: #fff;
+    letter-spacing: 1px;
+}
+
+.card-header-title {
+    color: #fff;
 }
 
 .card-header-icon {
@@ -62,6 +69,18 @@ table {
     font-size: 11px;
     letter-spacing: 1px;
     text-transform: uppercase;
+}
+
+.task_stat_display img {
+    float: right;
+    height: 50px;
+    width: auto;
+    margin-top: -20px;
+}
+
+.date_display {
+    font-size: 0.9em;
+    color: rgb(122, 122, 122);
 }
 
 .notification {
@@ -83,12 +102,6 @@ table {
     margin-top: 50px;
 }
 
-.subtitle.is-5 {
-    display: flex;
-    justify-content: center;
-    margin-top: 50px;
-}
-
 .button.credentials {
     display: flex;
     margin: auto;
@@ -97,6 +110,10 @@ table {
 
 .hero {
     padding-top: 25px;
+}
+
+.hero-body {
+    padding: 5px!important;
 }
 
 .new-task-form {
@@ -110,6 +127,11 @@ table {
 
 .new-quest-title {
     display: flex;
+}
+
+.subtitle {
+    display: flex;
+    justify-content: center;
 }
 
 .attribute-selector {
@@ -356,7 +378,7 @@ table {
     }
 
     .attribute-selector img {
-        width: 30px;
+        width: 60px;
         height: auto;
     }
 
