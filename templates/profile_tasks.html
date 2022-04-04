@@ -35,7 +35,8 @@
     <div class="container has-text-centered">
       <p class="title profile-header">
         Greetings, {{ username.title() }}
-        <img src="{{ url_for('static', filename='/images/characters/' + character + '.png') }}" alt="profile character sprite">
+        <img src="{{ url_for('static', filename='/images/characters/' + character + '.png') }}"
+          alt="profile character sprite">
       </p>
       <p class="subtitle">
         Your current stats:
@@ -45,48 +46,54 @@
 
   <div class="container is-max-desktop">
 
-  <table class="table">
-    <tbody>
-      <tr>
-      <td> <img src="{{ url_for('static', filename='/images/attributes/level.png') }}" alt="profile character sprite"></td>
-      <td>Level</td>
-      <td>{{ level }}</td>
-    </tr>
+    <table class="table">
+      <tbody>
+        <tr>
+          <td> <img src="{{ url_for('static', filename='/images/attributes/level.png') }}"
+              alt="profile character sprite"></td>
+          <td>Level</td>
+          <td>{{ level }}</td>
+        </tr>
 
-    <tr>
-      <td> <img src="{{ url_for('static', filename='/images/attributes/strength.png') }}" alt="profile character sprite"></td>
-      <td>Strength</td>
-      <td>{{ strength }}</td>
-    </tr>
+        <tr>
+          <td> <img src="{{ url_for('static', filename='/images/attributes/strength.png') }}"
+              alt="profile character sprite"></td>
+          <td>Strength</td>
+          <td>{{ strength }}</td>
+        </tr>
 
-    <tr>
-      <td> <img src="{{ url_for('static', filename='/images/attributes/stamina.png') }}" alt="profile character sprite"></td>
-      <td>Stamina</td>
-      <td>{{ stamina }}</td>
-    </tr>
+        <tr>
+          <td> <img src="{{ url_for('static', filename='/images/attributes/stamina.png') }}"
+              alt="profile character sprite"></td>
+          <td>Stamina</td>
+          <td>{{ stamina }}</td>
+        </tr>
 
-    <tr>
-      <td> <img src="{{ url_for('static', filename='/images/attributes/intellect.png') }}" alt="profile character sprite"></td>
-      <td>Intellect</td>
-      <td>{{ intellect }}</td>
-    </tr>
+        <tr>
+          <td> <img src="{{ url_for('static', filename='/images/attributes/intellect.png') }}"
+              alt="profile character sprite"></td>
+          <td>Intellect</td>
+          <td>{{ intellect }}</td>
+        </tr>
 
-    <tr>
-      <td> <img src="{{ url_for('static', filename='/images/attributes/skill.png') }}" alt="profile character sprite"></td>
-      <td>Skill</td>
-      <td>{{ skill }}</td>
-    </tr>
+        <tr>
+          <td> <img src="{{ url_for('static', filename='/images/attributes/skill.png') }}"
+              alt="profile character sprite"></td>
+          <td>Skill</td>
+          <td>{{ skill }}</td>
+        </tr>
 
-    <tr>
-      <td> <img src="{{ url_for('static', filename='/images/attributes/social.png') }}" alt="profile character sprite"></td>
-      <td>Social</td>
-      <td>{{ social }}</td>
-    </tr>
-    </tbody>
-  </table>
+        <tr>
+          <td> <img src="{{ url_for('static', filename='/images/attributes/social.png') }}"
+              alt="profile character sprite"></td>
+          <td>Social</td>
+          <td>{{ social }}</td>
+        </tr>
+      </tbody>
+    </table>
 
-</div>
-<div class="hero-foot">
+  </div>
+  <div class="hero-foot">
     <nav class="tabs is-boxed is-fullwidth">
       <div class="container">
         <ul>
@@ -109,38 +116,62 @@
 </section>
 <div class="container">
 
-    <div class="columns is-multiline active-tasks-list">
-        {% for task in tasks %}
-        <div class="column is-6">
-        <div class="card">
-            <header class="card-header">
-              <p class="card-header-title">
-                {{ task.task_name }}
-              </p>
-              <span class="card-header-icon">
-                <span class="icon">
-                    {% if task.is_urgent == "on" %}
-                    <i class="fa-solid fa-circle-exclamation tooltipped" data-position="right" data-tooltip="Urgent"></i>
-                    {% endif %}
-                </span>
+  <div class="columns is-multiline active-tasks-list">
+    {% for task in tasks %}
+    <div class="column is-6">
+      <div class="card">
+        <header class="card-header">
+          <p class="card-header-title">
+            {{ task.task_name }}
+          </p>
+          <span class="card-header-icon">
+            <span class="icon">
+              {% if task.is_urgent == "on" %}
+              <i class="fa-solid fa-circle-exclamation tooltipped" data-position="right" data-tooltip="Urgent"></i>
+              {% endif %}
             </span>
-            </header>
-            <div class="card-content">
-              <div class="content">
-                <span class="task_stat_display"><img src="{{ url_for('static', filename='/images/attributes/' + task.stat_increase + '.png') }}" alt="Image showing which character attribute will be increased by this task"></span>
-                <em class="date_display">Quest Ends {{task.due_date }}</em>
-                <br>
-                {{ task.task_description }}
-              </div>
-            </div>
-            <footer class="card-footer">
-              <a href="#" class="card-footer-item">Done</a>
-              <a href="#" class="card-footer-item">Edit</a>
-              <a href="#" class="card-footer-item">Delete</a>
-            </footer>
+          </span>
+        </header>
+        <div class="card-content">
+          <div class="content">
+            <span class="task_stat_display"><img
+                src="{{ url_for('static', filename='/images/attributes/' + task.stat_increase + '.png') }}"
+                alt="Image showing which character attribute will be increased by this task"></span>
+            <em class="date_display">Quest Ends {{task.due_date }}</em>
+            <br>
+            {{ task.task_description }}
           </div>
         </div>
-    {% endfor %}
+        <footer class="card-footer">
+          <a href="#" class="card-footer-item">Done</a>
+          <a href="#" class="card-footer-item">Edit</a>
+          <a class="card-footer-item js-modal-trigger" data-target="modal">Delete</a>
+
+          <div class="modal" id="modal">
+            <div class="modal-background"></div>
+            <div class="modal-card">
+              <header class="modal-card-head">
+                <p class="modal-card-title">Delete this quest?</p>
+                <button class="delete" aria-label="close"></button>
+              </header>
+              <section class="modal-card-body">
+                The quest will be permanently deleted.
+              </section>
+              <footer class="modal-card-foot">
+                <a href="{{ url_for('delete_task', task_id=task._id) }}"><button
+                    class="button is-danger">Delete</button></a>
+                    <button class="button">Cancel</button>
+              </footer>
+            </div>
+          </div>
+
+
+
+
+        </footer>
+      </div>
     </div>
+    {% endfor %}
+  </div>
 </div>
 {% endblock %}

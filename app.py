@@ -158,6 +158,15 @@ def create_task():
                             social=social)
 
 
+@app.route("/delete_task/<task_id>")
+def delete_task(task_id):
+    """ Removes task from document library """
+    mongo.db.tasks.delete_one({"_id": ObjectId(task_id)})
+    flash("Quest Abandoned")
+    return redirect(url_for(
+                    "profile_tasks", username=session["user"]))
+
+
 @app.route("/logout")
 def logout():
     flash("Logged Out")
