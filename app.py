@@ -30,8 +30,8 @@ def profile_tasks(username):
         {"username": session["user"]})["username"]
     character = mongo.db.users.find_one(
         {"username": session["user"]})["character"]
-    tasks = mongo.db.tasks.find(
-        {"created_by": session["user"]})
+    tasks = list(mongo.db.tasks.find(
+        {"created_by": session["user"]}))
     level = mongo.db.users.find_one(
         {"username": session["user"]})["level"]
     strength = mongo.db.users.find_one(
@@ -70,12 +70,12 @@ def register():
             "username": request.form.get("username").lower(),
             "password": generate_password_hash(request.form.get("password")),
             "character": request.form.get("character"),
-            "level": "1",
-            "strength": "1",
-            "stamina": "1",
-            "intellect": "1",
-            "skill": "1",
-            "social": "1"
+            "level": 1,
+            "strength": 1,
+            "stamina": 1,
+            "intellect": 1,
+            "skill": 1,
+            "social": 1
         }
         # Add new user (dict) to MongoDB
         mongo.db.users.insert_one(register)
@@ -163,6 +163,24 @@ def delete_task(task_id):
     """ Removes task from document library """
     mongo.db.tasks.delete_one({"_id": ObjectId(task_id)})
     flash("Quest Abandoned")
+    return redirect(url_for(
+                    "profile_tasks", username=session["user"]))
+
+
+@app.route("/complete_task/<task_id>")
+def complete_task(task_id):
+    completed_task = ObjectId(task_id)
+    # Mark as complete
+    mongo.db.tasks.update_one(
+        {"_id": completed_task}, {"$set": {"is_completed": "yes"},
+            "$currentDate": {"lastModified": True}},)
+
+    stat = mongo.db.tasks.find_one(
+        {"_id": completed_task})["stat_increase"]
+    mongo.db.users.update_one(
+        {"username": session["user"]}, {"$inc": {stat: int(1)},
+            "$currentDate": {"lastModified": True}},)
+    flash("Quest Completed")
     return redirect(url_for(
                     "profile_tasks", username=session["user"]))
 

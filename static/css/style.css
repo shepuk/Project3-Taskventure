@@ -116,6 +116,10 @@ table {
     padding: 5px!important;
 }
 
+.card-header.task-complete-card {
+    background-color: grey!important;
+}
+
 .new-task-form {
     padding-top: 50px;
 }
