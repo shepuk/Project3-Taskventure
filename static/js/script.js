@@ -20,6 +20,9 @@ $(document).ready(function () {
     });
   });
 
+  const elements = document.querySelectorAll('.enemy_name')
+elements.forEach(e => e.innerText = e.innerText.replaceAll('_', ' '))
+
 });
 
 document.addEventListener('DOMContentLoaded', () => {

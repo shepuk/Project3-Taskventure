@@ -4,7 +4,7 @@
   <nav class="level is-mobile">
     <div class="level-item has-text-centered">
       <div>
-        <p class="heading">Level</p>
+        <p class="heading">Hero Level</p>
         <p class="title">{{ level }}</p>
       </div>
     </div>
@@ -100,10 +100,10 @@
             <a href="{{ url_for('profile_tasks', username=session['user']) }}">Quests</a>
           </li>
           <li>
-            <a href="{{ url_for('create_task') }}">New Quest</a>
+            <a href="{{ url_for('create_task', username=session['user']) }}">New Quest</a>
           </li>
           <li>
-            <a>Battle</a>
+            <a href="{{ url_for('profile_battle', username=session['user']) }}">Battle</a>
           </li>
           <li>
             <a>Treasures</a>
@@ -198,7 +198,7 @@
             <span class="task_stat_display"><img
                 src="{{ url_for('static', filename='/images/attributes/' + task.stat_increase + '.png') }}"
                 alt="Image showing which character attribute will be increased by this task"></span>
-            <em class="date_display">Quest Complete (Due date{{task.due_date }}</em>
+            <em class="date_display">Quest Complete (Due date {{task.due_date }})</em>
             <br>
             {{ task.task_description }}
           </div>

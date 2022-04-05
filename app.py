@@ -178,6 +178,51 @@ def create_task():
                                 urgent_tasks = urgent_tasks)
 
 
+@app.route("/profile_battle/<username>", methods=["GET", "POST"])
+def profile_battle(username):
+    # Get the session user's username form the database
+    username = mongo.db.users.find_one(
+        {"username": session["user"]})["username"]
+    character = mongo.db.users.find_one(
+        {"username": session["user"]})["character"]
+    tasks = list(mongo.db.tasks.find(
+        {"created_by": session["user"]}))
+    level = mongo.db.users.find_one(
+        {"username": session["user"]})["level"]
+    strength = mongo.db.users.find_one(
+        {"username": session["user"]})["strength"]
+    stamina = mongo.db.users.find_one(
+        {"username": session["user"]})["stamina"]
+    intellect = mongo.db.users.find_one(
+        {"username": session["user"]})["intellect"]
+    skill = mongo.db.users.find_one(
+        {"username": session["user"]})["skill"]
+    social = mongo.db.users.find_one(
+        {"username": session["user"]})["social"]
+    active_tasks = mongo.db.tasks.count_documents(
+        {"created_by": username, "is_completed": "no"})
+    finished_tasks = mongo.db.tasks.count_documents(
+        {"created_by": username, "is_completed": "yes"})
+    urgent_tasks = mongo.db.tasks.count_documents(
+        {"created_by": username, "is_completed": "no", "is_urgent": "on"})
+    enemies = mongo.db.enemies.find()
+    print(enemies)
+
+    if session["user"]:
+        return render_template(
+            "profile_battle.html", tasks=tasks,
+            username=username, character=character,
+            level=level, strength=strength,
+            stamina=stamina, intellect=intellect,
+            skill=skill, social=social,
+            active_tasks = active_tasks,
+            finished_tasks = finished_tasks,
+            urgent_tasks = urgent_tasks,
+            enemies = enemies)
+
+    return redirect(url_for("login"))
+
+
 @app.route("/delete_task/<task_id>")
 def delete_task(task_id):
     """ Removes task from document library """
