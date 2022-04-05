@@ -44,6 +44,12 @@ def profile_tasks(username):
         {"username": session["user"]})["skill"]
     social = mongo.db.users.find_one(
         {"username": session["user"]})["social"]
+    active_tasks = mongo.db.tasks.count_documents(
+        {"created_by": username, "is_completed": "no"})
+    finished_tasks = mongo.db.tasks.count_documents(
+        {"created_by": username, "is_completed": "yes"})
+    urgent_tasks = mongo.db.tasks.count_documents(
+        {"created_by": username, "is_completed": "no", "is_urgent": "on"})
 
     if session["user"]:
         return render_template(
@@ -51,7 +57,10 @@ def profile_tasks(username):
             username=username, character=character,
             level=level, strength=strength,
             stamina=stamina, intellect=intellect,
-            skill=skill, social=social)
+            skill=skill, social=social,
+            active_tasks = active_tasks,
+            finished_tasks = finished_tasks,
+            urgent_tasks = urgent_tasks)
 
     return redirect(url_for("login"))
 
@@ -130,32 +139,43 @@ def create_task():
         {"username": session["user"]})["skill"]
     social = mongo.db.users.find_one(
         {"username": session["user"]})["social"]
-    if request.method == "POST":
-        is_urgent = "on" if request.form.get("is_urgent") else "off"
-        task = {
-            "task_name": request.form.get("task_name"),
-            "task_description": request.form.get("task_description"),
-            "is_urgent": is_urgent,
-            "due_date": request.form.get("due_date"),
-            "stat_increase": request.form.get("stat_increase"),
-            "created_by": session["user"],
-            #"task_level": request.form.get("task_level"),
-            "is_completed": "no"
-        }
-        mongo.db.tasks.insert_one(task)
-        flash("New Quest Added")
-        return redirect(url_for(
-                    "profile_tasks", username=session["user"]))
+    active_tasks = mongo.db.tasks.count_documents(
+        {"created_by": username, "is_completed": "no"})
+    finished_tasks = mongo.db.tasks.count_documents(
+        {"created_by": username, "is_completed": "yes"})
+    urgent_tasks = mongo.db.tasks.count_documents(
+        {"created_by": username, "is_completed": "no", "is_urgent": "on"})
+    
+    if session["user"]:
+        if request.method == "POST":
+            is_urgent = "on" if request.form.get("is_urgent") else "off"
+            task = {
+                "task_name": request.form.get("task_name"),
+                "task_description": request.form.get("task_description"),
+                "is_urgent": is_urgent,
+                "due_date": request.form.get("due_date"),
+                "stat_increase": request.form.get("stat_increase"),
+                "created_by": session["user"],
+                #"task_level": request.form.get("task_level"),
+                "is_completed": "no"
+            }
+            mongo.db.tasks.insert_one(task)
+            flash("New Quest Added")
+            return redirect(url_for(
+                        "profile_tasks", username=session["user"]))
 
-    return render_template("create_task.html",
-                            username=username,
-                            character=character,
-                            level=level,
-                            strength=strength,
-                            stamina=stamina,
-                            intellect=intellect,
-                            skill=skill,
-                            social=social)
+        return render_template("create_task.html",
+                                username=username,
+                                character=character,
+                                level=level,
+                                strength=strength,
+                                stamina=stamina,
+                                intellect=intellect,
+                                skill=skill,
+                                social=social,
+                                active_tasks = active_tasks,
+                                finished_tasks = finished_tasks,
+                                urgent_tasks = urgent_tasks)
 
 
 @app.route("/delete_task/<task_id>")
@@ -180,7 +200,7 @@ def complete_task(task_id):
     mongo.db.users.update_one(
         {"username": session["user"]}, {"$inc": {stat: int(1)},
             "$currentDate": {"lastModified": True}},)
-    flash("Quest Completed")
+    flash("Quest Completed, " + stat + " increased!")
     return redirect(url_for(
                     "profile_tasks", username=session["user"]))
 

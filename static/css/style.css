@@ -61,6 +61,10 @@ table {
     color: #fff;
 }
 
+.signin-heading {
+    font-family: 'Averia Serif Libre', cursive!important;
+}
+
 .card-header-icon {
     cursor: default;
 }
