@@ -241,9 +241,10 @@ def battle_enemy(enemy):
             {"username": session["user"]})["defeat_list"]
         mongo.db.users.update_one(
             {"username": session["user"]}, {"$set": {"defeat_list": defeat_list + " " + enemy }})
-        mongo.db.users.update_one(
-        {"username": session["user"]}, {"$inc": {player_stat: int(1)},
-            "$currentDate": {"lastModified": True}},)
+        #mongo.db.users.update_one(
+        #{"username": session["user"]}, {"$inc": {player_stat: int(1)},
+          #  "$currentDate": {"lastModified": True}},)
+          #fix the above
 
     elif player_stat < enemy_level:
         flash("Enemy Too Powerful...")
