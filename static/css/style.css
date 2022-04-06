@@ -175,18 +175,39 @@ table {
     margin-top: 50px;
 }
 
-.enemy_name {
+.enemy-card {
+    border-radius: 5px;
+}
+
+.enemy-name {
     display: grid;
-    background-color: #447db3;
+    font-weight: 600;
+    height: 45px;
+    background-color: hsl(348, 100%, 61%);
+}
+
+.enemy-name-defeated {
+    display: grid;
+    font-weight: 600;
+    height: 45px;
+    background-color: hsl(204, 86%, 53%);
 }
 
 .enemy-info {
-    padding: 10px
+    font-size: 1em;
+    padding: 10px;
 }
 
 .enemy-info img {
     height: 60px;
     width: auto;
+}
+
+.enemy-battle-button{
+    font-size: 1em;
+    font-weight: 600;
+    display: grid;
+    padding: 10px;
 }
 
 

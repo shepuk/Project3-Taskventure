@@ -20,8 +20,8 @@ $(document).ready(function () {
     });
   });
 
-  const elements = document.querySelectorAll('.enemy_name')
-elements.forEach(e => e.innerText = e.innerText.replaceAll('_', ' '))
+  const elements = document.querySelectorAll('.enemy-name')
+  elements.forEach(e => e.innerText = e.innerText.replaceAll('_', ' '))
 
 });
 

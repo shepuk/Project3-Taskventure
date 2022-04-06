@@ -119,22 +119,31 @@
   <div class="columns is-flex-mobile is-multiline">
     {% for enemy in enemies %}
 
-    <div class="column is-2 is-one-third-mobile">
-    <div class="card has-text-centered">
-      <header class="card-header enemy_name">
-        {{ enemy.name.title() }}
-      </header>
-      <div class="card-content enemy-info">
+    <div class="column is-2 is-half-mobile">
+
+      <div class="card enemy-card has-text-centered">
+        {% if enemy.name in defeat_list %}
+        <header class="card-header enemy-name enemy-name-defeated">
+        {% else %}
+        <header class="card-header enemy-name">
+        {% endif %}
+          {{ enemy.name.title() }}
+        </header>
+        <div class="card-content enemy-info">
           <img src="{{ url_for('static', filename='/images/enemies/' + enemy.name + '.png') }}" alt="">
-        <p>
-          Level {{ enemy.level }}
-        </p>
+          <p>
+            {{ enemy.level }} {{ enemy.attribute }} required.
+          </p>
+        </div>
+        <footer class="card-footer enemy-battle-button">
+          {% if enemy.name in defeat_list %}
+          <p>Defeated</p>
+          {% else %}
+          <a href="{{ url_for('battle_enemy', enemy=enemy.name) }}">Battle</a>
+          {% endif %}
+        </footer>
       </div>
-      <footer class="card-footer">
-        
-      </footer>
     </div>
-  </div>
 
 
     {% endfor %}

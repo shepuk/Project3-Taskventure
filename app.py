@@ -205,8 +205,9 @@ def profile_battle(username):
         {"created_by": username, "is_completed": "yes"})
     urgent_tasks = mongo.db.tasks.count_documents(
         {"created_by": username, "is_completed": "no", "is_urgent": "on"})
-    enemies = mongo.db.enemies.find()
-    print(enemies)
+    enemies = mongo.db.enemies.find().sort("level")
+    defeat_list = mongo.db.users.find_one(
+        {"username": session["user"]})["defeat_list"]
 
     if session["user"]:
         return render_template(
@@ -218,9 +219,37 @@ def profile_battle(username):
             active_tasks = active_tasks,
             finished_tasks = finished_tasks,
             urgent_tasks = urgent_tasks,
-            enemies = enemies)
+            enemies = enemies, defeat_list = defeat_list)
 
     return redirect(url_for("login"))
+
+
+@app.route("/battle_enemy/<enemy>")
+def battle_enemy(enemy):
+    enemy_stat = mongo.db.enemies.find_one(
+        {"name": enemy})["attribute"]
+    player_stat = mongo.db.users.find_one(
+        {"username": session["user"]})[enemy_stat]
+    enemy_level = mongo.db.enemies.find_one(
+        {"name": enemy})["level"]
+    if player_stat >= enemy_level:
+        flash("Enemy Defeated!")
+        mongo.db.users.update_one(
+            {"username": session["user"]}, {"$inc": {"defeated": int(1)},
+            "$currentDate": {"lastModified": True}},)
+        defeat_list = mongo.db.users.find_one(
+            {"username": session["user"]})["defeat_list"]
+        mongo.db.users.update_one(
+            {"username": session["user"]}, {"$set": {"defeat_list": defeat_list + " " + enemy }})
+        mongo.db.users.update_one(
+        {"username": session["user"]}, {"$inc": {player_stat: int(1)},
+            "$currentDate": {"lastModified": True}},)
+
+    elif player_stat < enemy_level:
+        flash("Enemy Too Powerful...")
+
+    return redirect(url_for(
+                    "profile_battle", username=session["user"]))
 
 
 @app.route("/delete_task/<task_id>")
