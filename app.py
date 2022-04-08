@@ -50,6 +50,8 @@ def profile_tasks(username):
         {"created_by": username, "is_completed": "yes"})
     urgent_tasks = mongo.db.tasks.count_documents(
         {"created_by": username, "is_completed": "no", "is_urgent": "on"})
+    exp = mongo.db.users.find_one(
+        {"username": session["user"]})["exp"]
 
     if session["user"]:
         return render_template(
@@ -60,7 +62,7 @@ def profile_tasks(username):
             skill=skill, social=social,
             active_tasks = active_tasks,
             finished_tasks = finished_tasks,
-            urgent_tasks = urgent_tasks)
+            urgent_tasks = urgent_tasks, exp = exp)
 
     return redirect(url_for("login"))
 
@@ -84,7 +86,9 @@ def register():
             "stamina": 1,
             "intellect": 1,
             "skill": 1,
-            "social": 1
+            "social": 1,
+            "defeated": 0,
+            "defeat_list": ""
         }
         # Add new user (dict) to MongoDB
         mongo.db.users.insert_one(register)
@@ -145,6 +149,8 @@ def create_task():
         {"created_by": username, "is_completed": "yes"})
     urgent_tasks = mongo.db.tasks.count_documents(
         {"created_by": username, "is_completed": "no", "is_urgent": "on"})
+    exp = mongo.db.users.find_one(
+        {"username": session["user"]})["exp"]
     
     if session["user"]:
         if request.method == "POST":
@@ -175,7 +181,8 @@ def create_task():
                                 social=social,
                                 active_tasks = active_tasks,
                                 finished_tasks = finished_tasks,
-                                urgent_tasks = urgent_tasks)
+                                urgent_tasks = urgent_tasks,
+                                exp = exp)
 
 
 @app.route("/profile_battle/<username>", methods=["GET", "POST"])
@@ -208,6 +215,8 @@ def profile_battle(username):
     enemies = mongo.db.enemies.find().sort("level")
     defeat_list = mongo.db.users.find_one(
         {"username": session["user"]})["defeat_list"]
+    exp = mongo.db.users.find_one(
+        {"username": session["user"]})["exp"]
 
     if session["user"]:
         return render_template(
@@ -219,7 +228,8 @@ def profile_battle(username):
             active_tasks = active_tasks,
             finished_tasks = finished_tasks,
             urgent_tasks = urgent_tasks,
-            enemies = enemies, defeat_list = defeat_list)
+            enemies = enemies, defeat_list = defeat_list,
+            exp = exp)
 
     return redirect(url_for("login"))
 
@@ -240,11 +250,28 @@ def battle_enemy(enemy):
         defeat_list = mongo.db.users.find_one(
             {"username": session["user"]})["defeat_list"]
         mongo.db.users.update_one(
-            {"username": session["user"]}, {"$set": {"defeat_list": defeat_list + " " + enemy }})
-        #mongo.db.users.update_one(
-        #{"username": session["user"]}, {"$inc": {player_stat: int(1)},
-          #  "$currentDate": {"lastModified": True}},)
-          #fix the above
+            {"username": session["user"]},
+            {"$set": {"defeat_list": defeat_list + " " + enemy}})
+
+        mongo.db.users.update_one(
+            {"username": session["user"]}, {"$inc": {str(player_stat): int(1)},
+                "$currentDate": {"lastModified": True}},)
+        mongo.db.users.update_one(
+            {"username": session["user"]}, {"$inc": {"exp": int(150)},
+                "$currentDate": {"lastModified": True}},)
+
+        total_exp = int(mongo.db.users.find_one(
+            {"username": session["user"]})["exp"])
+
+        if total_exp >= 500:
+            flash("Level Up!")
+            mongo.db.users.update_one(
+            {"username": session["user"]}, {"$inc": {"level": int(1)},
+                "$currentDate": {"lastModified": True}},)
+            leftover_exp = total_exp - 500
+            mongo.db.users.update_one(
+            {"username": session["user"]}, {"$set": {"exp": int(leftover_exp)},
+                "$currentDate": {"lastModified": True}},)
 
     elif player_stat < enemy_level:
         flash("Enemy Too Powerful...")
@@ -275,6 +302,24 @@ def complete_task(task_id):
     mongo.db.users.update_one(
         {"username": session["user"]}, {"$inc": {stat: int(1)},
             "$currentDate": {"lastModified": True}},)
+    
+    mongo.db.users.update_one(
+        {"username": session["user"]}, {"$inc": {"exp": int(100)},
+            "$currentDate": {"lastModified": True}},)
+
+    total_exp = int(mongo.db.users.find_one(
+        {"username": session["user"]})["exp"])
+
+    if total_exp >= 500:
+        flash("Level Up!")
+        mongo.db.users.update_one(
+        {"username": session["user"]}, {"$inc": {"level": int(1)},
+            "$currentDate": {"lastModified": True}},)
+        leftover_exp = total_exp - 500
+        mongo.db.users.update_one(
+            {"username": session["user"]}, {"$set": {"exp": int(leftover_exp)},
+                "$currentDate": {"lastModified": True}},)
+
     flash("Quest Completed, " + stat + " increased!")
     return redirect(url_for(
                     "profile_tasks", username=session["user"]))
@@ -285,6 +330,7 @@ def logout():
     flash("Logged Out")
     session.pop("user")
     return redirect(url_for("load_homepage"))
+
 
 
 if __name__ == "__main__":
