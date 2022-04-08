@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container new-task-form">
+  <span class="leaderboard-title">
+    <h2 class="title is-2">Leaderboard </h2>
+  </span>
+
+  {% for user in users %}
+  <div class="columns">
+    <div class="column"><img src="{{ url_for('static', filename='/images/characters/' + user.character + '.png') }}">
+    </div>
+    <div class="column attribute-leaderboard">
+      <h2 class="title leaderboard_username" style="margin: 0;">{{ user.username.title() }}</h2>
+    </div>
+    <div class="column">
+      <table class="table">
+        <tbody>
+          <tr>
+            <td> <img src="{{ url_for('static', filename='/images/attributes/level.png') }}"
+                alt="profile character sprite"></td>
+            <td> <img src="{{ url_for('static', filename='/images/attributes/strength.png') }}"
+                alt="profile character sprite"></td>
+            <td> <img src="{{ url_for('static', filename='/images/attributes/intellect.png') }}"
+                alt="profile character sprite"></td>
+            <td> <img src="{{ url_for('static', filename='/images/attributes/stamina.png') }}"
+                alt="profile character sprite"></td>
+            <td> <img src="{{ url_for('static', filename='/images/attributes/skill.png') }}"
+                alt="profile character sprite"></td>
+            <td> <img src="{{ url_for('static', filename='/images/attributes/social.png') }}"
+                alt="profile character sprite"></td>
+          </tr>
+          <tr>
+            <td>
+              {{ user.level }}
+            </td>
+            <td>
+              {{ user.strength }}
+            </td>
+            <td>
+              {{ user.intellect }}
+            </td>
+            <td>
+              {{ user.stamina }}
+            </td>
+            <td>
+              {{ user.skill }}
+            </td>
+            <td>
+              {{ user.social }}
+            </td>
+          </tr>
+      </table>
+    </div>
+  </div>
+
+  <hr class="solid">
+
+  {% endfor %}
+
+</div>
+
+{% endblock %}

@@ -88,7 +88,8 @@ def register():
             "skill": 1,
             "social": 1,
             "defeated": 0,
-            "defeat_list": ""
+            "defeat_list": "",
+            "exp": 0
         }
         # Add new user (dict) to MongoDB
         mongo.db.users.insert_one(register)
@@ -323,6 +324,12 @@ def complete_task(task_id):
     flash("Quest Completed, " + stat + " increased!")
     return redirect(url_for(
                     "profile_tasks", username=session["user"]))
+
+
+@app.route("/leaderboard")
+def leaderboard():
+    users = mongo.db.users.find().sort("level", -1)
+    return render_template("leaderboard.html", users=users)
 
 
 @app.route("/logout")

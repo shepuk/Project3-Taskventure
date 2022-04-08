@@ -210,6 +210,21 @@ table {
     padding: 10px;
 }
 
+.attribute-leaderboard {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.attribute-leaderboard img {
+    height: 30px;
+    width: auto;
+}
+
+/* Solid border */
+hr.solid {
+    border-top: 2px solid rgb(216, 216, 216);
+  }
+
 
 /* https://stackoverflow.com/questions/17541614/use-images-instead-of-radio-buttons
 /* HIDE RADIO */
