@@ -10,3 +10,4 @@ cloudinary_python.txt
 env.py
 __pycache__/
 enemies.py
+treasures.py

@@ -89,7 +89,12 @@ def register():
             "social": 1,
             "defeated": 0,
             "defeat_list": "",
-            "exp": 0
+            "exp": 0,
+            "total_exp": 0,
+            "complete_tasks": 0,
+            "urgent_completed": 0,
+            "claimed_list": "",
+            "claimed_amount": 0
         }
         # Add new user (dict) to MongoDB
         mongo.db.users.insert_one(register)
@@ -260,6 +265,9 @@ def battle_enemy(enemy):
         mongo.db.users.update_one(
             {"username": session["user"]}, {"$inc": {"exp": int(150)},
                 "$currentDate": {"lastModified": True}},)
+        mongo.db.users.update_one(
+            {"username": session["user"]}, {"$inc": {"total_exp": int(150)},
+                "$currentDate": {"lastModified": True}},)
 
         total_exp = int(mongo.db.users.find_one(
             {"username": session["user"]})["exp"])
@@ -279,6 +287,113 @@ def battle_enemy(enemy):
 
     return redirect(url_for(
                     "profile_battle", username=session["user"]))
+
+
+@app.route("/profile_treasures/<username>", methods=["GET", "POST"])
+def profile_treasures(username):
+    # Get the session user's username form the database
+    username = mongo.db.users.find_one(
+        {"username": session["user"]})["username"]
+    character = mongo.db.users.find_one(
+        {"username": session["user"]})["character"]
+    tasks = list(mongo.db.tasks.find(
+        {"created_by": session["user"]}))
+    level = mongo.db.users.find_one(
+        {"username": session["user"]})["level"]
+    strength = mongo.db.users.find_one(
+        {"username": session["user"]})["strength"]
+    stamina = mongo.db.users.find_one(
+        {"username": session["user"]})["stamina"]
+    intellect = mongo.db.users.find_one(
+        {"username": session["user"]})["intellect"]
+    skill = mongo.db.users.find_one(
+        {"username": session["user"]})["skill"]
+    social = mongo.db.users.find_one(
+        {"username": session["user"]})["social"]
+    active_tasks = mongo.db.tasks.count_documents(
+        {"created_by": username, "is_completed": "no"})
+    finished_tasks = mongo.db.tasks.count_documents(
+        {"created_by": username, "is_completed": "yes"})
+    urgent_tasks = mongo.db.tasks.count_documents(
+        {"created_by": username, "is_completed": "no", "is_urgent": "on"})
+    enemies = mongo.db.enemies.find().sort("level")
+    defeat_list = mongo.db.users.find_one(
+        {"username": session["user"]})["defeat_list"]
+    exp = mongo.db.users.find_one(
+        {"username": session["user"]})["exp"]
+    treasures = mongo.db.treasures.find().sort("level")
+    claimed_list = mongo.db.users.find_one(
+        {"username": session["user"]})["claimed_list"]
+    
+    active_tasks = mongo.db.tasks.count_documents(
+        {"created_by": username, "is_completed": "no"})
+    mongo.db.users.update_one(
+            {"username": session["user"]},
+            {"$set": {"active_tasks": int(active_tasks)}})
+
+    if session["user"]:
+        return render_template(
+            "profile_treasures.html", tasks=tasks,
+            username=username, character=character,
+            level=level, strength=strength,
+            stamina=stamina, intellect=intellect,
+            skill=skill, social=social,
+            active_tasks = active_tasks,
+            finished_tasks = finished_tasks,
+            urgent_tasks = urgent_tasks,
+            enemies = enemies, defeat_list = defeat_list,
+            exp = exp, treasures = treasures,
+            claimed_list = claimed_list)
+
+    return redirect(url_for("login"))
+
+
+@app.route("/claim_treasure/<treasure>")
+def claim_treasure(treasure):
+    treasure_requirement = mongo.db.treasures.find_one(
+        {"name": treasure})["requirement"]
+    player_stat = mongo.db.users.find_one(
+        {"username": session["user"]})[treasure_requirement]
+    treasure_level = mongo.db.treasures.find_one(
+        {"name": treasure})["level"]
+    if player_stat >= treasure_level:
+        flash("Treasure Climed!")
+        mongo.db.users.update_one(
+            {"username": session["user"]}, {"$inc": {"claimed_amount": int(1)},
+            "$currentDate": {"lastModified": True}},)
+        claimed_list = mongo.db.users.find_one(
+            {"username": session["user"]})["claimed_list"]
+        mongo.db.users.update_one(
+            {"username": session["user"]},
+            {"$set": {"claimed_list": claimed_list + " " + treasure}})
+
+        mongo.db.users.update_one(
+            {"username": session["user"]}, {"$inc": {"exp": int(75)},
+                "$currentDate": {"lastModified": True}},)
+        mongo.db.users.update_one(
+            {"username": session["user"]}, {"$inc": {"total_exp": int(75)},
+                "$currentDate": {"lastModified": True}},)
+
+        total_exp = int(mongo.db.users.find_one(
+            {"username": session["user"]})["exp"])
+
+        if total_exp >= 500:
+            flash("Level Up!")
+            mongo.db.users.update_one(
+            {"username": session["user"]}, {"$inc": {"level": int(1)},
+                "$currentDate": {"lastModified": True}},)
+            leftover_exp = total_exp - 500
+            mongo.db.users.update_one(
+            {"username": session["user"]}, {"$set": {"exp": int(leftover_exp)},
+                "$currentDate": {"lastModified": True}},)
+
+    elif player_stat < treasure_level:
+        flash("Cannot yet claim...")
+
+    return redirect(url_for(
+                    "profile_treasures", username=session["user"]))
+
+
 
 
 @app.route("/delete_task/<task_id>")
@@ -303,10 +418,28 @@ def complete_task(task_id):
     mongo.db.users.update_one(
         {"username": session["user"]}, {"$inc": {stat: int(1)},
             "$currentDate": {"lastModified": True}},)
-    
     mongo.db.users.update_one(
         {"username": session["user"]}, {"$inc": {"exp": int(100)},
             "$currentDate": {"lastModified": True}},)
+    mongo.db.users.update_one(
+        {"username": session["user"]}, {"$inc": {"total_exp": int(100)},
+            "$currentDate": {"lastModified": True}},)
+    mongo.db.users.update_one(
+        {"username": session["user"]}, {"$inc": {"complete_tasks": int(1)},
+            "$currentDate": {"lastModified": True}},)
+    
+    is_urgent = mongo.db.tasks.find_one({"_id": completed_task})["is_urgent"]
+
+    if is_urgent == "on":
+        mongo.db.users.update_one(
+            {"username": session["user"]}, {"$inc": {"urgent_completed": int(1)},
+                "$currentDate": {"lastModified": True}},)
+        mongo.db.users.update_one(
+            {"username": session["user"]}, {"$inc": {"exp": int(50)},
+                "$currentDate": {"lastModified": True}},)
+        mongo.db.users.update_one(
+            {"username": session["user"]}, {"$inc": {"total_exp": int(50)},
+                "$currentDate": {"lastModified": True}},)
 
     total_exp = int(mongo.db.users.find_one(
         {"username": session["user"]})["exp"])

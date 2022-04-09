@@ -27,10 +27,9 @@
       </div>
     </div>
   </nav>
+
   <div class="hero-head">
-
   </div>
-
   <div class="hero-body">
     <div class="container has-text-centered">
       <p class="title profile-header">
@@ -100,13 +99,13 @@
           <li>
             <a href="{{ url_for('profile_tasks', username=session['user']) }}">Quests</a>
           </li>
-          <li class="is-active">
+          <li>
             <a href="{{ url_for('create_task') }}">New Quest</a>
           </li>
           <li>
             <a href="{{ url_for('profile_battle', username=session['user']) }}">Battle</a>
           </li>
-          <li>
+          <li class="is-active">
             <a href="{{ url_for('profile_treasures', username=session['user']) }}">Treasures</a>
           </li>
         </ul>
@@ -115,95 +114,42 @@
   </div>
 </section>
 
-<form method="POST" action="{{ url_for('create_task') }}">
+<!-- Enemy list -->
+<div class="container enemy-list">
+  <div class="columns is-flex-mobile is-multiline">
+    {% for treasure in treasures %}
 
-  <div class="container new-task-form">
-    <span class="new-quest-title">
-      <h2 class="title is-2">Start a new Quest. </h2>
-    </span>
-    <div class="columns">
-      <div class="column">
-        <div class="field">
-          <label class="label">Quest Name</label>
-          <div class="control field has-icons-left">
-            <input class="input" name="task_name" type="text" placeholder="Quest Name" required>
-            <span class="icon is-left">
-              <i class="fa-solid fa-pen"></i>
-            </span>
-          </div>
+    <div class="column is-2 is-half-mobile">
+
+      <div class="card enemy-card has-text-centered">
+        {% if treasure.name in claimed_list %}
+        <header class="card-header enemy-name enemy-name-defeated">
+        {% else %}
+        <header class="card-header enemy-name">
+        {% endif %}
+          {{ treasure.name.title() }}
+        </header>
+        <div class="card-content enemy-info">
+          <img src="{{ url_for('static', filename='/images/treasures/' + treasure.name + '.png') }}" alt="">
+          <p>
+            {{ treasure.level }} {{ treasure.requirement }} required.
+          </p>
         </div>
-
-        <div class="field">
-          <label class="label">Quest Description</label>
-          <div class="control">
-            <textarea class="textarea" name="task_description" placeholder="Quest Description" required></textarea>
-          </div>
-        </div>
-      </div>
-      <div class="column">
-
-        <div class="field has-icons-left">
-          <label class="label">Quest End</label>
-          <input class="input" type="text" name="due_date" id="datepicker" size="40" type="date" onkeydown="return false" required>
-        </div>
-
-        <label class="checkbox">
-          <label class="label">Urgent</label>
-          <input type="checkbox" name="is_urgent">
-        </label>
-
+        <footer class="card-footer enemy-battle-button">
+          {% if treasure.name in claimed_list %}
+          <p>Claimed</p>
+          {% else %}
+          <a href="{{ url_for('claim_treasure', treasure=treasure.name) }}">Claim</a>
+          {% endif %}
+        </footer>
       </div>
     </div>
+
+
+    {% endfor %}
   </div>
-
-
-    <div class="container is-centered">
-      <h5 class="subtitle">This quest is a feat of:</h5>
-        <div class="columns attribute-selector is-centered is-mobile">
-        <div class="column is-one-fifth">
-        <label>
-          <label class="label">Strength</label>
-          <input type="radio" name="stat_increase" value="strength" checked>
-          <img src="{{ url_for('static', filename='/images/attributes/strength.png') }}" alt="" srcset="">
-        </label>
-        </div>
-        <div class="column is-one-fifth">
-        <label>
-          <label class="label">Stamina</label>
-          <input type="radio" name="stat_increase" value="stamina">
-          <img src="{{ url_for('static', filename='/images/attributes/stamina.png') }}" alt="" srcset="">
-        </label>
-      </div>
-        <div class="column is-one-fifth">
-        <label>
-          <label class="label">Intellect</label>
-          <input type="radio" name="stat_increase" value="intellect">
-          <img src="{{ url_for('static', filename='/images/attributes/intellect.png') }}" alt="" srcset="">
-        </label>
-      </div>
-        <div class="column is-one-fifth">
-        <label>
-          <label class="label">Skill</label>
-          <input type="radio" name="stat_increase" value="skill">
-          <img src="{{ url_for('static', filename='/images/attributes/skill.png') }}" alt="" srcset="">
-        </label>
-      </div>
-        <div class="column is-one-fifth">
-        <label>
-          <label class="label">Social</label>
-          <input type="radio" name="stat_increase" value="social">
-          <img src="{{ url_for('static', filename='/images/attributes/social.png') }}" alt="" srcset="">
-        </label>
-      </div>
-      </div>
-
-  </div>
-
-  <button class="button is-large is-large is-centered start-quest-button">Start Quest</button>
-
-</form>
-
-
-
 </div>
+
+
+
 {% endblock %}
