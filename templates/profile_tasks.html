@@ -51,10 +51,7 @@
           <td> <img src="{{ url_for('static', filename='/images/attributes/level.png') }}"
               alt="profile character sprite"></td>
           <td>Level</td>
-          <td>{{ level }}</td>
-        </tr>
-
-        <tr>
+          <td class="table-column-border-right">{{ level }}</td>
           <td> <img src="{{ url_for('static', filename='/images/attributes/strength.png') }}"
               alt="profile character sprite"></td>
           <td>Strength</td>
@@ -65,10 +62,7 @@
           <td> <img src="{{ url_for('static', filename='/images/attributes/stamina.png') }}"
               alt="profile character sprite"></td>
           <td>Stamina</td>
-          <td>{{ stamina }}</td>
-        </tr>
-
-        <tr>
+          <td class="table-column-border-right">{{ stamina }}</td>
           <td> <img src="{{ url_for('static', filename='/images/attributes/intellect.png') }}"
               alt="profile character sprite"></td>
           <td>Intellect</td>
@@ -79,14 +73,22 @@
           <td> <img src="{{ url_for('static', filename='/images/attributes/skill.png') }}"
               alt="profile character sprite"></td>
           <td>Skill</td>
-          <td>{{ skill }}</td>
-        </tr>
-
-        <tr>
+          <td class="table-column-border-right">{{ skill }}</td>
           <td> <img src="{{ url_for('static', filename='/images/attributes/social.png') }}"
               alt="profile character sprite"></td>
           <td>Social</td>
           <td>{{ social }}</td>
+        </tr>
+
+        <tr>
+          <td> <img src="{{ url_for('static', filename='/images/attributes/defeated.png') }}"
+              alt="profile character sprite"></td>
+          <td>Defeated</td>
+          <td class="table-column-border-right">{{ defeated }}</td>
+          <td> <img src="{{ url_for('static', filename='/images/attributes/claimed.png') }}"
+              alt="profile character sprite"></td>
+          <td>Claimed</td>
+          <td>{{ claimed }}</td>
         </tr>
       </tbody>
     </table>
@@ -114,65 +116,71 @@
   </div>
 </section>
 
-<!-- Task / Quest list -->
-<div class="container">
-  <div class="columns is-multiline active-tasks-list">
-    {% for task in tasks %}
-    {% if task.is_completed == "no" %}
-    <div class="column is-6">
-      <div class="card">
-        <header class="card-header">
-          <p class="card-header-title">
-            {{ task.task_name }}
-          </p>
-          <span class="card-header-icon">
-            <span class="icon">
-              {% if task.is_urgent == "on" %}
-              <i class="fa-solid fa-circle-exclamation tooltipped" data-position="right" data-tooltip="Urgent"></i>
-              {% endif %}
-            </span>
-          </span>
-        </header>
-        <div class="card-content">
-          <div class="content">
-            <span class="task_stat_display"><img
-                src="{{ url_for('static', filename='/images/attributes/' + task.stat_increase + '.png') }}"
-                alt="Image showing which character attribute will be increased by this task"></span>
-            <em class="date_display">Quest Ends {{task.due_date }}</em>
-            <br>
-            {{ task.task_description }}
-          </div>
-        </div>
-        <footer class="card-footer">
-          <a href="{{ url_for('complete_task', task_id=task._id) }}" class="card-footer-item">Done</a>
-          <a href="#" class="card-footer-item">Edit</a>
-          <a class="card-footer-item js-modal-trigger" data-target="modal">Delete</a>
+<span class="scroll-indicator"><i class="fa-solid fa-caret-down"></i></span>
 
-          <div class="modal" id="modal">
-            <div class="modal-background"></div>
-            <div class="modal-card">
-              <header class="modal-card-head">
-                <p class="modal-card-title">Delete this quest?</p>
-                <button class="delete" aria-label="close"></button>
-              </header>
-              <section class="modal-card-body">
-                The quest will be permanently deleted.
-                You will not receive the stat increase for this task.
-              </section>
-              <footer class="modal-card-foot">
-                <a href="{{ url_for('delete_task', task_id=task._id) }}"><button
-                    class="button is-danger">Delete</button></a>
-                <button class="button">Cancel</button>
-              </footer>
+<!-- Task / Quest list -->
+<section class="section">
+  <div class="container">
+    
+      <h2 class="title is-2 page-heading">Quest Log. </h2>
+    
+    <div class="columns is-multiline active-tasks-list">
+      {% for task in tasks %}
+      {% if task.is_completed == "no" %}
+      <div class="column is-6">
+        <div class="card">
+          <header class="card-header">
+            <p class="card-header-title">
+              {{ task.task_name }}
+            </p>
+            <span class="card-header-icon">
+              <span class="icon">
+                {% if task.is_urgent == "on" %}
+                <i class="fa-solid fa-circle-exclamation tooltipped" data-position="right" data-tooltip="Urgent"></i>
+                {% endif %}
+              </span>
+            </span>
+          </header>
+          <div class="card-content">
+            <div class="content">
+              <span class="task_stat_display"><img
+                  src="{{ url_for('static', filename='/images/attributes/' + task.stat_increase + '.png') }}"
+                  alt="Image showing which character attribute will be increased by this task"></span>
+              <em class="date_display">Quest Ends {{task.due_date }}</em>
+              <br>
+              {{ task.task_description }}
             </div>
           </div>
-        </footer>
+          <footer class="card-footer">
+            <a href="{{ url_for('complete_task', task_id=task._id) }}" class="card-footer-item">Done</a>
+            <a href="#" class="card-footer-item">Edit</a>
+            <a class="card-footer-item js-modal-trigger" data-target="modal">Delete</a>
+
+            <div class="modal" id="modal">
+              <div class="modal-background"></div>
+              <div class="modal-card">
+                <header class="modal-card-head">
+                  <p class="modal-card-title">Delete this quest?</p>
+                  <button class="delete" aria-label="close"></button>
+                </header>
+                <section class="modal-card-body">
+                  The quest will be permanently deleted.
+                  You will not receive the stat increase for this task.
+                </section>
+                <footer class="modal-card-foot">
+                  <a href="{{ url_for('delete_task', task_id=task._id) }}"><button
+                      class="button is-danger">Delete</button></a>
+                  <button class="button">Cancel</button>
+                </footer>
+              </div>
+            </div>
+          </footer>
+        </div>
       </div>
+      {% endif %}
+      {% endfor %}
     </div>
-    {% endif %}
-    {% endfor %}
   </div>
-</div>
 
 <!-- COMPLETED TASKS -->
 <div class="container">
@@ -209,5 +217,5 @@
     {% endfor %}
   </div>
 </div>
-
+</section>
 {% endblock %}

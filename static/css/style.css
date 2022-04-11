@@ -25,17 +25,26 @@ img {
     flex-direction: column-reverse;
 }
 
+.page-heading {
+    font-family: 'Averia Serif Libre', cursive;
+    margin-bottom: 30px;
+}
+
 table {
     display: inline-table;
 }
 
 .table {
-    border-radius: 10px;
+    border-radius: 5px;
     margin-bottom: 50px;
-    font-size: 11px;
+    font-size: 13px;
     letter-spacing: 1px;
     text-transform: uppercase;
     font-weight: 600;
+}
+
+td {
+    vertical-align: middle !important;
 }
 
 .table img {
@@ -87,11 +96,14 @@ table {
     color: rgb(122, 122, 122);
 }
 
+
 .notification {
+    border-radius: 0;
     margin: 0 auto;
     z-index: 1;
     text-align: center;
 }
+
 
 .signin-notification {
     margin-top: 100px;
@@ -120,25 +132,23 @@ table {
     padding: 5px !important;
 }
 
+.table-column-border-right {
+    border-right: 1px solid #dbdbdb !important;
+}
+
+.scroll-indicator {
+    font-size: 2em;
+    color: #3e8ed0;
+    display: table;
+    margin: 0 auto;
+}
+
 .card-header.task-complete-card {
     background-color: grey !important;
 }
 
 .card-footer a {
     color: black;
-}
-
-.new-task-form {
-    padding-top: 50px;
-}
-
-.new-task-form h2 {
-    font-family: 'Averia Serif Libre', cursive;
-    margin-bottom: 30px;
-}
-
-.new-quest-title {
-    display: flex;
 }
 
 .subtitle {
@@ -171,7 +181,8 @@ table {
     margin-right: auto;
 }
 
-.enemy-list {
+.enemy-list,
+.treasure-list {
     margin-top: 50px;
 }
 
@@ -203,7 +214,7 @@ table {
     width: auto;
 }
 
-.enemy-battle-button{
+.enemy-battle-button {
     font-size: 1em;
     font-weight: 600;
     display: grid;
@@ -218,12 +229,30 @@ table {
 .attribute-leaderboard img {
     height: 30px;
     width: auto;
+    margin: 0px 10px 0px 10px
 }
 
 /* Solid border */
 hr.solid {
     border-top: 2px solid rgb(216, 216, 216);
-  }
+}
+
+.leaderboard-table {
+    background-color: #f5f5f5;
+    margin: 10px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.leaderboard-column {
+    display: contents;
+    padding: 0;
+}
+
+.leaderboard-username {
+    font-family: 'Averia Serif Libre', cursive;
+    margin: 10px!important;
+}
 
 
 /* https://stackoverflow.com/questions/17541614/use-images-instead-of-radio-buttons

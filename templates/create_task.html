@@ -52,10 +52,7 @@
           <td> <img src="{{ url_for('static', filename='/images/attributes/level.png') }}"
               alt="profile character sprite"></td>
           <td>Level</td>
-          <td>{{ level }}</td>
-        </tr>
-
-        <tr>
+          <td class="table-column-border-right">{{ level }}</td>
           <td> <img src="{{ url_for('static', filename='/images/attributes/strength.png') }}"
               alt="profile character sprite"></td>
           <td>Strength</td>
@@ -66,10 +63,7 @@
           <td> <img src="{{ url_for('static', filename='/images/attributes/stamina.png') }}"
               alt="profile character sprite"></td>
           <td>Stamina</td>
-          <td>{{ stamina }}</td>
-        </tr>
-
-        <tr>
+          <td class="table-column-border-right">{{ stamina }}</td>
           <td> <img src="{{ url_for('static', filename='/images/attributes/intellect.png') }}"
               alt="profile character sprite"></td>
           <td>Intellect</td>
@@ -80,14 +74,22 @@
           <td> <img src="{{ url_for('static', filename='/images/attributes/skill.png') }}"
               alt="profile character sprite"></td>
           <td>Skill</td>
-          <td>{{ skill }}</td>
-        </tr>
-
-        <tr>
+          <td class="table-column-border-right">{{ skill }}</td>
           <td> <img src="{{ url_for('static', filename='/images/attributes/social.png') }}"
               alt="profile character sprite"></td>
           <td>Social</td>
           <td>{{ social }}</td>
+        </tr>
+
+        <tr>
+          <td> <img src="{{ url_for('static', filename='/images/attributes/defeated.png') }}"
+              alt="profile character sprite"></td>
+          <td>Defeated</td>
+          <td class="table-column-border-right">{{ defeated }}</td>
+          <td> <img src="{{ url_for('static', filename='/images/attributes/claimed.png') }}"
+              alt="profile character sprite"></td>
+          <td>Claimed</td>
+          <td>{{ claimed }}</td>
         </tr>
       </tbody>
     </table>
@@ -115,12 +117,15 @@
   </div>
 </section>
 
+<span class="scroll-indicator"><i class="fa-solid fa-caret-down"></i></span>
+
 <form method="POST" action="{{ url_for('create_task') }}">
 
+  <section class="section">
   <div class="container new-task-form">
-    <span class="new-quest-title">
-      <h2 class="title is-2">Start a new Quest. </h2>
-    </span>
+
+      <h2 class="title is-2 page-heading">Start a new Quest. </h2>
+
     <div class="columns">
       <div class="column">
         <div class="field">
@@ -155,6 +160,7 @@
       </div>
     </div>
   </div>
+  </section>
 
 
     <div class="container is-centered">

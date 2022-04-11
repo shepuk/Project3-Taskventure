@@ -51,10 +51,7 @@
           <td> <img src="{{ url_for('static', filename='/images/attributes/level.png') }}"
               alt="profile character sprite"></td>
           <td>Level</td>
-          <td>{{ level }}</td>
-        </tr>
-
-        <tr>
+          <td class="table-column-border-right">{{ level }}</td>
           <td> <img src="{{ url_for('static', filename='/images/attributes/strength.png') }}"
               alt="profile character sprite"></td>
           <td>Strength</td>
@@ -65,10 +62,7 @@
           <td> <img src="{{ url_for('static', filename='/images/attributes/stamina.png') }}"
               alt="profile character sprite"></td>
           <td>Stamina</td>
-          <td>{{ stamina }}</td>
-        </tr>
-
-        <tr>
+          <td class="table-column-border-right">{{ stamina }}</td>
           <td> <img src="{{ url_for('static', filename='/images/attributes/intellect.png') }}"
               alt="profile character sprite"></td>
           <td>Intellect</td>
@@ -79,14 +73,22 @@
           <td> <img src="{{ url_for('static', filename='/images/attributes/skill.png') }}"
               alt="profile character sprite"></td>
           <td>Skill</td>
-          <td>{{ skill }}</td>
-        </tr>
-
-        <tr>
+          <td class="table-column-border-right">{{ skill }}</td>
           <td> <img src="{{ url_for('static', filename='/images/attributes/social.png') }}"
               alt="profile character sprite"></td>
           <td>Social</td>
           <td>{{ social }}</td>
+        </tr>
+
+        <tr>
+          <td> <img src="{{ url_for('static', filename='/images/attributes/defeated.png') }}"
+              alt="profile character sprite"></td>
+          <td>Defeated</td>
+          <td class="table-column-border-right">{{ defeated }}</td>
+          <td> <img src="{{ url_for('static', filename='/images/attributes/claimed.png') }}"
+              alt="profile character sprite"></td>
+          <td>Claimed</td>
+          <td>{{ claimed }}</td>
         </tr>
       </tbody>
     </table>
@@ -114,8 +116,14 @@
   </div>
 </section>
 
-<!-- Enemy list -->
-<div class="container enemy-list">
+<span class="scroll-indicator"><i class="fa-solid fa-caret-down"></i></span>
+
+<section class="section">
+<!-- Treasures list -->
+<div class="container treasure-list">
+
+    <h2 class="title is-2 page-heading">Collect Rare Treasures. </h2>
+
   <div class="columns is-flex-mobile is-multiline">
     {% for treasure in treasures %}
 
@@ -149,6 +157,7 @@
     {% endfor %}
   </div>
 </div>
+</section>
 
 
 

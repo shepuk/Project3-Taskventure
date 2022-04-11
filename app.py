@@ -52,6 +52,10 @@ def profile_tasks(username):
         {"created_by": username, "is_completed": "no", "is_urgent": "on"})
     exp = mongo.db.users.find_one(
         {"username": session["user"]})["exp"]
+    claimed = mongo.db.users.find_one(
+        {"username": session["user"]})["claimed_amount"]
+    defeated = mongo.db.users.find_one(
+        {"username": session["user"]})["defeated"]
 
     if session["user"]:
         return render_template(
@@ -62,7 +66,8 @@ def profile_tasks(username):
             skill=skill, social=social,
             active_tasks = active_tasks,
             finished_tasks = finished_tasks,
-            urgent_tasks = urgent_tasks, exp = exp)
+            urgent_tasks = urgent_tasks, exp = exp,
+            claimed = claimed, defeated = defeated)
 
     return redirect(url_for("login"))
 
@@ -157,6 +162,10 @@ def create_task():
         {"created_by": username, "is_completed": "no", "is_urgent": "on"})
     exp = mongo.db.users.find_one(
         {"username": session["user"]})["exp"]
+    claimed = mongo.db.users.find_one(
+        {"username": session["user"]})["claimed_amount"]
+    defeated = mongo.db.users.find_one(
+        {"username": session["user"]})["defeated"]
     
     if session["user"]:
         if request.method == "POST":
@@ -188,7 +197,9 @@ def create_task():
                                 active_tasks = active_tasks,
                                 finished_tasks = finished_tasks,
                                 urgent_tasks = urgent_tasks,
-                                exp = exp)
+                                exp = exp,
+                                claimed = claimed,
+                                defeated = defeated)
 
 
 @app.route("/profile_battle/<username>", methods=["GET", "POST"])
@@ -223,6 +234,10 @@ def profile_battle(username):
         {"username": session["user"]})["defeat_list"]
     exp = mongo.db.users.find_one(
         {"username": session["user"]})["exp"]
+    claimed = mongo.db.users.find_one(
+        {"username": session["user"]})["claimed_amount"]
+    defeated = mongo.db.users.find_one(
+        {"username": session["user"]})["defeated"]
 
     if session["user"]:
         return render_template(
@@ -235,7 +250,7 @@ def profile_battle(username):
             finished_tasks = finished_tasks,
             urgent_tasks = urgent_tasks,
             enemies = enemies, defeat_list = defeat_list,
-            exp = exp)
+            exp = exp, claimed = claimed, defeated = defeated)
 
     return redirect(url_for("login"))
 
@@ -324,6 +339,10 @@ def profile_treasures(username):
     treasures = mongo.db.treasures.find().sort("level")
     claimed_list = mongo.db.users.find_one(
         {"username": session["user"]})["claimed_list"]
+    claimed = mongo.db.users.find_one(
+        {"username": session["user"]})["claimed_amount"]
+    defeated = mongo.db.users.find_one(
+        {"username": session["user"]})["defeated"]
     
     active_tasks = mongo.db.tasks.count_documents(
         {"created_by": username, "is_completed": "no"})
@@ -343,7 +362,8 @@ def profile_treasures(username):
             urgent_tasks = urgent_tasks,
             enemies = enemies, defeat_list = defeat_list,
             exp = exp, treasures = treasures,
-            claimed_list = claimed_list)
+            claimed_list = claimed_list,
+            claimed = claimed, defeated = defeated)
 
     return redirect(url_for("login"))
 

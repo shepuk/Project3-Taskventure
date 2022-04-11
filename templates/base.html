@@ -16,7 +16,7 @@
 
 <body>
 
-  <nav class="navbar is-dark is-spaced has-shadow" role="navigation" aria-label="main navigation">
+  <nav class="navbar is-dark is-spaced" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
       <a href="{{ url_for('load_homepage') }}" class="navbar-item nav-header is-size-4" href="#">
         <h1>TASKVENTURE!</h1>
@@ -42,21 +42,12 @@
         <a href="{{ url_for('leaderboard') }}" class="navbar-item">
           Leaderboard
         </a>
-
-        <div class="navbar-item has-dropdown is-hoverable">
-          <a class="navbar-link">
-            More
-          </a>
-
-          <div class="navbar-dropdown">
-            <a class="navbar-item">
-              About
-            </a>
-            <a class="navbar-item">
-              Contact
-            </a>
-          </div>
-        </div>
+        <a class="navbar-item">
+          About
+        </a>
+        <a class="navbar-item">
+          Contact
+        </a>
       </div>
 
       <div class="navbar-end">
@@ -86,7 +77,7 @@
     {% if messages %}
     {% for message in messages %}
 
-    <div class="notification is-info">
+    <div class="notification is-danger">
       <button class="delete"></button>
       <p class="title is-3">{{ message }}</p>
     </div>
