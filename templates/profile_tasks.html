@@ -153,7 +153,7 @@
           </div>
           <footer class="card-footer">
             <a href="{{ url_for('complete_task', task_id=task._id) }}" class="card-footer-item">Done</a>
-            <a href="#" class="card-footer-item">Edit</a>
+            <a href="{{ url_for('edit_task', task_id=task._id) }}" class="card-footer-item">Edit</a>
             <a class="card-footer-item js-modal-trigger" data-target="modal">Delete</a>
 
             <div class="modal" id="modal">

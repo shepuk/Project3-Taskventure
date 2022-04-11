@@ -177,7 +177,6 @@ def create_task():
                 "due_date": request.form.get("due_date"),
                 "stat_increase": request.form.get("stat_increase"),
                 "created_by": session["user"],
-                #"task_level": request.form.get("task_level"),
                 "is_completed": "no"
             }
             mongo.db.tasks.insert_one(task)
@@ -200,6 +199,29 @@ def create_task():
                                 exp = exp,
                                 claimed = claimed,
                                 defeated = defeated)
+
+
+@app.route("/edit_task/<task_id>", methods=["GET", "POST"])
+def edit_task(task_id):
+    task = mongo.db.tasks.find_one({"_id": ObjectId(task_id)})
+
+    if request.method == "POST":
+        is_urgent = "on" if request.form.get("is_urgent") else "off"
+        task_edit = {"$set": {
+            "task_name": request.form.get("task_name"),
+            "task_description": request.form.get("task_description"),
+            "is_urgent": is_urgent,
+            "due_date": request.form.get("due_date"),
+            "stat_increase": request.form.get("stat_increase"),
+            "created_by": session["user"],
+            "is_completed": "no"
+            }}
+
+        mongo.db.tasks.update_one({"_id": ObjectId(task_id)}, task_edit)
+        flash("Quest Updated")
+        return redirect(url_for("profile_tasks", username=session["user"]))
+
+    return render_template("edit_task.html", task=task)
 
 
 @app.route("/profile_battle/<username>", methods=["GET", "POST"])
