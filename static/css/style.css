@@ -30,6 +30,28 @@ img {
     margin-bottom: 30px;
 }
 
+.hero-body {
+    align-items: flex-start!important;
+}
+
+.hero-heading h1 {
+    font-size: 100px;
+    color: black;
+}
+
+.hero-heading p {
+    font-size: ;
+}
+
+.hero {
+    background-image: url(../images/homepage/hero_background.jpg)!important;
+    background-size: cover;
+}
+
+.hero.is-info {
+    
+}
+
 table {
     display: inline-table;
 }
