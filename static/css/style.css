@@ -30,26 +30,44 @@ img {
     margin-bottom: 30px;
 }
 
-.hero-body {
-    align-items: flex-start!important;
+/* https://css-tricks.com/create-diagonal-layouts-like-its-2020/*/
+.home-hero {
+    margin-top: 30px;
+	background: url(../images/homepage/hero_background.jpg);
+	background-position: center bottom;
+	background-repeat: no-repeat;
+	background-size: cover;
+    clip-path: polygon(0 10%, 100% 0, 100% 90%, 0 100%);
+    padding: 18rem 18%;
+	padding: rem(100) rem(20);
+	text-align: center;
 }
 
-.hero-heading h1 {
-    font-size: 100px;
-    color: black;
+.hero-heading {
+    font-family: 'Averia Serif Libre', cursive;
+    font-weight: 400;
+    margin-top: 50px;
+    font-size: 50px;
+    font-weight: 400;
+    color: rgb(255, 255, 255);
+    text-shadow: rgb(0, 0, 0) 1px 0 10px;
 }
 
-.hero-heading p {
-    font-size: ;
+.hero-subheading {
+    font-family: 'Averia Serif Libre', cursive;
+    font-size: 30px;
+    font-style: italic;
+    color: rgb(255, 255, 255);
+    text-shadow: rgb(0, 0, 0) 1px 0 10px;
 }
 
-.hero {
-    background-image: url(../images/homepage/hero_background.jpg)!important;
-    background-size: cover;
+.home-feature {
+    font-family: 'Averia Serif Libre', cursive;
 }
 
-.hero.is-info {
-    
+article > i {
+    font-size: 30px;
+    margin-bottom: 5px;
 }
 
 table {
@@ -493,6 +511,10 @@ hr.solid {
     top: .3em;
 }
 
+.footer {
+    color: white;
+}
+
 
 @media only screen and (max-width: 768px) {
 
@@ -511,4 +533,5 @@ hr.solid {
     .attribute-selector label {
         font-size: small;
     }
+
 }
