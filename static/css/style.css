@@ -523,6 +523,10 @@ hr.solid {
     color: white;
 }
 
+.footer p {
+    color: white;
+}
+
 .footer a:hover {
     text-decoration: underline;
     color: white;
