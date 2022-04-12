@@ -32,13 +32,12 @@ img {
 
 /* https://css-tricks.com/create-diagonal-layouts-like-its-2020/*/
 .home-hero {
-    margin-top: 30px;
 	background: url(../images/homepage/hero_background.jpg);
 	background-position: center bottom;
 	background-repeat: no-repeat;
 	background-size: cover;
-    clip-path: polygon(0 10%, 100% 0, 100% 90%, 0 100%);
-    padding: 18rem 18%;
+    clip-path: polygon(0 0%, 100% 0, 100% 90%, 0 100%);
+    padding: 18rem 15%;
 	padding: rem(100) rem(20);
 	text-align: center;
 }
@@ -63,6 +62,7 @@ img {
 
 .home-feature {
     font-family: 'Averia Serif Libre', cursive;
+    margin-bottom: 15px;
 }
 
 article > i {
@@ -511,9 +511,14 @@ hr.solid {
     top: .3em;
 }
 
-.footer {
+.footer, footer a {
     color: white;
 }
+
+.footer a:hover {
+    text-decoration: underline;
+    color: white;
+  }
 
 
 @media only screen and (max-width: 768px) {
@@ -532,6 +537,11 @@ hr.solid {
 
     .attribute-selector label {
         font-size: small;
+    }
+
+    .home-hero {
+        padding: 7rem 13%;
+        padding-top: 40px;
     }
 
 }
