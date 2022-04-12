@@ -144,6 +144,10 @@ td {
     text-align: center;
 }
 
+.notification.is-danger {
+    margin-bottom: 0!important;
+}
+
 
 .signin-notification {
     margin-top: 100px;
@@ -511,7 +515,11 @@ hr.solid {
     top: .3em;
 }
 
-.footer, footer a {
+.footer {
+    margin-top: 100px;
+}
+
+.footer a {
     color: white;
 }
 

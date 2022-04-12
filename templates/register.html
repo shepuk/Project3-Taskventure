@@ -1,92 +1,104 @@
 {% extends "base.html" %}
 {% block content %}
 
-<div class="container mt-5">
-    <div class="columns is-centered">
-        <div class="column is-half">
-            <h1 class="title signin-heading" style="text-align: center;">Start your quest.</h1>
-            <h2 class="subtitle">Register and start leveling up!</h2>
-            <form method="POST" action="{{ url_for('register') }}">
-                <div class="field">
-                    <p class="control has-icons-left">
-                        <input class="input" id="username" type="text" placeholder="Username" name="username"
-                            minlength="3" maxlength="15" required>
-                        <span class="icon is-small is-left">
-                            <i class="fas fa-user"></i>
-                        </span>
-                    </p>
-                </div>
-                <div class="field">
-                    <p class="control has-icons-left">
-                        <input class="input" id="password" type="password" placeholder="Password" name="password"
-                            minlength="5" maxlength="20" pattern="^[a-zA-Z0-9]{5,15}$" required
-                            title="Please use at least 5 characters">
-                        <span class="icon is-small is-left">
-                            <i class="fas fa-lock"></i>
-                        </span>
-                    </p>
-                </div>
-
-                <div class="container is-fluid is-centered">
-                    <h5 class="subtitle is-5">Choose your hero.</h5>
-                    <div class="notification character-selector">
-                        <label>
-                            <input type="radio" name="character" value="1" checked>
-                            <img src="{{ url_for('static', filename='/images/characters/1.png') }}" alt="" srcset="">
-                        </label>
-                        <label>
-                            <input type="radio" name="character" value="2">
-                            <img src="{{ url_for('static', filename='/images/characters/2.png') }}" alt="" srcset="">
-                        </label>
-                        <label>
-                            <input type="radio" name="character" value="3">
-                            <img src="{{ url_for('static', filename='/images/characters/3.png') }}" alt="" srcset="">
-                        </label>
-                        <label>
-                            <input type="radio" name="character" value="4">
-                            <img src="{{ url_for('static', filename='/images/characters/4.png') }}" alt="" srcset="">
-                        </label>
-                        <label>
-                            <input type="radio" name="character" value="5">
-                            <img src="{{ url_for('static', filename='/images/characters/5.png') }}" alt="" srcset="">
-                        </label>
-                        <label>
-                            <input type="radio" name="character" value="6">
-                            <img src="{{ url_for('static', filename='/images/characters/6.png') }}" alt="" srcset="">
-                        </label>
-                        <label>
-                            <input type="radio" name="character" value="7">
-                            <img src="{{ url_for('static', filename='/images/characters/7.png') }}" alt="" srcset="">
-                        </label>
-                        <label>
-                            <input type="radio" name="character" value="8">
-                            <img src="{{ url_for('static', filename='/images/characters/8.png') }}" alt="" srcset="">
-                        </label>
-                        <label>
-                            <input type="radio" name="character" value="9">
-                            <img src="{{ url_for('static', filename='/images/characters/9.png') }}" alt="" srcset="">
-                        </label>
-                        <label>
-                            <input type="radio" name="character" value="10">
-                            <img src="{{ url_for('static', filename='/images/characters/10.png') }}" alt="" srcset="">
-                        </label>
+<section class="section">
+    <div class="container mt-5">
+        <div class="columns is-centered">
+            <div class="column is-half">
+                <h1 class="title signin-heading" style="text-align: center;">Start your quest.</h1>
+                <h2 class="subtitle">Register and start leveling up!</h2>
+                <form method="POST" action="{{ url_for('register') }}">
+                    <div class="field">
+                        <p class="control has-icons-left">
+                            <input class="input" id="username" type="text" placeholder="Username" name="username"
+                                minlength="3" maxlength="15" required>
+                            <span class="icon is-small is-left">
+                                <i class="fas fa-user"></i>
+                            </span>
+                        </p>
                     </div>
-                </div>
+                    <div class="field">
+                        <p class="control has-icons-left">
+                            <input class="input" id="password" type="password" placeholder="Password" name="password"
+                                minlength="5" maxlength="20" pattern="^[a-zA-Z0-9]{5,15}$" required
+                                title="Please use at least 5 characters">
+                            <span class="icon is-small is-left">
+                                <i class="fas fa-lock"></i>
+                            </span>
+                        </p>
+                    </div>
 
-                <div class="field">
-                    <p class="control">
-                        <button class="button is-info credentials" type="submt">
-                            Register
-                        </button>
-                    </p>
+                    <div class="container is-fluid is-centered">
+                        <h5 class="subtitle is-5">Choose your hero.</h5>
+                        <div class="notification character-selector">
+                            <label>
+                                <input type="radio" name="character" value="1" checked>
+                                <img src="{{ url_for('static', filename='/images/characters/1.png') }}" alt=""
+                                    srcset="">
+                            </label>
+                            <label>
+                                <input type="radio" name="character" value="2">
+                                <img src="{{ url_for('static', filename='/images/characters/2.png') }}" alt=""
+                                    srcset="">
+                            </label>
+                            <label>
+                                <input type="radio" name="character" value="3">
+                                <img src="{{ url_for('static', filename='/images/characters/3.png') }}" alt=""
+                                    srcset="">
+                            </label>
+                            <label>
+                                <input type="radio" name="character" value="4">
+                                <img src="{{ url_for('static', filename='/images/characters/4.png') }}" alt=""
+                                    srcset="">
+                            </label>
+                            <label>
+                                <input type="radio" name="character" value="5">
+                                <img src="{{ url_for('static', filename='/images/characters/5.png') }}" alt=""
+                                    srcset="">
+                            </label>
+                            <label>
+                                <input type="radio" name="character" value="6">
+                                <img src="{{ url_for('static', filename='/images/characters/6.png') }}" alt=""
+                                    srcset="">
+                            </label>
+                            <label>
+                                <input type="radio" name="character" value="7">
+                                <img src="{{ url_for('static', filename='/images/characters/7.png') }}" alt=""
+                                    srcset="">
+                            </label>
+                            <label>
+                                <input type="radio" name="character" value="8">
+                                <img src="{{ url_for('static', filename='/images/characters/8.png') }}" alt=""
+                                    srcset="">
+                            </label>
+                            <label>
+                                <input type="radio" name="character" value="9">
+                                <img src="{{ url_for('static', filename='/images/characters/9.png') }}" alt=""
+                                    srcset="">
+                            </label>
+                            <label>
+                                <input type="radio" name="character" value="10">
+                                <img src="{{ url_for('static', filename='/images/characters/10.png') }}" alt=""
+                                    srcset="">
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <p class="control">
+                            <button class="button is-info credentials" type="submt">
+                                Register
+                            </button>
+                        </p>
+                    </div>
+                </form>
+                <div class="notification signin-notification is-warning">
+                    <button class="delete"></button>
+                    Psst!<br>Already have an account?<br> <a href="{{ url_for('login') }}">Log in here</a>
                 </div>
-            </form>
-            <div class="notification signin-notification is-warning">
-                <button class="delete"></button>
-                Psst!<br>Already have an account?<br> <a href="{{ url_for('login') }}">Log in here</a>
             </div>
         </div>
     </div>
-</div>
+</section>
 
 {% endblock %}
