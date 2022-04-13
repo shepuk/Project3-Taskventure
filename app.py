@@ -25,6 +25,11 @@ def load_homepage():
 
 @app.route("/profile_tasks/<username>", methods=["GET", "POST"])
 def profile_tasks(username):
+
+    if session.get("user") == None:
+        return render_template(
+            "login.html")
+
     # Get the session user's username form the database
     username = mongo.db.users.find_one(
         {"username": session["user"]})["username"]
@@ -138,6 +143,11 @@ def login():
 
 @app.route("/create_task", methods=["GET", "POST"])
 def create_task():
+
+    if session.get("user") == None:
+        return render_template(
+            "login.html")
+
     username = mongo.db.users.find_one(
         {"username": session["user"]})["username"]
     character = mongo.db.users.find_one(
@@ -226,6 +236,11 @@ def edit_task(task_id):
 
 @app.route("/profile_battle/<username>", methods=["GET", "POST"])
 def profile_battle(username):
+
+    if session.get("user") == None:
+        return render_template(
+            "login.html")
+    
     # Get the session user's username form the database
     username = mongo.db.users.find_one(
         {"username": session["user"]})["username"]
@@ -328,6 +343,11 @@ def battle_enemy(enemy):
 
 @app.route("/profile_treasures/<username>", methods=["GET", "POST"])
 def profile_treasures(username):
+
+    if session.get("user") == None:
+        return render_template(
+            "login.html")
+
     # Get the session user's username form the database
     username = mongo.db.users.find_one(
         {"username": session["user"]})["username"]
