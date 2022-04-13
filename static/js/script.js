@@ -1,5 +1,5 @@
 $(document).ready(function () {
-  
+
   // Check for click events on the navbar burger icon
   $(".navbar-burger").click(function () {
 
@@ -20,8 +20,14 @@ $(document).ready(function () {
     });
   });
 
-  const elements = document.querySelectorAll('.enemy-name')
+  const elements = document.querySelectorAll('.enemy-name', 'treasure-name')
   elements.forEach(e => e.innerText = e.innerText.replaceAll('_', ' '))
+
+  var dropdown = document.querySelector('.dropdown');
+  dropdown.addEventListener('click', function (event) {
+    event.stopPropagation();
+    dropdown.classList.toggle('is-active');
+  });
 
 });
 

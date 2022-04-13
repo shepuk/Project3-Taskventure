@@ -121,9 +121,51 @@
 <!-- Task / Quest list -->
 <section class="section">
   <div class="container">
-    
+
+    <span class="tasks-title">
       <h2 class="title is-2 page-heading">Quest Log. </h2>
-    
+      <form action="{{ url_for('search') }}" method="POST" id="searchform">
+        <div class="field has-addons">
+          <div class="control">
+            <input class="input" type="text" placeholder="Search Quests" name="query">
+          </div>
+          <div class="control">
+            <a onclick="document.getElementById('searchform').submit();" class="button is-info">
+              Search
+            </a>
+          </div>
+          <div class="control">
+          <a href="{{ url_for('profile_tasks', username=session['user']) }}" class="button is-success">
+            All
+          </a>
+        </div>
+        </div>
+      </form>
+
+      <div class="dropdown">
+        <div class="dropdown-trigger">
+          <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
+            <span>Sort By</span>
+            <span class="icon is-small">
+              <i class="fas fa-angle-down" aria-hidden="true"></i>
+            </span>
+          </button>
+        </div>
+        <div class="dropdown-menu" id="dropdown-menu" role="menu">
+          <div class="dropdown-content">
+            <a href="{{ sort_date }}" class="dropdown-item">
+              Date
+            </a>
+            <a href="{{ sort_urgency }}" class="dropdown-item">
+              Urgency
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </span>
+
+    {% if tasks|length > 0 %}
     <div class="columns is-multiline active-tasks-list">
       {% for task in tasks %}
       {% if task.is_completed == "no" %}
@@ -180,42 +222,45 @@
       {% endif %}
       {% endfor %}
     </div>
+    {% else %}
+    <h2 class="title is-2 page-heading">No Quests Found.</h2>
+    {% endif %}
   </div>
 
-<!-- COMPLETED TASKS -->
-<div class="container">
-  <div class="columns is-multiline active-tasks-list">
-    {% for task in tasks %}
-    {% if task.is_completed == "yes" %}
-    <div class="column is-6">
-      <div class="card">
-        <header class="card-header task-complete-card">
-          <p class="card-header-title">
-            {{ task.task_name }}
-          </p>
-          <span class="card-header-icon">
-            <span class="icon">
-              {% if task.is_urgent == "on" %}
-              <i class="fa-solid fa-circle-exclamation tooltipped" data-position="right" data-tooltip="Urgent"></i>
-              {% endif %}
+  <!-- COMPLETED TASKS -->
+  <div class="container">
+    <div class="columns is-multiline active-tasks-list">
+      {% for task in tasks %}
+      {% if task.is_completed == "yes" %}
+      <div class="column is-6">
+        <div class="card">
+          <header class="card-header task-complete-card">
+            <p class="card-header-title">
+              {{ task.task_name }}
+            </p>
+            <span class="card-header-icon">
+              <span class="icon">
+                {% if task.is_urgent == "on" %}
+                <i class="fa-solid fa-circle-exclamation tooltipped" data-position="right" data-tooltip="Urgent"></i>
+                {% endif %}
+              </span>
             </span>
-          </span>
-        </header>
-        <div class="card-content">
-          <div class="content">
-            <span class="task_stat_display"><img
-                src="{{ url_for('static', filename='/images/attributes/' + task.stat_increase + '.png') }}"
-                alt="Image showing which character attribute will be increased by this task"></span>
-            <em class="date_display">Quest Complete (Due date {{task.due_date }})</em>
-            <br>
-            {{ task.task_description }}
+          </header>
+          <div class="card-content">
+            <div class="content">
+              <span class="task_stat_display"><img
+                  src="{{ url_for('static', filename='/images/attributes/' + task.stat_increase + '.png') }}"
+                  alt="Image showing which character attribute will be increased by this task"></span>
+              <em class="date_display">Quest Complete (Due date {{task.due_date }})</em>
+              <br>
+              {{ task.task_description }}
+            </div>
           </div>
         </div>
       </div>
+      {% endif %}
+      {% endfor %}
     </div>
-    {% endif %}
-    {% endfor %}
   </div>
-</div>
 </section>
 {% endblock %}

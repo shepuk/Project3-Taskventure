@@ -534,6 +534,58 @@ def logout():
     return redirect(url_for("load_homepage"))
 
 
+@app.route("/search", methods=["GET", "POST"])
+def search():
+
+    query = request.form.get("query")
+    tasks = list(mongo.db.tasks.find(
+        {"created_by": session["user"], "$text": {"$search": query}}))
+    
+    username = mongo.db.users.find_one(
+        {"username": session["user"]})["username"]
+    character = mongo.db.users.find_one(
+        {"username": session["user"]})["character"]
+    level = mongo.db.users.find_one(
+        {"username": session["user"]})["level"]
+    strength = mongo.db.users.find_one(
+        {"username": session["user"]})["strength"]
+    stamina = mongo.db.users.find_one(
+        {"username": session["user"]})["stamina"]
+    intellect = mongo.db.users.find_one(
+        {"username": session["user"]})["intellect"]
+    skill = mongo.db.users.find_one(
+        {"username": session["user"]})["skill"]
+    social = mongo.db.users.find_one(
+        {"username": session["user"]})["social"]
+    active_tasks = mongo.db.tasks.count_documents(
+        {"created_by": username, "is_completed": "no"})
+    finished_tasks = mongo.db.tasks.count_documents(
+        {"created_by": username, "is_completed": "yes"})
+    urgent_tasks = mongo.db.tasks.count_documents(
+        {"created_by": username, "is_completed": "no", "is_urgent": "on"})
+    exp = mongo.db.users.find_one(
+        {"username": session["user"]})["exp"]
+    claimed = mongo.db.users.find_one(
+        {"username": session["user"]})["claimed_amount"]
+    defeated = mongo.db.users.find_one(
+        {"username": session["user"]})["defeated"]
+
+    if session["user"]:
+        return render_template(
+            "profile_tasks.html", tasks=tasks,
+            username=username, character=character,
+            level=level, strength=strength,
+            stamina=stamina, intellect=intellect,
+            skill=skill, social=social,
+            active_tasks = active_tasks,
+            finished_tasks = finished_tasks,
+            urgent_tasks = urgent_tasks, exp = exp,
+            claimed = claimed, defeated = defeated)
+
+    return redirect(url_for(
+                    "profile_tasks", username=session["user"]))
+
+
 
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),

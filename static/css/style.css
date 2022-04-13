@@ -92,6 +92,14 @@ td {
     width: 25px;
 }
 
+.tasks-title {
+    margin-bottom: 20px;
+}
+
+.is-active {
+    background-color: white;
+}
+
 .card {
     border-radius: 10px;
 }
@@ -153,7 +161,7 @@ td {
     margin-top: 100px;
 }
 
-.is-active a {
+li.is-active a {
     background-color: hsl(0, 0%, 96%) !important;
     border-color: hsl(0, 0%, 96%) !important;
 }
