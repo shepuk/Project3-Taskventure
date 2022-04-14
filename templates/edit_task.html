@@ -104,7 +104,7 @@
 
         <span class="edit-quest-buttons">
             <button type="submit" class="button is-medium is-centered is-info">Update Quest</button>
-            <a href="{{ url_for('profile_tasks', username=session['user']) }}"><button type="button" class="button is-centered is-medium is-danger">Cancel</button></a>
+            <a href="{{ url_for('profile_tasks', username=session['user'], sort_by='due_date') }}"><button type="button" class="button is-centered is-medium is-danger">Cancel</button></a>
         </span>
 
     </div>
