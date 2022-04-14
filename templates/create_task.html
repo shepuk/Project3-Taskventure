@@ -100,7 +100,7 @@
       <div class="container">
         <ul>
           <li>
-            <a href="{{ url_for('profile_tasks', username=session['user']) }}">Quests</a>
+            <a href="{{ url_for('profile_tasks', username=session['user'], sort_by='due_date') }}">Quests</a>
           </li>
           <li class="is-active">
             <a href="{{ url_for('create_task') }}">New Quest</a>

@@ -6,6 +6,7 @@ from bson.objectid import ObjectId
 from werkzeug.security import generate_password_hash, check_password_hash
 if os.path.exists("env.py"):
     import env
+from datetime import datetime
 
 
 app = Flask(__name__)
@@ -23,8 +24,8 @@ def load_homepage():
     return render_template("home.html")
 
 
-@app.route("/profile_tasks/<username>", methods=["GET", "POST"])
-def profile_tasks(username):
+@app.route("/profile_tasks/<username>/<sort_by>", methods=["GET", "POST"])
+def profile_tasks(username, sort_by):
 
     if session.get("user") == None:
         return render_template(
@@ -35,8 +36,8 @@ def profile_tasks(username):
         {"username": session["user"]})["username"]
     character = mongo.db.users.find_one(
         {"username": session["user"]})["character"]
-    tasks = list(mongo.db.tasks.find(
-        {"created_by": session["user"]}))
+    tasks = mongo.db.tasks.find(
+        {"created_by": session["user"]}).sort(sort_by)
     level = mongo.db.users.find_one(
         {"username": session["user"]})["level"]
     strength = mongo.db.users.find_one(
@@ -61,6 +62,8 @@ def profile_tasks(username):
         {"username": session["user"]})["claimed_amount"]
     defeated = mongo.db.users.find_one(
         {"username": session["user"]})["defeated"]
+
+    tasks = list(tasks)
 
     if session["user"]:
         return render_template(
@@ -176,23 +179,24 @@ def create_task():
         {"username": session["user"]})["claimed_amount"]
     defeated = mongo.db.users.find_one(
         {"username": session["user"]})["defeated"]
-    
+
     if session["user"]:
         if request.method == "POST":
             is_urgent = "on" if request.form.get("is_urgent") else "off"
             task = {
-                "task_name": request.form.get("task_name"),
+                "task_name": request.form.get("task_name").lower(),
                 "task_description": request.form.get("task_description"),
                 "is_urgent": is_urgent,
                 "due_date": request.form.get("due_date"),
                 "stat_increase": request.form.get("stat_increase"),
                 "created_by": session["user"],
-                "is_completed": "no"
+                "is_completed": "no",
+                "date_created": datetime.now()
             }
             mongo.db.tasks.insert_one(task)
             flash("New Quest Added")
             return redirect(url_for(
-                        "profile_tasks", username=session["user"]))
+                        "profile_tasks", username=session["user"], sort_by='due_date'))
 
         return render_template("create_task.html",
                                 username=username,
@@ -229,7 +233,7 @@ def edit_task(task_id):
 
         mongo.db.tasks.update_one({"_id": ObjectId(task_id)}, task_edit)
         flash("Quest Updated")
-        return redirect(url_for("profile_tasks", username=session["user"]))
+        return redirect(url_for("profile_tasks", username=session["user"], sort_by='due_date'))
 
     return render_template("edit_task.html", task=task)
 
@@ -464,7 +468,7 @@ def delete_task(task_id):
     mongo.db.tasks.delete_one({"_id": ObjectId(task_id)})
     flash("Quest Abandoned")
     return redirect(url_for(
-                    "profile_tasks", username=session["user"]))
+                    "profile_tasks", username=session["user"], sort_by='due_date'))
 
 
 @app.route("/complete_task/<task_id>")
@@ -518,7 +522,7 @@ def complete_task(task_id):
 
     flash("Quest Completed, " + stat + " increased!")
     return redirect(url_for(
-                    "profile_tasks", username=session["user"]))
+                    "profile_tasks", username=session["user"], sort_by='due_date'))
 
 
 @app.route("/leaderboard")
@@ -536,7 +540,6 @@ def logout():
 
 @app.route("/search", methods=["GET", "POST"])
 def search():
-
     query = request.form.get("query")
     tasks = list(mongo.db.tasks.find(
         {"created_by": session["user"], "$text": {"$search": query}}))
@@ -583,7 +586,7 @@ def search():
             claimed = claimed, defeated = defeated)
 
     return redirect(url_for(
-                    "profile_tasks", username=session["user"]))
+                    "profile_tasks", username=session["user"], sort_by='due_date'))
 
 
 
