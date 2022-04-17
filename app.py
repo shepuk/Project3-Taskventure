@@ -544,6 +544,11 @@ def leaderboard():
     return render_template("leaderboard.html", users=users)
 
 
+@app.route("/about")
+def about():
+    return render_template("about.html")
+
+
 @app.route("/logout")
 def logout():
     flash("Logged Out")
