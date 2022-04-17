@@ -7,7 +7,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 if os.path.exists("env.py"):
     import env
 from datetime import datetime
-
+from flask_mail import Mail, Message
 
 app = Flask(__name__)
 
@@ -16,6 +16,15 @@ app.config["MONGO_URI"] = os.environ.get("MONGO_URI")
 app.secret_key = os.environ.get("SECRET_KEY")
 
 mongo = PyMongo(app)
+
+app.config['MAIL_SERVER'] = "smtp.gmail.com"
+app.config['MAIL_PORT'] = 587
+app.config['MAIL_USERNAME'] = os.environ.get("EMAIL")
+app.config['MAIL_PASSWORD'] = os.environ.get("EMAIL_KEY")
+app.config['MAIL_USE_TLS'] = False
+app.config['MAIL_USE_SSL'] = True
+
+mail = Mail(app)
 
 
 @app.route("/")
@@ -547,6 +556,21 @@ def leaderboard():
 @app.route("/about")
 def about():
     return render_template("about.html")
+
+
+@app.route("/contact", methods=("GET", "POST"))
+def contact():
+
+    if request.method == "POST":
+        name = request.form.get("name")
+        email = request.form.get("email")
+        message = request.form.get("message")
+
+        msg = Message(sender = name, recipients = ['os.environ.get("EMAIL")'])
+        msg.body = message
+        mail.send(msg)
+        flash("Email Sent")
+    return render_template("contact.html")
 
 
 @app.route("/logout")
