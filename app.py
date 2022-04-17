@@ -109,13 +109,26 @@ def register():
             "claimed_list": "",
             "claimed_amount": 0
         }
+
+        tutorial_task = {
+            "task_name": "your first quest",
+            "task_description": "Welcome to taskventure! This is a quest. You can create more by clicking 'new quest' above. Quests provide two things - stat increases and experience. Increasing your stats will allow you to fight stronger monsters, and gaining 500 experience (EXP) will level your character up. Completing quests, fighting monsters and finding treasures will all provide experience. This particular quest will increase your strength stat (indicated by the sword icon). Collect treasures by meeting certain requirements and turn your to-do list into a fun adventure!",
+            "is_urgent": "off",
+            "due_date": "2023-12-31",
+            "stat_increase": 'strength',
+            "created_by": request.form.get("username").lower(),
+            "is_completed": "no",
+            "date_created": datetime.now()
+        }
+
         # Add new user (dict) to MongoDB
         mongo.db.users.insert_one(register)
+        mongo.db.tasks.insert_one(tutorial_task)
 
         # Add new user to session cookie
         session["user"] = request.form.get("username").lower()
         flash("Beginning quest...")
-        return redirect(url_for("profile_tasks", username=session["user"]))
+        return redirect(url_for("profile_tasks", username=session["user"], sort_by='due_date'))
 
     return render_template("register.html")
 
@@ -131,7 +144,7 @@ def login():
                     existing_user["password"], request.form.get("password")):
                 session["user"] = request.form.get("username").lower()
                 return redirect(url_for(
-                    "profile_tasks", username=session["user"]))
+                    "profile_tasks", username=session["user"], sort_by='due_date'))
 
             else:
                 flash("Incorrect Username and/or Password")
