@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
+<!-- profile details -->
 <section class="hero is-info is-small">
   <nav class="level is-mobile">
     <div class="level-item has-text-centered">
@@ -27,9 +28,9 @@
       </div>
     </div>
   </nav>
-
   <div class="hero-head">
   </div>
+  <!-- user avatar and stats -->
   <div class="hero-body">
     <div class="container has-text-centered">
       <p class="title profile-header">
@@ -42,58 +43,53 @@
       </p>
     </div>
   </div>
-
   <div class="container is-max-desktop">
-
     <table class="table">
       <tbody>
         <tr>
           <td> <img src="{{ url_for('static', filename='/images/attributes/level.png') }}"
-              alt="profile character sprite"></td>
+              alt="level symbol"></td>
           <td>Level</td>
           <td class="table-column-border-right">{{ level }}</td>
           <td> <img src="{{ url_for('static', filename='/images/attributes/strength.png') }}"
-              alt="profile character sprite"></td>
+              alt="strength symbol"></td>
           <td>Strength</td>
           <td>{{ strength }}</td>
         </tr>
-
         <tr>
           <td> <img src="{{ url_for('static', filename='/images/attributes/stamina.png') }}"
-              alt="profile character sprite"></td>
+              alt="samina symbol"></td>
           <td>Stamina</td>
           <td class="table-column-border-right">{{ stamina }}</td>
           <td> <img src="{{ url_for('static', filename='/images/attributes/intellect.png') }}"
-              alt="profile character sprite"></td>
+              alt="intellect symbol"></td>
           <td>Intellect</td>
           <td>{{ intellect }}</td>
         </tr>
-
         <tr>
           <td> <img src="{{ url_for('static', filename='/images/attributes/skill.png') }}"
-              alt="profile character sprite"></td>
+              alt="skill symbol"></td>
           <td>Skill</td>
           <td class="table-column-border-right">{{ skill }}</td>
           <td> <img src="{{ url_for('static', filename='/images/attributes/social.png') }}"
-              alt="profile character sprite"></td>
+              alt="social symbol"></td>
           <td>Social</td>
           <td>{{ social }}</td>
         </tr>
-
         <tr>
           <td> <img src="{{ url_for('static', filename='/images/attributes/defeated.png') }}"
-              alt="profile character sprite"></td>
+              alt="enemies defeated symbol"></td>
           <td>Defeated</td>
           <td class="table-column-border-right">{{ defeated }}</td>
           <td> <img src="{{ url_for('static', filename='/images/attributes/claimed.png') }}"
-              alt="profile character sprite"></td>
+              alt="treasures claimed symbol"></td>
           <td>Claimed</td>
           <td>{{ claimed }}</td>
         </tr>
       </tbody>
     </table>
-
   </div>
+  <!-- profile tab navigation -->
   <div class="hero-foot">
     <nav class="tabs is-boxed is-fullwidth">
       <div class="container">
@@ -115,50 +111,39 @@
     </nav>
   </div>
 </section>
-
 <span class="scroll-indicator"><i class="fa-solid fa-caret-down"></i></span>
-
 <section class="section">
-<!-- Enemy list -->
-<div class="container enemy-list">
-  
+  <!-- Enemy list -->
+  <div class="container enemy-list">
     <h2 class="title is-2 page-heading">Defeat Them All. </h2>
-  
-  <div class="columns is-flex-mobile is-multiline">
-    {% for enemy in enemies %}
-
-    <div class="column is-2 is-half-mobile">
-
-      <div class="card enemy-card has-text-centered">
-        {% if enemy.name in defeat_list %}
-        <header class="card-header enemy-name enemy-name-defeated">
-        {% else %}
-        <header class="card-header enemy-name">
-        {% endif %}
-          {{ enemy.name.title() }}
-        </header>
-        <div class="card-content enemy-info">
-          <img src="{{ url_for('static', filename='/images/enemies/' + enemy.name + '.png') }}" alt="">
-          <p>
-            {{ enemy.level }} {{ enemy.attribute }} required.
-          </p>
-        </div>
-        <footer class="card-footer enemy-battle-button">
+    <div class="columns is-flex-mobile is-multiline">
+      {% for enemy in enemies %}
+      <div class="column is-2 is-half-mobile">
+        <div class="card enemy-card has-text-centered">
           {% if enemy.name in defeat_list %}
-          <p>Defeated</p>
-          {% else %}
-          <a href="{{ url_for('battle_enemy', enemy=enemy.name) }}">Battle</a>
-          {% endif %}
-        </footer>
+          <header class="card-header enemy-name enemy-name-defeated">
+            {% else %}
+            <header class="card-header enemy-name">
+              {% endif %}
+              {{ enemy.name.title() }}
+            </header>
+            <div class="card-content enemy-info">
+              <img src="{{ url_for('static', filename='/images/enemies/' + enemy.name + '.png') }}" alt="enemy sprite">
+              <p>
+                {{ enemy.level }} {{ enemy.attribute }} required.
+              </p>
+            </div>
+            <footer class="card-footer enemy-battle-button">
+              {% if enemy.name in defeat_list %}
+              <p>Defeated</p>
+              {% else %}
+              <a href="{{ url_for('battle_enemy', enemy=enemy.name) }}">Battle</a>
+              {% endif %}
+            </footer>
+        </div>
       </div>
+      {% endfor %}
     </div>
-
-
-    {% endfor %}
   </div>
-</div>
 </section>
-
-
-
 {% endblock %}

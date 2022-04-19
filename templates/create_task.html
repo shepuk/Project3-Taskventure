@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
+<!-- profile header -->
 <section class="hero is-info is-small">
   <nav class="level is-mobile">
     <div class="level-item has-text-centered">
@@ -27,10 +28,9 @@
       </div>
     </div>
   </nav>
+  <!-- profile avatar and stats -->
   <div class="hero-head">
-
   </div>
-
   <div class="hero-body">
     <div class="container has-text-centered">
       <p class="title profile-header">
@@ -43,58 +43,50 @@
       </p>
     </div>
   </div>
-
   <div class="container is-max-desktop">
-
     <table class="table">
       <tbody>
         <tr>
-          <td> <img src="{{ url_for('static', filename='/images/attributes/level.png') }}"
-              alt="profile character sprite"></td>
+          <td> <img src="{{ url_for('static', filename='/images/attributes/level.png') }}" alt="current level symbol">
+          </td>
           <td>Level</td>
           <td class="table-column-border-right">{{ level }}</td>
-          <td> <img src="{{ url_for('static', filename='/images/attributes/strength.png') }}"
-              alt="profile character sprite"></td>
+          <td> <img src="{{ url_for('static', filename='/images/attributes/strength.png') }}" alt="strength symbol">
+          </td>
           <td>Strength</td>
           <td>{{ strength }}</td>
         </tr>
-
         <tr>
-          <td> <img src="{{ url_for('static', filename='/images/attributes/stamina.png') }}"
-              alt="profile character sprite"></td>
+          <td> <img src="{{ url_for('static', filename='/images/attributes/stamina.png') }}" alt="stamina symbol"></td>
           <td>Stamina</td>
           <td class="table-column-border-right">{{ stamina }}</td>
-          <td> <img src="{{ url_for('static', filename='/images/attributes/intellect.png') }}"
-              alt="profile character sprite"></td>
+          <td> <img src="{{ url_for('static', filename='/images/attributes/intellect.png') }}" alt="intellect symbol">
+          </td>
           <td>Intellect</td>
           <td>{{ intellect }}</td>
         </tr>
-
         <tr>
-          <td> <img src="{{ url_for('static', filename='/images/attributes/skill.png') }}"
-              alt="profile character sprite"></td>
+          <td> <img src="{{ url_for('static', filename='/images/attributes/skill.png') }}" alt="skill symbol"></td>
           <td>Skill</td>
           <td class="table-column-border-right">{{ skill }}</td>
-          <td> <img src="{{ url_for('static', filename='/images/attributes/social.png') }}"
-              alt="profile character sprite"></td>
+          <td> <img src="{{ url_for('static', filename='/images/attributes/social.png') }}" alt="social symbol"></td>
           <td>Social</td>
           <td>{{ social }}</td>
         </tr>
-
         <tr>
           <td> <img src="{{ url_for('static', filename='/images/attributes/defeated.png') }}"
-              alt="profile character sprite"></td>
+              alt="monsters defeated symbol"></td>
           <td>Defeated</td>
           <td class="table-column-border-right">{{ defeated }}</td>
           <td> <img src="{{ url_for('static', filename='/images/attributes/claimed.png') }}"
-              alt="profile character sprite"></td>
+              alt="treasures claimed symbol"></td>
           <td>Claimed</td>
           <td>{{ claimed }}</td>
         </tr>
       </tbody>
     </table>
-
   </div>
+  <!-- profile navigation tabs -->
   <div class="hero-foot">
     <nav class="tabs is-boxed is-fullwidth">
       <div class="container">
@@ -116,104 +108,85 @@
     </nav>
   </div>
 </section>
-
 <span class="scroll-indicator"><i class="fa-solid fa-caret-down"></i></span>
-
+<!-- create task form -->
 <form method="POST" action="{{ url_for('create_task') }}">
-
   <section class="section">
-  <div class="container new-task-form">
-
+    <div class="container new-task-form">
       <h2 class="title is-2 page-heading">Start a new Quest. </h2>
-
-    <div class="columns">
-      <div class="column">
-        <div class="field">
-          <label class="label">Quest Name</label>
-          <div class="control field has-icons-left">
-            <input class="input" name="task_name" type="text" placeholder="Quest Name" required>
-            <span class="icon is-left">
-              <i class="fa-solid fa-pen"></i>
-            </span>
+      <div class="columns">
+        <div class="column">
+          <div class="field">
+            <label class="label">Quest Name</label>
+            <div class="control field has-icons-left">
+              <input class="input" name="task_name" type="text" placeholder="Quest Name" required>
+              <span class="icon is-left">
+                <i class="fa-solid fa-pen"></i>
+              </span>
+            </div>
           </div>
         </div>
-
-      </div>
-      <div class="column">
-
-        <div class="field has-icons-left">
-          <label class="label">Quest End</label>
-          <input class="input" type="text" name="due_date" id="datepicker" size="40" type="date" onkeydown="return false" required>
+        <div class="column">
+          <div class="field has-icons-left">
+            <label class="label">Quest End</label>
+            <input class="input" type="text" name="due_date" id="datepicker" size="40" type="date"
+              onkeydown="return false" required>
+          </div>
         </div>
-
       </div>
-
-      
-    </div>
-
-    <div class="field">
-      <label class="label">Quest Description</label>
-      <div class="control">
-        <textarea class="textarea" name="task_description" placeholder="Quest Description" required></textarea>
+      <div class="field">
+        <label class="label">Quest Description</label>
+        <div class="control">
+          <textarea class="textarea" name="task_description" placeholder="Quest Description" required></textarea>
+        </div>
       </div>
+      <label class="checkbox">
+        <label class="label">Urgent</label>
+        <input type="checkbox" name="is_urgent">
+      </label>
     </div>
-    <label class="checkbox">
-      <label class="label">Urgent</label>
-      <input type="checkbox" name="is_urgent">
-    </label>
-
-  </div>
-
   </section>
-
-
-    <div class="container is-centered">
-      <h5 class="subtitle">This quest is a feat of:</h5>
-        <div class="columns attribute-selector is-centered is-mobile">
-        <div class="column is-one-fifth">
+  <div class="container is-centered">
+    <h5 class="subtitle">This quest is a feat of:</h5>
+    <div class="columns attribute-selector is-centered is-mobile">
+      <div class="column is-one-fifth">
         <label>
           <label class="label">Strength</label>
           <input type="radio" name="stat_increase" value="strength" checked>
-          <img src="{{ url_for('static', filename='/images/attributes/strength.png') }}" alt="" srcset="">
+          <img src="{{ url_for('static', filename='/images/attributes/strength.png') }}" alt="strength symbol">
         </label>
-        </div>
-        <div class="column is-one-fifth">
+      </div>
+      <div class="column is-one-fifth">
         <label>
           <label class="label">Stamina</label>
           <input type="radio" name="stat_increase" value="stamina">
-          <img src="{{ url_for('static', filename='/images/attributes/stamina.png') }}" alt="" srcset="">
+          <img src="{{ url_for('static', filename='/images/attributes/stamina.png') }}" alt="stamina symbol">
         </label>
       </div>
-        <div class="column is-one-fifth">
+      <div class="column is-one-fifth">
         <label>
           <label class="label">Intellect</label>
           <input type="radio" name="stat_increase" value="intellect">
-          <img src="{{ url_for('static', filename='/images/attributes/intellect.png') }}" alt="" srcset="">
+          <img src="{{ url_for('static', filename='/images/attributes/intellect.png') }}" alt="intellect symbol">
         </label>
       </div>
-        <div class="column is-one-fifth">
+      <div class="column is-one-fifth">
         <label>
           <label class="label">Skill</label>
           <input type="radio" name="stat_increase" value="skill">
-          <img src="{{ url_for('static', filename='/images/attributes/skill.png') }}" alt="" srcset="">
+          <img src="{{ url_for('static', filename='/images/attributes/skill.png') }}" alt="skill symbol">
         </label>
       </div>
-        <div class="column is-one-fifth">
+      <div class="column is-one-fifth">
         <label>
           <label class="label">Social</label>
           <input type="radio" name="stat_increase" value="social">
-          <img src="{{ url_for('static', filename='/images/attributes/social.png') }}" alt="" srcset="">
+          <img src="{{ url_for('static', filename='/images/attributes/social.png') }}" alt="social symbol">
         </label>
       </div>
-      </div>
-
+    </div>
   </div>
-
   <button class="button is-medium is-info is-centered start-quest-button">Start Quest</button>
-
 </form>
-
-
-
 </div>
 {% endblock %}

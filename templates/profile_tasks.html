@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
+<!-- profile section -->
 <section class="hero is-info is-small">
   <nav class="level is-mobile">
     <div class="level-item has-text-centered">
@@ -27,7 +28,7 @@
       </div>
     </div>
   </nav>
-
+  <!-- user avatar and stat info -->
   <div class="hero-head">
   </div>
   <div class="hero-body">
@@ -42,9 +43,7 @@
       </p>
     </div>
   </div>
-
   <div class="container is-max-desktop">
-
     <table class="table">
       <tbody>
         <tr>
@@ -57,7 +56,6 @@
           <td>Strength</td>
           <td>{{ strength }}</td>
         </tr>
-
         <tr>
           <td> <img src="{{ url_for('static', filename='/images/attributes/stamina.png') }}"
               alt="profile character sprite"></td>
@@ -68,7 +66,6 @@
           <td>Intellect</td>
           <td>{{ intellect }}</td>
         </tr>
-
         <tr>
           <td> <img src="{{ url_for('static', filename='/images/attributes/skill.png') }}"
               alt="profile character sprite"></td>
@@ -79,7 +76,6 @@
           <td>Social</td>
           <td>{{ social }}</td>
         </tr>
-
         <tr>
           <td> <img src="{{ url_for('static', filename='/images/attributes/defeated.png') }}"
               alt="profile character sprite"></td>
@@ -92,8 +88,8 @@
         </tr>
       </tbody>
     </table>
-
   </div>
+  <!-- profile tab navigation -->
   <div class="hero-foot">
     <nav class="tabs is-boxed is-fullwidth">
       <div class="container">
@@ -115,15 +111,13 @@
     </nav>
   </div>
 </section>
-
 <span class="scroll-indicator"><i class="fa-solid fa-caret-down"></i></span>
-
 <!-- Task / Quest list -->
 <section class="section">
   <div class="container">
-
     <span class="tasks-title">
       <h2 class="title is-2 page-heading">Quest Log. </h2>
+      <!-- quest search box -->
       <form action="{{ url_for('search') }}" method="POST" id="searchform">
         <div class="field has-addons">
           <div class="control">
@@ -135,13 +129,14 @@
             </a>
           </div>
           <div class="control">
-          <a href="{{ url_for('profile_tasks', username=session['user'], sort_by='due_date') }}" class="button is-success">
-            All
-          </a>
-        </div>
+            <a href="{{ url_for('profile_tasks', username=session['user'], sort_by='due_date') }}"
+              class="button is-success">
+              All
+            </a>
+          </div>
         </div>
       </form>
-
+      <!-- quest filter dropdown -->
       <div class="dropdown">
         <div class="dropdown-trigger">
           <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
@@ -153,24 +148,27 @@
         </div>
         <div class="dropdown-menu" id="dropdown-menu" role="menu">
           <div class="dropdown-content">
-            <a href="{{ url_for('profile_tasks', username=session['user'], sort_by='due_date') }}" class="dropdown-item">
+            <a href="{{ url_for('profile_tasks', username=session['user'], sort_by='due_date') }}"
+              class="dropdown-item">
               Date Due
             </a>
-            <a href="{{ url_for('profile_tasks', username=session['user'], sort_by='date_created') }}" class="dropdown-item">
+            <a href="{{ url_for('profile_tasks', username=session['user'], sort_by='date_created') }}"
+              class="dropdown-item">
               Date Created
             </a>
-            <a href="{{ url_for('profile_tasks', username=session['user'], sort_by='is_urgent') }}" class="dropdown-item">
+            <a href="{{ url_for('profile_tasks', username=session['user'], sort_by='is_urgent') }}"
+              class="dropdown-item">
               Urgency
             </a>
-            <a href="{{ url_for('profile_tasks', username=session['user'], sort_by='task_name') }}" class="dropdown-item">
+            <a href="{{ url_for('profile_tasks', username=session['user'], sort_by='task_name') }}"
+              class="dropdown-item">
               Alphabetically
             </a>
           </div>
         </div>
       </div>
-
     </span>
-
+    <!-- tasks -->
     {% if tasks|length > 0 %}
     <div class="columns is-multiline active-tasks-list">
       {% for task in tasks %}
@@ -203,7 +201,7 @@
             <a href="{{ url_for('complete_task', task_id=task._id) }}" class="card-footer-item">Done</a>
             <a href="{{ url_for('edit_task', task_id=task._id) }}" class="card-footer-item">Edit</a>
             <a class="card-footer-item js-modal-trigger" data-target="modal">Delete</a>
-
+            <!-- popup modal for delete button -->
             <div class="modal" id="modal">
               <div class="modal-background"></div>
               <div class="modal-card">
@@ -213,7 +211,7 @@
                 </header>
                 <section class="modal-card-body">
                   The quest will be permanently deleted.
-                  You will not receive the stat increase for this task.
+                  You will not receive the stat increase or EXP for this task.
                 </section>
                 <footer class="modal-card-foot">
                   <a href="{{ url_for('delete_task', task_id=task._id) }}"><button
@@ -232,8 +230,7 @@
     <h2 class="title is-2 page-heading">No Quests Found.</h2>
     {% endif %}
   </div>
-
-  <!-- COMPLETED TASKS -->
+  <!-- completed tasks -->
   <div class="container">
     <div class="columns is-multiline active-tasks-list">
       {% for task in tasks %}
@@ -269,4 +266,12 @@
     </div>
   </div>
 </section>
+<!-- script for dropdown selector -->
+<script>
+  var dropdown = document.querySelector('.dropdown');
+  dropdown.addEventListener('click', function (event) {
+    event.stopPropagation();
+    dropdown.classList.toggle('is-active');
+  });
+</script>
 {% endblock %}

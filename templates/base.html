@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,13 +8,10 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
     integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
     crossorigin="anonymous" referrerpolicy="no-referrer" type="text/css">
-
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css" type="text/css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css" type="text/css">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" type="text/css">
 </head>
-
 <body>
-
   <nav class="navbar is-dark is-spaced" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
       <a href="{{ url_for('load_homepage') }}" class="navbar-item nav-header is-size-4" href="#">
@@ -28,7 +24,7 @@
         <span aria-hidden="true"></span>
       </a>
     </div>
-
+    <!-- navbar -->
     <div class="navbar-menu">
       <div class="navbar-start">
         <a href="{{ url_for('load_homepage') }}" class="navbar-item">
@@ -49,7 +45,6 @@
           Contact
         </a>
       </div>
-
       <div class="navbar-end">
         <div class="navbar-item">
           <div class="buttons">
@@ -69,27 +64,23 @@
         </div>
       </div>
     </div>
-  </nav> 
-
+  </nav>
   <section>
     <!-- flash messages -->
     {% with messages = get_flashed_messages() %}
     {% if messages %}
     {% for message in messages %}
-
     <div class="notification is-danger">
       <button class="delete"></button>
       <p class="title is-3">{{ message }}</p>
     </div>
-
     {% endfor %}
     {% endif %}
     {% endwith %}
   </section>
-
   {% block content %}
   {% endblock %}
-
+  <!-- footer -->
   <footer class="footer has-background-dark">
     <div class="content has-text-centered">
       <div class="columns">
@@ -102,21 +93,18 @@
         </div>
         <div class="column">
           <p>Pixel Art by <a href="http://opengameart.org/content/dungeon-crawl-32x32-tiles" target="_blank">OGA</a></p>
-          <p>Pixel Art by <a href="https://kyrise.itch.io/kyrises-free-16x16-rpg-icon-pack" target="_blank">Kyrise</a></p>
-          <p>Hero Image Courtesy of <a href="https://en.bandainamcoent.eu/elden-ring/elden-ring" target="_blank">From Software</a></p>
+          <p>Pixel Art by <a href="https://kyrise.itch.io/kyrises-free-16x16-rpg-icon-pack" target="_blank">Kyrise</a>
+          </p>
+          <p>Hero Image Courtesy of <a href="https://en.bandainamcoent.eu/elden-ring/elden-ring" target="_blank">From
+              Software</a></p>
         </div>
       </div>
     </div>
   </footer>
-
-
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"
     integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <script
-  src="https://code.jquery.com/ui/1.13.1/jquery-ui.min.js"
-  integrity="sha256-eTyxS0rkjpLEo16uXTS0uVCS4815lc40K2iVpWDvdSY="
-  crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.min.js"
+    integrity="sha256-eTyxS0rkjpLEo16uXTS0uVCS4815lc40K2iVpWDvdSY=" crossorigin="anonymous"></script>
   <script src="{{ url_for('static', filename='/js/script.js') }}"></script>
 </body>
-
 </html>

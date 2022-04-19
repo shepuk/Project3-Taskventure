@@ -1,40 +1,36 @@
 {% extends "base.html" %}
 {% block content %}
-
 <section class="section">
-
-<div class="columns is-centered">
-    <div class="column is-half">
-        <h2 class="title is-centered is-2 page-heading">Contact. </h2>
-    <form method="POST" action="{{ url_for('contact') }}">
-        <div class="field">
-            <label class="label">Name</label>
-            <div class="control">
-                <input class="input" name="name" type="text">
-            </div>
+    <!-- contact form -->
+    <div class="columns is-centered">
+        <div class="column is-half">
+            <h2 class="title is-centered is-2 page-heading">Contact. </h2>
+            <form method="POST" action="{{ url_for('contact') }}">
+                <div class="field">
+                    <label class="label">Name</label>
+                    <div class="control">
+                        <input class="input" name="name" type="text">
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">Email</label>
+                    <div class="control">
+                        <input class="input" name="email" type="email">
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">Message</label>
+                    <div class="control">
+                        <textarea class="textarea" name="message"></textarea>
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="control">
+                        <button type="submit" class="button is-link">Submit</button>
+                    </div>
+                </div>
+            </form>
         </div>
-
-        <div class="field">
-            <label class="label">Email</label>
-            <div class="control">
-                <input class="input" name="email" type="email">
-            </div>
-        </div>
-
-        <div class="field">
-            <label class="label">Message</label>
-            <div class="control">
-                <textarea class="textarea" name="message"></textarea>
-            </div>
-        </div>
-
-        <div class="field">
-            <div class="control">
-                <button type="submit" class="button is-link">Submit</button>
-            </div>
-        </div>
-    </form>
-    </div></div>
+    </div>
 </section>
-
 {% endblock %}

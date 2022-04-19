@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
-
+<!-- register form -->
 <section class="section">
     <div class="container mt-5">
         <div class="columns is-centered">
@@ -27,63 +27,61 @@
                             </span>
                         </p>
                     </div>
-
                     <div class="container is-fluid is-centered">
                         <h5 class="subtitle is-5">Choose your hero.</h5>
                         <div class="notification character-selector">
                             <label>
                                 <input type="radio" name="character" value="1" checked>
-                                <img src="{{ url_for('static', filename='/images/characters/1.png') }}" alt=""
-                                    srcset="">
+                                <img src="{{ url_for('static', filename='/images/characters/1.png') }}"
+                                    alt="summoner character">
                             </label>
                             <label>
                                 <input type="radio" name="character" value="2">
-                                <img src="{{ url_for('static', filename='/images/characters/2.png') }}" alt=""
-                                    srcset="">
+                                <img src="{{ url_for('static', filename='/images/characters/2.png') }}"
+                                    alt="sword caster character">
                             </label>
                             <label>
                                 <input type="radio" name="character" value="3">
-                                <img src="{{ url_for('static', filename='/images/characters/3.png') }}" alt=""
-                                    srcset="">
+                                <img src="{{ url_for('static', filename='/images/characters/3.png') }}"
+                                    alt="barbarian character">
                             </label>
                             <label>
                                 <input type="radio" name="character" value="4">
-                                <img src="{{ url_for('static', filename='/images/characters/4.png') }}" alt=""
-                                    srcset="">
+                                <img src="{{ url_for('static', filename='/images/characters/4.png') }}"
+                                    alt="fire blade character">
                             </label>
                             <label>
                                 <input type="radio" name="character" value="5">
-                                <img src="{{ url_for('static', filename='/images/characters/5.png') }}" alt=""
-                                    srcset="">
+                                <img src="{{ url_for('static', filename='/images/characters/5.png') }}"
+                                    alt="wizard character">
                             </label>
                             <label>
                                 <input type="radio" name="character" value="6">
-                                <img src="{{ url_for('static', filename='/images/characters/6.png') }}" alt=""
-                                    srcset="">
+                                <img src="{{ url_for('static', filename='/images/characters/6.png') }}"
+                                    alt="paladin character">
                             </label>
                             <label>
                                 <input type="radio" name="character" value="7">
-                                <img src="{{ url_for('static', filename='/images/characters/7.png') }}" alt=""
-                                    srcset="">
+                                <img src="{{ url_for('static', filename='/images/characters/7.png') }}"
+                                    alt="bewitcher character">
                             </label>
                             <label>
                                 <input type="radio" name="character" value="8">
-                                <img src="{{ url_for('static', filename='/images/characters/8.png') }}" alt=""
-                                    srcset="">
+                                <img src="{{ url_for('static', filename='/images/characters/8.png') }}"
+                                    alt="thief character">
                             </label>
                             <label>
                                 <input type="radio" name="character" value="9">
-                                <img src="{{ url_for('static', filename='/images/characters/9.png') }}" alt=""
-                                    srcset="">
+                                <img src="{{ url_for('static', filename='/images/characters/9.png') }}"
+                                    alt="knight character">
                             </label>
                             <label>
                                 <input type="radio" name="character" value="10">
-                                <img src="{{ url_for('static', filename='/images/characters/10.png') }}" alt=""
-                                    srcset="">
+                                <img src="{{ url_for('static', filename='/images/characters/10.png') }}"
+                                    alt="healer character">
                             </label>
                         </div>
                     </div>
-
                     <div class="field">
                         <p class="control">
                             <button class="button is-info credentials" type="submt">
@@ -100,5 +98,4 @@
         </div>
     </div>
 </section>
-
 {% endblock %}

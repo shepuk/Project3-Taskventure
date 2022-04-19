@@ -1,72 +1,73 @@
 {% extends "base.html" %}
 {% block content %}
-
 <section class="section">
+  <span class="leaderboard-title">
+    <h2 class="title is-2 page-heading">Leaderboard </h2>
+  </span>
   <div class="container">
-    <span class="leaderboard-title">
-      <h2 class="title is-2 page-heading">Leaderboard </h2>
-    </span>
-
-    {% for user in users %}
-    <div class="columns is-centered is-vcentered">
-      <div class="column leaderboard-column">
-        <h2 class="title leaderboard-username">{{ user.username.title() }}</h2>
-        <img src="{{ url_for('static', filename='/images/characters/' + user.character + '.png') }}">
-        <table class="table leaderboard-table">
-          <tbody>
-            <tr>
-              <td> <img src="{{ url_for('static', filename='/images/attributes/level.png') }}"
-                  alt="profile character sprite"></td>
-              <td> <img src="{{ url_for('static', filename='/images/attributes/strength.png') }}"
-                  alt="profile character sprite"></td>
-              <td> <img src="{{ url_for('static', filename='/images/attributes/intellect.png') }}"
-                  alt="profile character sprite"></td>
-              <td> <img src="{{ url_for('static', filename='/images/attributes/stamina.png') }}"
-                  alt="profile character sprite"></td>
-              <td> <img src="{{ url_for('static', filename='/images/attributes/skill.png') }}"
-                  alt="profile character sprite"></td>
-              <td> <img src="{{ url_for('static', filename='/images/attributes/social.png') }}"
-                  alt="profile character sprite"></td>
-              <td> <img src="{{ url_for('static', filename='/images/attributes/defeated.png') }}"
-                  alt="profile character sprite"></td>
-              <td> <img src="{{ url_for('static', filename='/images/attributes/claimed.png') }}"
-                  alt="profile character sprite"></td>
-            </tr>
-            <tr>
-              <td>
-                {{ user.level }}
-              </td>
-              <td>
-                {{ user.strength }}
-              </td>
-              <td>
-                {{ user.intellect }}
-              </td>
-              <td>
-                {{ user.stamina }}
-              </td>
-              <td>
-                {{ user.skill }}
-              </td>
-              <td>
-                {{ user.social }}
-              </td>
-              <td>
-                {{ user.defeated }}
-              </td>
-              <td>
-                {{ user.claimed_amount }}
-              </td>
-            </tr>
-        </table>
+    <div class="columns is-flex-mobile is-multiline is-centered is-vcentered">
+      {% for user in users %}
+      <div class="column m-4 is-4 leaderboard-column">
+        <div class="card leaderboard-card">
+          <div class="card-header-title">
+            <h2 class="title leaderboard-username">{{ user.username.title() }}</h2>
+          </div>
+          <div class="card-image">
+            <img src="{{ url_for('static', filename='/images/characters/' + user.character + '.png') }}">
+          </div>
+          <div class="card-body">
+            <table class="table leaderboard-table">
+              <tbody>
+                <tr>
+                  <td> <img src="{{ url_for('static', filename='/images/attributes/level.png') }}"
+                      alt="profile character sprite"></td>
+                  <td> <img src="{{ url_for('static', filename='/images/attributes/strength.png') }}"
+                      alt="profile character sprite"></td>
+                  <td> <img src="{{ url_for('static', filename='/images/attributes/intellect.png') }}"
+                      alt="profile character sprite"></td>
+                  <td> <img src="{{ url_for('static', filename='/images/attributes/stamina.png') }}"
+                      alt="profile character sprite"></td>
+                  <td> <img src="{{ url_for('static', filename='/images/attributes/skill.png') }}"
+                      alt="profile character sprite"></td>
+                  <td> <img src="{{ url_for('static', filename='/images/attributes/social.png') }}"
+                      alt="profile character sprite"></td>
+                  <td> <img src="{{ url_for('static', filename='/images/attributes/defeated.png') }}"
+                      alt="profile character sprite"></td>
+                  <td> <img src="{{ url_for('static', filename='/images/attributes/claimed.png') }}"
+                      alt="profile character sprite"></td>
+                </tr>
+                <tr>
+                  <td>
+                    {{ user.level }}
+                  </td>
+                  <td>
+                    {{ user.strength }}
+                  </td>
+                  <td>
+                    {{ user.intellect }}
+                  </td>
+                  <td>
+                    {{ user.stamina }}
+                  </td>
+                  <td>
+                    {{ user.skill }}
+                  </td>
+                  <td>
+                    {{ user.social }}
+                  </td>
+                  <td>
+                    {{ user.defeated }}
+                  </td>
+                  <td>
+                    {{ user.claimed_amount }}
+                  </td>
+                </tr>
+            </table>
+          </div>
+        </div>
       </div>
+      {% endfor %}
     </div>
-
-    <hr class="solid">
-
-    {% endfor %}
-
   </div>
 </section>
-
 {% endblock %}

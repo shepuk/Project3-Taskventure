@@ -1,44 +1,45 @@
 {% extends "base.html" %}
 {% block content %}
-
+<!-- login screen -->
 <section class="section">
-<div class="container mt-5">
-    <div class="columns is-centered">
-        <div class="column is-half">
-            <h1 class="title signin-heading" style="text-align: center;">Continue your quest.</h1>
-            <h2 class="subtitle">Sign in and start leveling up!</h2>
-            <form method="POST" action="{{ url_for('login') }}">
-                <div class="field">
-                    <p class="control has-icons-left">
-                        <input class="input" id="username" type="text" placeholder="Username" name="username" minlength="3" maxlength="15" required>
-                        <span class="icon is-small is-left">
-                            <i class="fas fa-user"></i>
-                        </span>
-                    </p>
+    <div class="container mt-5">
+        <div class="columns is-centered">
+            <div class="column is-half">
+                <h1 class="title signin-heading" style="text-align: center;">Continue your quest.</h1>
+                <h2 class="subtitle">Sign in and start leveling up!</h2>
+                <form method="POST" action="{{ url_for('login') }}">
+                    <div class="field">
+                        <p class="control has-icons-left">
+                            <input class="input" id="username" type="text" placeholder="Username" name="username"
+                                minlength="3" maxlength="15" required>
+                            <span class="icon is-small is-left">
+                                <i class="fas fa-user"></i>
+                            </span>
+                        </p>
+                    </div>
+                    <div class="field">
+                        <p class="control has-icons-left">
+                            <input class="input" id="password" type="password" placeholder="Password" name="password"
+                                minlength="5" maxlength="20" required>
+                            <span class="icon is-small is-left">
+                                <i class="fas fa-lock"></i>
+                            </span>
+                        </p>
+                    </div>
+                    <div class="field">
+                        <p class="control">
+                            <button class="button is-info credentials" type="submt">
+                                Log in
+                            </button>
+                        </p>
+                    </div>
+                </form>
+                <div class="notification signin-notification is-warning">
+                    <button class="delete"></button>
+                    Psst!<br>Not signed up yet?<br> <a href="{{ url_for('register') }}">Register here</a>
                 </div>
-                <div class="field">
-                    <p class="control has-icons-left">
-                        <input class="input" id="password" type="password" placeholder="Password" name="password" minlength="5" maxlength="20" required>
-                        <span class="icon is-small is-left">
-                            <i class="fas fa-lock"></i>
-                        </span>
-                    </p>
-                </div>
-                <div class="field">
-                    <p class="control">
-                        <button class="button is-info credentials" type="submt">
-                            Log in
-                        </button>
-                    </p>
-                </div>
-            </form>
-            <div class="notification signin-notification is-warning">
-                <button class="delete"></button>
-                Psst!<br>Not signed up yet?<br> <a href="{{ url_for('register') }}">Register here</a>
             </div>
         </div>
     </div>
-</div>
 </section>
-
 {% endblock %}
