@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
+<!-- profile section -->
 <section class="hero is-info is-small">
   <nav class="level is-mobile">
     <div class="level-item has-text-centered">
@@ -27,7 +28,7 @@
       </div>
     </div>
   </nav>
-
+  <!-- user avatar and stats -->
   <div class="hero-head">
   </div>
   <div class="hero-body">
@@ -42,58 +43,49 @@
       </p>
     </div>
   </div>
-
   <div class="container is-max-desktop">
-
     <table class="table">
       <tbody>
         <tr>
-          <td> <img src="{{ url_for('static', filename='/images/attributes/level.png') }}"
-              alt="profile character sprite"></td>
+          <td> <img src="{{ url_for('static', filename='/images/attributes/level.png') }}" alt="level symbol"></td>
           <td>Level</td>
           <td class="table-column-border-right">{{ level }}</td>
-          <td> <img src="{{ url_for('static', filename='/images/attributes/strength.png') }}"
-              alt="profile character sprite"></td>
+          <td> <img src="{{ url_for('static', filename='/images/attributes/strength.png') }}" alt="strength symbol">
+          </td>
           <td>Strength</td>
           <td>{{ strength }}</td>
         </tr>
-
         <tr>
-          <td> <img src="{{ url_for('static', filename='/images/attributes/stamina.png') }}"
-              alt="profile character sprite"></td>
+          <td> <img src="{{ url_for('static', filename='/images/attributes/stamina.png') }}" alt="stamina symbol"></td>
           <td>Stamina</td>
           <td class="table-column-border-right">{{ stamina }}</td>
-          <td> <img src="{{ url_for('static', filename='/images/attributes/intellect.png') }}"
-              alt="profile character sprite"></td>
+          <td> <img src="{{ url_for('static', filename='/images/attributes/intellect.png') }}" alt="intellect symbol">
+          </td>
           <td>Intellect</td>
           <td>{{ intellect }}</td>
         </tr>
-
         <tr>
-          <td> <img src="{{ url_for('static', filename='/images/attributes/skill.png') }}"
-              alt="profile character sprite"></td>
+          <td> <img src="{{ url_for('static', filename='/images/attributes/skill.png') }}" alt="skill symbol"></td>
           <td>Skill</td>
           <td class="table-column-border-right">{{ skill }}</td>
-          <td> <img src="{{ url_for('static', filename='/images/attributes/social.png') }}"
-              alt="profile character sprite"></td>
+          <td> <img src="{{ url_for('static', filename='/images/attributes/social.png') }}" alt="social symbol"></td>
           <td>Social</td>
           <td>{{ social }}</td>
         </tr>
-
         <tr>
           <td> <img src="{{ url_for('static', filename='/images/attributes/defeated.png') }}"
-              alt="profile character sprite"></td>
+              alt="monsters defeated symbol"></td>
           <td>Defeated</td>
           <td class="table-column-border-right">{{ defeated }}</td>
           <td> <img src="{{ url_for('static', filename='/images/attributes/claimed.png') }}"
-              alt="profile character sprite"></td>
+              alt="treasures claimed symbol"></td>
           <td>Claimed</td>
           <td>{{ claimed }}</td>
         </tr>
       </tbody>
     </table>
-
   </div>
+  <!-- profile tab navigation -->
   <div class="hero-foot">
     <nav class="tabs is-boxed is-fullwidth">
       <div class="container">
@@ -115,50 +107,39 @@
     </nav>
   </div>
 </section>
-
 <span class="scroll-indicator"><i class="fa-solid fa-caret-down"></i></span>
-
 <section class="section">
-<!-- Treasures list -->
-<div class="container treasure-list">
-
+  <!-- Treasures list -->
+  <div class="container treasure-list">
     <h2 class="title is-2 page-heading">Collect Rare Treasures. </h2>
-
-  <div class="columns is-flex-mobile is-multiline">
-    {% for treasure in treasures %}
-
-    <div class="column is-2 is-half-mobile">
-
-      <div class="card treasure-card has-text-centered">
-        {% if treasure.name in claimed_list %}
-        <header class="card-header treasure-name treasure-name-defeated">
-        {% else %}
-        <header class="card-header treasure-name">
-        {% endif %}
-          {{ treasure.name.title() }}
-        </header>
-        <div class="card-content">
-          <img src="{{ url_for('static', filename='/images/treasures/' + treasure.name + '.png') }}" alt="">
-          <p class="treasure-info">
-            {{ treasure.level }} {{ treasure.requirement }} required.
-          </p>
-        </div>
-        <footer class="card-footer treasure-battle-button">
+    <div class="columns is-flex-mobile is-multiline">
+      {% for treasure in treasures %}
+      <div class="column is-2 is-half-mobile">
+        <div class="card treasure-card has-text-centered">
           {% if treasure.name in claimed_list %}
-          <p>Claimed</p>
-          {% else %}
-          <a href="{{ url_for('claim_treasure', treasure=treasure.name) }}">Claim</a>
-          {% endif %}
-        </footer>
+          <header class="card-header treasure-name treasure-name-defeated">
+            {% else %}
+            <header class="card-header treasure-name">
+              {% endif %}
+              {{ treasure.name.title() }}
+            </header>
+            <div class="card-content">
+              <img src="{{ url_for('static', filename='/images/treasures/' + treasure.name + '.png') }}" alt="">
+              <p class="treasure-info">
+                {{ treasure.level }} {{ treasure.requirement }} required.
+              </p>
+            </div>
+            <footer class="card-footer treasure-battle-button">
+              {% if treasure.name in claimed_list %}
+              <p>Claimed</p>
+              {% else %}
+              <a href="{{ url_for('claim_treasure', treasure=treasure.name) }}">Claim</a>
+              {% endif %}
+            </footer>
+        </div>
       </div>
+      {% endfor %}
     </div>
-
-
-    {% endfor %}
   </div>
-</div>
 </section>
-
-
-
 {% endblock %}
