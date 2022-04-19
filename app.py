@@ -638,7 +638,7 @@ def contact():
         email = request.form.get("email")
         message = request.form.get("message")
 
-        msg = Message(sender = name, recipients = ['os.environ.get("EMAIL")'])
+        msg = Message(sender = name, recipients = [os.environ.get("EMAIL")])
         msg.body = message
         mail.send(msg)
         flash("Email Sent")
