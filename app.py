@@ -639,7 +639,7 @@ def contact():
         message = request.form.get("message")
 
         msg = Message(sender = name, recipients = [os.environ.get("EMAIL")])
-        msg.body = message
+        msg.body = "Name: " + name + "Email: " + email + "Message: " + message
         mail.send(msg)
         flash("Email Sent")
     return render_template("contact.html")
