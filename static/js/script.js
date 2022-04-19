@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Close buttons
 document.addEventListener('DOMContentLoaded', () => {
-  (document.querySelectorAll('.notification', '.delete') || []).forEach(($delete) => {
+  (document.querySelectorAll('.notification .delete') || []).forEach(($delete) => {
     const $notification = $delete.parentNode;
 
     $delete.addEventListener('click', () => {
@@ -54,6 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 });
+
 
   // Check for click events on the navbar burger icon
   $(".navbar-burger").click(function () {
