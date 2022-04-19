@@ -200,7 +200,7 @@
           <footer class="card-footer">
             <a href="{{ url_for('complete_task', task_id=task._id) }}" class="card-footer-item">Done</a>
             <a href="{{ url_for('edit_task', task_id=task._id) }}" class="card-footer-item">Edit</a>
-            <a class="card-footer-item js-modal-trigger" data-target="modal">Delete</a>
+            <a class="card-footer-item js-modal-trigger" id="js-modal-trigger" data-target="modal">Delete</a>
             <!-- popup modal for delete button -->
             <div class="modal" id="modal">
               <div class="modal-background"></div>
