@@ -92,7 +92,11 @@ All pages are designed with mobile in mind and scale well. Columns stack on smal
     - Clear flash messages are shown at the top of the screen and offer feedback for interaction.
 
 - #### Database Design
-    - 
+    - I began designing my databases by identifying the categories which would need their own collection. After scoping out the project size and deciding on a final set of features, I was able to recognise 4 main categories - users, tasks, enemies & treasures. 
+        1. **Users** would contain the most information. Login details, charater stats, experience, total experience, defeated enemies and more. In total, 18 key:value pairs. This would allow me to a) display rich and detailed profie information, and b) provide a diverse set of requirements to fulfil for enemy battles and treasures.
+        2. **Tasks** would contain all relevant information to make a task detailed and trackable. Name and description are a good start, and due dates, urgency, category & creation date would all allow for deeper tracking and sorting.
+        3. **Enemies** are fairly simple, and contain a name, level and requirement. The name allows an img to be linked to the database entry and level and requirement are check as the user arttempts to battle. To check if a user has already defeated an enemy, the enemies name is taken as a string and concatenated onto the players 'defeat_list' key. When loading the enemies page, a check is made to see if the enemy name is included at any point in the 'defeat_list'.
+        4. **Treasures** are handled the same way as enemies, and check if the players requirement matches the treasure level before the player can claim.
 
 
 - ### Wireframes
@@ -180,22 +184,35 @@ All pages are designed with mobile in mind and scale well. Columns stack on smal
 
 - #### User Stories
     1. 'As a  typical user, I want to track and organise tasks and projects'
+        - The app allows for a positive task-tracking experiences and give great control in terms of tracking and sorting tasks. Multiple options are given to a new task, such as an urgent toggle, and a task type. Descriptions can be as in-depth as required and are clearly shown in a well presented way.
     2. 'As a fan of fantasy, I want features based around my interests'
+        - As mentioned in the above target audience section, a great deal of thought has went into creating the app based on the interests of fans of the fantasy genre. There is an ample amount of content which caters to this audience which makes the app an ideal choice for the target audience.
     3. 'As an advanced user, I want to sort, search and track my tasks easily'
+        - Search and sort features are easy to access and provide deep query functionality for active quests. Completed quests are also viewable, searchable and sorted when these controls.
     4. 'As an inexperienced user, I need simple navigation and controls with clear feedback'
-    5. 'As a typical user, I want to compete with my friends when using the app'
+        - Conformant navbar and clear profile tabular navigation provide clear and unambiguous access too all areas of the website. Flash messaging provides clear feedback to the user upon user interaction.
 
 - #### New Visitors
     1. App should be clear in it's intent, and designed around user-friendliness.
+        - A striking hero provides instant information to the user and shows the use and intent of the app. Accessibility was in mind during the website's design phase and confirms to all user accessibility guidelines. Upon registration, a tutorial task is generated to provide the user with instructions on how to use the website. An about page goes into more depth regarding the usage of the website.
     2. Clear feedback for user interaction is important.
+        - Defensive programming for deletions and flash messaging provide clear feelback at all times.
 
 - #### Returning Visitors
     1. Content should be easilly and quickly accessible.
+        - Minimal navigation options and unintrusive design allows users to browse the app extremely quickly. Users are typically only one click away from any page in the app.
     2. User information such as profile data should be displayed clearly and quickly.
+        - After a quick sign-in process (or instant sign-in with session cookies) the user is redirected to their main task page. The important profile information is always displayed at the top of the page when interacting with the database for quick feedback.
+    3. As a returning user, I want to compete with my friends when using the app.
+        - A leaderboard page has been included, listing player profiles and sorting by level.
 
 - #### Manual Testing
-
-- #### Automated Testing
+- Multiple browsers and devices were used to test the application.
+- The deployed website was also tested againt the development version to ensure everything worked as expected.
+- BrowserStack was used for their large variety of testing functionalty. I was able to test the app on over 50 devices including different OS, tablets and mobiles.
+- Modern browsers such as Chrome, Firefox and Edge display and load content as expected. Older browsers such as Internet Explorer are incompatible with large portions of the website, and are not reccomended. 
+- Mobile browsers handle styling and responsive design very well. Identical functionality to desktop/laptop screens.
+- Friends and family were utilised to test links, spelling, design and responsiveness.
 
 - #### Testing the code
  - Validators were used for all deployed code.
@@ -248,4 +265,4 @@ The Github repository was linked to Heroku for hosting and teasting early in dev
 All content was written by me.
 
 #### Acknowledgements
-Code Institute & Newcastle College for their support.
+Code Institute & Newcastle College.
