@@ -42,7 +42,7 @@ From the profile area, users can battle enemies or collect treasures. These are 
 When signing up, users are presented with a simple form and choice of hero to represent them. Retro pixel art is used throughout and credited below. These tiny images are scaled up and use the CSS `image-rendering: pixelated;` style to keep their crisp edges and maintain a retro feel to the website.
 ![register screenshot](/static/images/screenshots/screenshot_register.png)
 
-All pages are designed with mobile in mind and scale well. Columns stack on smaller screens and a hamber-style menu is offered. All information and features are still available at smaller screen sizes.
+All pages are designed with mobile in mind and scale well. Columns stack on smaller screens and a hamburger-style menu is offered. All information and features are still available at smaller screen sizes.
 [Mobile / small screen screenshots](https://github.com/shepuk/Project3-Taskventure/tree/main/static/images/screenshots/mobile_screenshots)
 
 
@@ -207,12 +207,12 @@ All pages are designed with mobile in mind and scale well. Columns stack on smal
         - A leaderboard page has been included, listing player profiles and sorting by level.
 
 - #### Manual Testing
-- Multiple browsers and devices were used to test the application.
-- The deployed website was also tested againt the development version to ensure everything worked as expected.
-- BrowserStack was used for their large variety of testing functionalty. I was able to test the app on over 50 devices including different OS, tablets and mobiles.
-- Modern browsers such as Chrome, Firefox and Edge display and load content as expected. Older browsers such as Internet Explorer are incompatible with large portions of the website, and are not reccomended. 
-- Mobile browsers handle styling and responsive design very well. Identical functionality to desktop/laptop screens.
-- Friends and family were utilised to test links, spelling, design and responsiveness.
+    - Multiple browsers and devices were used to test the application.
+    - The deployed website was also tested againt the development version to ensure everything worked as expected.
+    - BrowserStack was used for their large variety of testing functionalty. I was able to test the app on over 50 devices including different OS, tablets and mobiles.
+    - Modern browsers such as Chrome, Firefox and Edge display and load content as expected. Older browsers such as Internet Explorer are incompatible with large portions of the website, and are not reccomended. 
+    - Mobile browsers handle styling and responsive design very well. Identical functionality to desktop/laptop screens.
+    - Friends and family were utilised to test links, spelling, design and responsiveness.
 
 - #### Testing the code
  - Validators were used for all deployed code.
