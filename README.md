@@ -83,7 +83,7 @@ All pages are designed with mobile in mind and scale well. Columns stack on smal
 - #### Accessibility
     - content
 
-### Wireframes
+- ### Wireframes
     - Early design descisions were made using wireframes. I was able to stick to the inidial wireframe designs closely and only minor changes were made. For example, more information was added to the profile section as ideas were expanded upon, and the new quest form was ultimately created with a more stacked, vertical design.
 ![wireframe](/static/images/screenshots/wireframe_task_view.png)
 ![wireframe](/static/images/screenshots/wireframe_create_task.png)
@@ -94,9 +94,9 @@ All pages are designed with mobile in mind and scale well. Columns stack on smal
 ### Features
 
 ### Security
-    - Werkzeug was used for user authentication and provided secure pashword hashing for new signups or logging in.
-    - Session user cookies are used to grant access to profile areas, and profile links are removed from navigation if the cookie is not present.
-    - Environmental variables are included in a .gitingore file to prevent any sensitive data being publicly available.
+- Werkzeug was used for user authentication and provided secure pashword hashing for new signups or logging in.
+- Session user cookies are used to grant access to profile areas, and profile links are removed from navigation if the cookie is not present.
+- Environmental variables are included in a .gitingore file to prevent any sensitive data being publicly available.
 
 ### Technologies
 - [Python](https://www.python.org/) was the primary backend language used.
