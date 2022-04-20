@@ -1,8 +1,16 @@
 @import "https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css";
 @import url('https://fonts.googleapis.com/css2?family=Averia+Serif+Libre:ital,wght@0,300;0,400;1,300&display=swap');
 
+
+/*---------------------------------------------------------REUSEABLES */
+
 body {
     background-color: hsl(0, 0%, 96%);
+}
+
+.page-heading {
+    font-family: 'Averia Serif Libre', cursive;
+    margin-bottom: 30px;
 }
 
 /* https://css-tricks.com/almanac/properties/i/image-rendering/ */
@@ -12,23 +20,13 @@ img {
     width: 80px;
 }
 
+/*---------------------------------------------------------NAVBAR */
+
 .nav-header {
     font-family: 'Averia Serif Libre', cursive;
 }
 
-.profile-header {
-    font-family: 'Averia Serif Libre', cursive;
-    font-weight: 300;
-    display: flex;
-    align-items: center;
-    display: flex;
-    flex-direction: column-reverse;
-}
-
-.page-heading {
-    font-family: 'Averia Serif Libre', cursive;
-    margin-bottom: 30px;
-}
+/*---------------------------------------------------------HOMEPAGE */
 
 /* https://css-tricks.com/create-diagonal-layouts-like-its-2020/*/
 .home-hero {
@@ -70,6 +68,17 @@ article > i {
     margin-bottom: 5px;
 }
 
+/*---------------------------------------------------------PROFILE SECTION */
+
+.profile-header {
+    font-family: 'Averia Serif Libre', cursive;
+    font-weight: 300;
+    display: flex;
+    align-items: center;
+    display: flex;
+    flex-direction: column-reverse;
+}
+
 table {
     display: inline-table;
 }
@@ -99,6 +108,8 @@ td {
 .is-active {
     background-color: white;
 }
+
+/*---------------------------------------------------------CARDS */
 
 .card {
     border-radius: 10px;
@@ -187,6 +198,8 @@ li.is-active a {
     margin-top: 50px;
 }
 
+/*---------------------------------------------------------PROFILE HERO */
+
 .hero {
     padding-top: 25px;
 }
@@ -224,6 +237,8 @@ li.is-active a {
     margin: auto;
 }
 
+/*---------------------------------------------------------NEW QUEST */
+
 /* Alignes attribute icons on new task page */
 .is-one-fifth {
     text-align: center;
@@ -243,6 +258,8 @@ li.is-active a {
     margin-right: auto;
 }
 
+/*---------------------------------------------------------EDIT QUEST */
+
 .edit-quest-buttons {
     display: table;
     margin: 0 auto;
@@ -252,6 +269,8 @@ li.is-active a {
     font-family: 'Averia Serif Libre', cursive;
     margin-top: 40px;
 }
+
+/*---------------------------------------------------------ENEMY & TREASURE LISTS */
 
 .enemy-list,
 .treasure-list {
@@ -293,6 +312,8 @@ li.is-active a {
     padding: 10px;
 }
 
+/*---------------------------------------------------------LEADERBOARD */
+
 .attribute-leaderboard {
     font-size: 20px;
     font-weight: 700;
@@ -321,6 +342,8 @@ li.is-active a {
     margin: 10px!important;
 }
 
+/*---------------------------------------------------------RADIO BUTTONS */
+
 
 /* https://stackoverflow.com/questions/17541614/use-images-instead-of-radio-buttons
 /* HIDE RADIO */
@@ -341,8 +364,8 @@ li.is-active a {
     outline: 2px solid rgb(0, 0, 0);
 }
 
+/*---------------------------------------------------------JQUERY CALENDAR */
 
-/* jQuery calendar */
 .ui-datepicker {
     width: 25em;
     padding: .2em .2em 0;
@@ -529,6 +552,8 @@ li.is-active a {
     top: .3em;
 }
 
+/*---------------------------------------------------------FOOTER */
+
 .footer {
     margin-top: 100px;
 }
@@ -546,6 +571,7 @@ li.is-active a {
     color: white;
   }
 
+  /*---------------------------------------------------------MEDIA QUERIES */
 
 @media only screen and (max-width: 768px) {
 
