@@ -2,6 +2,8 @@
 
 Taskventure is an RPG inspired task-tracking app powered by Flask & MongoDB. Track quests, choose a hero, battle enemies and collect treasures.
 
+![amiresponsive screenshot](/static/images/screenshots/screenshot_responsive.png)
+
 ### Visit the website
 
 [View the live project here.](https://taskventure.herokuapp.com/)
@@ -27,8 +29,6 @@ Built with backend technilogy in mind, Taskventure utilises primarilly Python, F
  - The content should be justified, accessible, responsive and presented logically.
 
  ### Screenshots
-The hero section of the homepage, displaying responsively in different browser sizes. A hamburger-style menu is offered at tablet-sized screens and below. 
-![amiresponsive screenshot](/static/images/screenshots/screenshot_responsive.png)
 
 The main quests page - showing the current list of active and completed tasks below a full profile summary. Full CRUD functionality can be complerted from here - add, delete, and edit tasks. Doing so will provide various rewards to the player. Users can search and filter tasks with the tools provided above the quest list.
 ![1080 profile screenshot](/static/images/screenshots/screenshot_tasks_1080.png)
