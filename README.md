@@ -159,8 +159,11 @@ All pages are designed with mobile in mind and scale well. Columns stack on smal
 
 ### Bugs & Issues
 - #### Resolved bug examples
-
-- #### Known bug examples
+    - While testing the app line on a Heroku server, the browser would display error messages related to an insecure JavaScript file within my file directory. This was due to the .js file being issued over HTTP rather than HTTPS. The fix for this was to remove my {{Jinja2}} link in the script tag, and use a normal link to the file within my directory.
+    - I ran into a couple of issues when implementing email in my app. While building and testing, the contact form would get stuck during the mail.send() function and display an abiguous error message. This was due to Gitpod blocking traffic on GMail's email ports. A smaller issue was discovered when testing on Heroku - when sending mail via SMTP, SSL was enabled but going through port 587. I had to change this to port 465 which is the SSL port number.
+    - When implementing sort functionality to my quests page, I included sorting alphibetically. However, MongoDB has a known issue in which capitalisations are sorted with more priority than letters, meaning 'Z' would come before 'a' when sorting this was. A simple fix was to use the .lower() function when querying the database.
+    - When using a for loop in an HTML document with Jinja, trying to use a second for loop on the same list will not work as Jinja essentiallyunpacks and emptied the list. This is because it's not actually a list, but a Mongo corsor object. A fix for this is to convert this object into a list with list(). However, this created more issues...
+    - When adding the functionality to sort tasks, I would typically use the PyMongo sort() function. However, this will no longer work, because like I mentioned above, I converted the Mongo cursor object to a list which is not recognisable to the sort() function anymore. However, I still need it to be in list form for my double for loop. My fix for this was to pass through the sort_by option from the Jinja link throgh to the Python function. From there I could retrieve the tasks from MongoDB and pass in the sort_by option then, and finally convert the object to a list at the end of my function, so that it could be looped through twice by Jinja.
 
 ## Setup, Backups & Depoyment
 [Gitpod](https://www.gitpod.io/) was used as my primary IDE.
@@ -168,9 +171,9 @@ A template was provided by Code Institute which I cloned for my project reposito
 Opening the repository in Gitpod is made simple thanks to a [Chrome Extension](https://chrome.google.com/webstore/detail/gitpod-always-ready-to-co/dodmmooeoklaejobgleioelladacbeki).
 
 Git / Github were used for file versioning and hosting.
-`$ git add -A` was used initially to add my files and folders to the staging area, followed by git `$ commit -m "commit message"` and `$ git push` to add everything to my Github repository. These three commands allow me to commit changes and upload new code to Github. Git commits were used often, for any changes, new features or big fixes.
+`$ git add -A` was used initially to add my files and folders to the staging area, followed by git `$ commit -m "commit message"` and `$ git push` to add everything to my Github repository. These three commands allow me to commit changes and upload new code to Github. Git commits were used often, for any changes, new features or bug fixes.
 
-The Github repository was linked to Heroku for hosting and teasting early in development. After an issue with Github/Heroku connections due to security issues outside of my control, Github functionality was removed from Heroku. Using the Heroku CLI, I was able to continue to upload code to the Heroku hosting service. with the following commands;
+The Github repository was linked to Heroku for hosting and teasting early in development. After an issue with Github/Heroku connections due to security issues outside of my control, Github functionality was removed from Heroku. Using the Heroku CLI, I was able to continue to upload code to the Heroku hosting service with the following commands;
 `$ heroku login` (use Heroku login credentials here)
 `$ git add .`
 `$ git commit -am "Heroku commit message"`
@@ -179,8 +182,13 @@ The Github repository was linked to Heroku for hosting and teasting early in dev
 ### Credits
 
 #### Specific Cases
+- [StackOverflow - Help with JavaScript file being rejected by browser](https://stackoverflow.com/questions/37387711/page-loaded-over-https-but-requested-an-insecure-xmlhttprequest-endpoint)
+- [StackOverflow - MongoDB sorting by capitalised instead of alphibetically](https://stackoverflow.com/questions/19855147/mongodb-returns-capitalized-strings-first-when-sorting)
 
 #### Documentation & Online Help
+- [Python Documentation](https://www.python.org/doc/)
+- [Flask Documentation](https://flask.palletsprojects.com/en/2.1.x/)
+- [PyMongo Documentation](https://flask-pymongo.readthedocs.io/en/latest/)
 - [Mozilla MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/column-count)
 - [W3 Schools](https://www.w3schools.com/)
 
