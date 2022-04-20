@@ -91,6 +91,9 @@ All pages are designed with mobile in mind and scale well. Columns stack on smal
     - Tables are used in place of divs where appropriate.
     - Clear flash messages are shown at the top of the screen and offer feedback for interaction.
 
+- #### Database Design
+    - 
+
 
 - ### Wireframes
     - Early design descisions were made using wireframes. I was able to stick to the inidial wireframe designs closely and only minor changes were made. For example, more information was added to the profile section as ideas were expanded upon, and the new quest form was ultimately created with a more stacked, vertical design.
@@ -110,6 +113,7 @@ All pages are designed with mobile in mind and scale well. Columns stack on smal
     - Functional contact page writted with Flask Mail and Python.
     - Enemy and Treasure progress handled efficiently in the user's database entry with a small amout of code.
     - Defensive features built in with regards to deleting databse entries in particular.
+    - Register process performs database checks for existing usernames, to avoid clashes.
 
 - #### Features to implement
     - (Planned) include a greater roster of enemies/treasures for increased longevity.
@@ -143,12 +147,55 @@ All pages are designed with mobile in mind and scale well. Columns stack on smal
 
 ### Testing
 - #### Primary Objectives
+ 1. Design and implement a backend for a web application using Python and a micro-framework.
+    - I have successfully designed and deployed the above with Taskventure. Flask and Python power the logic and database maniplulation while MongoDB hosts all data which can be accessed by the code securely. 
+ 2. Model and manage data.
+    - Although MongoDB uses a flat data model by design, I have implemented relational-like features which compare data/fields for player progression purposes. For example, when a user decides to challenge an enemy, the backend will check both player stat and enemy requirement values in order to reward or redirect. Data is managed well with several checks in place, to avoid matching username fields for example. Only relevant data is shown to each user on the frontend.
+ 3. Query and manipulate data.
+    - **C** Create operations - registering new users, creating new quests
+    - **R** Read operations - fetching profile information, fetching login details, checking if enemy/treasure has been defeated/claimed, checking if user meets enemy/treasure requirement, fetching current task data for edit page, fetching quest details, fetching leaderboard.
+    - **U** Update operations - marking quests as complete, editing quests, updating user profile information (stats, level, experience, defeated list, treasure list, several other progress tracking fields).
+    - **D** Delete operations - deleting quests
+    - **QUERY** - searching quests (searches name and description fields), sorting quests by date, urgency, name, or due date
+ 4. Deploy to a cloud platform.
+    - Final build was deployed to Heroku cloud platform.
+ 5. Identify and apply security features.
+    - Outlined in [security](#security) section.
 
 - #### Early ideas & goals
+ 1. Design and build a task-tracking app with a deep set of additional features.
+    - Built a fully featured task app with significant additional functionality - a full and progressable user profile experience, alongside extra challengeg in the form of enemies to defeat and treasures to collect - each requiring a diverse set of user benchmarks to be hit. 
+ 2. Implement database CRUD functionality into the design.
+    - Outlined in the above section
+ 3. Design a databse in which fields can be compared against each other. 
+    - My intent was to build a progression system which would use and compare player data to other data and reward users with a feeling of atchievement and progress as they complete quests. This was achieved with several comparing functions which allowed players to progress their profile as their character grew stronger.
+ 4. Create a varied & fun experience with longevity in mind.
+    - Taskventure provides several enjoyable interactions and and sense of addictive progression - key features of a fun experience. Longevity was in mind from the beginning, with no upper limit on character stats. Additionally, adding new enemies or treasures can be done with ease thanks to their lightweight database entries.
+ 5. The content should be justified, accessible, responsive and presented logically.
+    - More detail in the [accessibility](#Accessibility) section. To expand slightly, Taskventure conforms to more several key accessibility guidelines; buttons are clear and coloured appropriately (ie. red for warning or info, blue/green for proceeding forward), `<article>` and `<section>` tags are used appropriately. The idea is justified and well thought-out for an audience which has little in the way of this kind of product. Using Bulma's components and build blocks, the design is presented in a logical way and information is easilly found.
 
 - #### Target Audience
+1. - Taskventure is available and accessible to everyone, with an emphesis on users with an interest in fictional fantasy-sytle content.
+    - The app does well in catering to a wide audience, while offering additional features which would draw in users interested in a product with a fantasy style. As outlines in the above sections, the site is hugely accessible to all users and provides a way to track activities and jobs etc. To cater to a fantasy and pop-culture audience, several key steps were taken: a retro pixel art style is reminiscent to classic fantasy-adventure tales and games. Character stat-building, as well as character selection, is integral to any well-known fantasy game and provides a role-playing element to the app. Less significant choices such as naming tasks 'quests', and welcoming the user with 'Greetings' is a small touch which adds to the fantasy style and caters to this audience.
 
 - #### User Stories
+    1. 'As a  typical user, I want to track and organise tasks and projects'
+    2. 'As a fan of fantasy, I want features based around my interests'
+    3. 'As an advanced user, I want to sort, search and track my tasks easily'
+    4. 'As an inexperienced user, I need simple navigation and controls with clear feedback'
+    5. 'As a typical user, I want to compete with my friends when using the app'
+
+- #### New Visitors
+    1. App should be clear in it's intent, and designed around user-friendliness.
+    2. Clear feedback for user interaction is important.
+
+- #### Returning Visitors
+    1. Content should be easilly and quickly accessible.
+    2. User information such as profile data should be displayed clearly and quickly.
+
+- #### Manual Testing
+
+- #### Automated Testing
 
 - #### Testing the code
  - Validators were used for all deployed code.
