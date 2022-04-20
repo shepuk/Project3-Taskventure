@@ -109,7 +109,7 @@ td {
     background-color: white;
 }
 
-/*---------------------------------------------------------CARDS */
+/*---------------------------------------------------------BULMA CARDS */
 
 .card {
     border-radius: 10px;
@@ -133,15 +133,12 @@ td {
     color: #fff;
     display: flex;
     justify-content: center;
+    
 }
 
 .card-image {
     display: flex;
     justify-content: center;
-}
-
-.signin-heading {
-    font-family: 'Averia Serif Libre', cursive !important;
 }
 
 .card-header-icon {
@@ -176,11 +173,6 @@ td {
 
 .notification.is-danger {
     margin-bottom: 0!important;
-}
-
-
-.signin-notification {
-    margin-top: 100px;
 }
 
 li.is-active a {
@@ -232,11 +224,6 @@ li.is-active a {
     justify-content: center;
 }
 
-.attribute-selector {
-    display: grid;
-    margin: auto;
-}
-
 /*---------------------------------------------------------NEW QUEST */
 
 /* Alignes attribute icons on new task page */
@@ -244,6 +231,11 @@ li.is-active a {
     text-align: center;
     vertical-align: middle;
     display: table-cell;
+}
+
+.attribute-selector {
+    display: grid;
+    margin: auto;
 }
 
 .start-quest-button {
@@ -286,6 +278,7 @@ li.is-active a {
     font-weight: 600;
     height: 45px;
     background-color: hsl(348, 100%, 61%);
+    align-content: center;
 }
 
 .enemy-name-defeated, .treasure-name-defeated {
@@ -293,6 +286,7 @@ li.is-active a {
     font-weight: 600;
     height: 45px;
     background-color: hsl(204, 86%, 53%);
+    align-content: center;
 }
 
 .enemy-info, .treasure-info {
@@ -310,6 +304,16 @@ li.is-active a {
     font-weight: 600;
     display: grid;
     padding: 10px;
+}
+
+/*---------------------------------------------------------SIGN IN / REGISTER HEADING */
+
+.signin-heading {
+    font-family: 'Averia Serif Libre', cursive !important;
+}
+
+.signin-notification {
+    margin-top: 100px;
 }
 
 /*---------------------------------------------------------LEADERBOARD */
