@@ -31,10 +31,10 @@ Built with backend technilogy in mind, Taskventure utilises primarilly Python, F
  ### Screenshots
 
 The main quests page - showing the current list of active and completed tasks below a full profile summary. Full CRUD functionality can be complerted from here - add, delete, and edit tasks. Doing so will provide various rewards to the player. Users can search and filter tasks with the tools provided above the quest list.
-![1080 profile screenshot](/static/images/screenshots/screenshot_tasks_1080.png)
+![1080 profile screenshot](/static/images/screenshots/screenshot_create_1080.png)
 
 Still within the profile area of the app, users can use the blue tabs to navigate. This screenshot shows the new quest form below the profile information. Upon completion, a new quest is added to the database and users are redirected to the tasks page where they will find their newly created entry.
-![1080 create task screenshot](/static/images/screenshots/screenshot_create_1080.png)
+![1080 create task screenshot](/static/images/screenshots/screenshot_tasks_1080.png)
 
 From the profile area, users can battle enemies or collect treasures. These are both presented in a grid-view made with Bulma columns. Colours clearly indicate wheather a user has defeated an enemy or not, and the same functionality extends to the treasures list. This is all kept track of via PyMongo & MongoDB on the backend.
 ![1080 enemies page screenshot](/static/images/screenshots/screenshot_enemies_1080.png)
