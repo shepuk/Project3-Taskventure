@@ -15,7 +15,7 @@ Taskventure is an RPG inspired task-tracking app powered by Flask & MongoDB. Tra
     + [Technologies](#technologies)
     + [Testing](#testing)
     + [Bugs & Issues](#bugs---issues)
-    + [Setup, Backups & Depoyment](#setup--backups---depoyment)
+    + [Setup, Backups & Deployment](#setup--backups---depoyment)
     + [Credits](#credits)
 
 <small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
@@ -245,7 +245,7 @@ All pages are designed with mobile in mind and scale well. Columns stack on smal
     - When using a for loop in an HTML document with Jinja, trying to use a second for loop on the same list will not work as Jinja essentiallyunpacks and emptied the list. This is because it's not actually a list, but a Mongo corsor object. A fix for this is to convert this object into a list with list(). However, this created more issues...
     - When adding the functionality to sort tasks, I would typically use the PyMongo sort() function. However, this will no longer work, because like I mentioned above, I converted the Mongo cursor object to a list which is not recognisable to the sort() function anymore. However, I still need it to be in list form for my double for loop. My fix for this was to pass through the sort_by option from the Jinja link throgh to the Python function. From there I could retrieve the tasks from MongoDB and pass in the sort_by option then, and finally convert the object to a list at the end of my function, so that it could be looped through twice by Jinja.
 
-### Setup, Backups & Depoyment
+### Setup, Backups & Deployment
 [Gitpod](https://www.gitpod.io/) was used as my primary IDE.
 A template was provided by Code Institute which I cloned for my project repository.
 Opening the repository in Gitpod is made simple thanks to a [Chrome Extension](https://chrome.google.com/webstore/detail/gitpod-always-ready-to-co/dodmmooeoklaejobgleioelladacbeki).
