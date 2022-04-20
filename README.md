@@ -43,9 +43,7 @@ When signing up, users are presented with a simple form and choice of hero to re
 ![register screenshot](/static/images/screenshots/screenshot_register.png)
 
 All pages are designed with mobile in mind and scale well. Columns stack on smaller screens and a hamber-style menu is offered. All information and features are still available at smaller screen sizes.
-![mobile tasks screenshot](/static/images/screenshots/screenshot_tasks_mobile.png)
-![mobile gtreasures screenshot](/static/images/screenshots/screenshot_treasures_mobile.png)
-![mobile leaderboard screenshot](/static/images/screenshots/screenshot_leaderboard.png)
+[Mobile / small screen screenshots](https://github.com/shepuk/Project3-Taskventure/tree/main/static/images/screenshots/mobile_screenshots)
 
 
  ### User Experience
@@ -71,27 +69,52 @@ All pages are designed with mobile in mind and scale well. Columns stack on smal
 ### Design
 - #### Colours
     - Primarily a backend-focussed project, I wanted to utilise a standard BulmaCSS palette when building the app. This ensures good contrast and complimentary colour choice. With a lot of colourful pixel art in use, a light background colour allows the art to stand out.
-    ![colour palette](/static/images/screenshots/taskventure_colours.png)
+
+![colour palette](/static/images/screenshots/taskventure_colours.png)
 
 - #### Typography
     - Along with built-in BulmaCSS font styling, Google Fonts Averia Serif Libre was used for titles, headings and logos. This font is fantasy-esque and fits the subject matter well.
-    ![Averia Libre font](/static/images/screenshots/screenshot_font.png)
+
+![Averia Libre font](/static/images/screenshots/screenshot_font.png)
 
 - #### Imagery
-    - content
+    - 32x32 retro-style sprites were used throughout the design to provide a nostalgic fantasy feel. These were scaled up for modern screens and retained their pixel designs with CSS. Without this, images appear blurry and stretched.
+
+![wireframe](/static/images/characters/1.png) ![wireframe](/static/images/characters/2.png) ![wireframe](/static/images/characters/3.png) ![wireframe](/static/images/characters/4.png) ![wireframe](/static/images/characters/5.png) ![wireframe](/static/images/characters/6.png) ![wireframe](/static/images/characters/7.png) ![wireframe](/static/images/characters/8.png) ![wireframe](/static/images/characters/9.png) ![wireframe](/static/images/characters/10.png)
 
 - #### Accessibility
-    - content
+    - All images have a descriptive `alt` attribute.
+    - Contract is high throughout the website and all text is clearly readable.
+    - All forms utilise a `label` tag.
+    - Headings and paragraphs are used appropriately.
+    - Semantic markup is used throughout the website.
+    - Tables are used in place of divs where appropriate.
+    - Clear flash messages are shown at the top of the screen and offer feedback for interaction.
+
 
 - ### Wireframes
     - Early design descisions were made using wireframes. I was able to stick to the inidial wireframe designs closely and only minor changes were made. For example, more information was added to the profile section as ideas were expanded upon, and the new quest form was ultimately created with a more stacked, vertical design.
-![wireframe](/static/images/screenshots/wireframe_task_view.png)
-![wireframe](/static/images/screenshots/wireframe_create_task.png)
-![wireframe](/static/images/screenshots/wireframe_enemy_treasure_view.png)
-![wireframe](/static/images/screenshots/wireframe_mobile.png)
+[Wireframe Screenshots](https://github.com/shepuk/Project3-Taskventure/tree/main/static/images/screenshots/wireframes)
 
 
 ### Features
+- #### Current features
+    - Deep MongoDB integration used for task tracking, user account stats, and enemy / treasure interaction logging.
+    - Designed with scaleability in mind - database can be expanded and receive new features easily quickly.
+    - Rich user profiles with several tracked player counters and attributes.
+    - Deep task-tracking features, along with search and sorting features. Users can sort by date, urgency and more.
+    - Experience tracking and logic - checks if user is over the 500 EXP limit, and if they are, reset to zero, gain a level and add any remmaining EXP.
+    - Multiple CRUD operations performed during task completion, editing, monster battling or treasure collecting.
+    - Clear user feedback in the form of Flask flash messaging.
+    - Secure login/register process with password hashing.
+    - Functional contact page writted with Flask Mail and Python.
+    - Enemy and Treasure progress handled efficiently in the user's database entry with a small amout of code.
+    - Defensive features built in with regards to deleting databse entries in particular.
+
+- #### Features to implement
+    - (Planned) include a greater roster of enemies/treasures for increased longevity.
+    - All completed tasks are displayed currently - introduce pagination to limit this.
+
 
 ### Security
 - Werkzeug was used for user authentication and provided secure pashword hashing for new signups or logging in.
