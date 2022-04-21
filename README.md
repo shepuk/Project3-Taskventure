@@ -15,7 +15,7 @@ Taskventure is an RPG inspired task-tracking app powered by Flask & MongoDB. Tra
     + [Technologies](#technologies)
     + [Testing](#testing)
     + [Bugs & Issues](#bugs---issues)
-    + [Setup, Backups & Deployment](#setup--backups---depoyment)
+    + [Setup, Backups & Deployment](#setup--backups---deployment)
     + [Credits](#credits)
 
 <small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
@@ -118,6 +118,9 @@ All pages are designed with mobile in mind and scale well. Columns stack on smal
 - ### Wireframes
     - Early design descisions were made using wireframes. I was able to stick to the inidial wireframe designs closely and only minor changes were made. For example, more information was added to the profile section as ideas were expanded upon, and the new quest form was ultimately created with a more stacked, vertical design.
 [Wireframe Screenshots](https://github.com/shepuk/Project3-Taskventure/tree/main/static/images/screenshots/wireframes)
+
+- ### Flow diagram
+    - A flow diagram was also created early on, to help structure the flow of the app. [See it here](https://github.com/shepuk/Project3-Taskventure/blob/main/static/images/screenshots/screenshot_flowchart.png)
 
 
 ### Features
