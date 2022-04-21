@@ -7,6 +7,7 @@
   <div class="container">
     <div class="columns is-flex-mobile is-multiline is-centered is-vcentered">
       {% for user in users %}
+      {% if loop.index <= 10 %}
       <div class="column m-4 is-4 leaderboard-column">
         <div class="card leaderboard-card">
           <div class="card-header-title">
@@ -66,6 +67,7 @@
           </div>
         </div>
       </div>
+      {% endif %}
       {% endfor %}
     </div>
   </div>
