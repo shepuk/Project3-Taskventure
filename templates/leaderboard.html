@@ -11,7 +11,7 @@
       <div class="column m-4 is-4 leaderboard-column">
         <div class="card leaderboard-card">
           <div class="card-header-title">
-            <h2 class="title leaderboard-username">{{ user.username.title() }}</h2>
+            <h2 class="title leaderboard-username">{{ loop.index }}) {{ user.username.title() }}</h2>
           </div>
           <div class="card-image">
             <img src="{{ url_for('static', filename='/images/characters/' + user.character + '.png') }}">
