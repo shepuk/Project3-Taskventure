@@ -3,6 +3,9 @@
 
 
 /*---------------------------------------------------------REUSEABLES */
+html {
+    background-color: hsl(0, 0%, 96%);
+}
 
 body {
     background-color: hsl(0, 0%, 96%);
@@ -132,7 +135,7 @@ td {
 .card-header-title {
     color: #fff;
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     
 }
 
@@ -560,6 +563,9 @@ li.is-active a {
 
 .footer {
     margin-top: 100px;
+    position: fixed;
+    width: 100vw;
+    bottom: 0;
 }
 
 .footer a {
