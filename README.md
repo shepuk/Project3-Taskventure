@@ -235,7 +235,7 @@ All pages are designed with mobile in mind and scale well. Columns stack on smal
 
 - #### Testing the code
  - Validators were used for the deployed code.
-    - [PEP8 Online](http://pep8online.com/) was used to make sure Python code was written to guidelines and falls within PEP8 compliancy. [See the PEP8 results here]([Wireframe Screenshots](https://github.com/shepuk/Project3-Taskventure/tree/main/static/images/screenshots/screenshot_pep8.jpg))
+    - [PEP8 Online](http://pep8online.com/) was used to make sure Python code was written to guidelines and falls within PEP8 compliancy. [See the PEP8 results here](https://github.com/shepuk/Project3-Taskventure/tree/main/static/images/screenshots/screenshot_pep8.jpg))
 
 ### Bugs & Issues
 - #### Resolved bug examples
